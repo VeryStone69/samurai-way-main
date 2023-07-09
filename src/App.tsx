@@ -1,12 +1,33 @@
 import React from 'react';
 import './App.css';
 
-function App() {
+export const App =() => {
     return (
-        <div className="App">
-            Hello, samurai! Let's go! TEST TEST TEST
+        <div>
+           <Header/>
+            <Technologies/>
         </div>
     );
 }
 
-export default App;
+const Header = () => {
+    return (
+        <div>
+            <a href="#">Home</a>
+            <a href="#">News</a>
+            <a href="#">Messages</a>
+        </div>
+    )
+}
+
+const Technologies = () => {
+    return (
+        <ul>
+            <li>CSS</li>
+            <li>HTML</li>
+            <li>JS</li>
+            <li>REACT</li>
+            <li>GIT</li>
+        </ul>
+    )
+}
