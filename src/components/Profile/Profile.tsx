@@ -1,4 +1,5 @@
 import React from 'react';
+import {MyPosts} from "./MyPosts/MyPosts";
 
 export const Profile = () => {
     return (
@@ -9,17 +10,7 @@ export const Profile = () => {
             <div>
                 ava + discription
             </div>
-            <div>
-                my posts
-                <div>
-                    New Post
-                </div>
-                <div>
-                    <div>post1</div>
-                    <div>post2</div>
-                    <div>post3</div>
-                </div>
-            </div>
+           <MyPosts/>
         </div>
     );
 };

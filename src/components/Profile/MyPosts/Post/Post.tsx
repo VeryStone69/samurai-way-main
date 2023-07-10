@@ -9,6 +9,7 @@ export const Post = () => {
                 Something
             </div>
             <span>Like</span>
+            <span>Dislike</span>
         </>
     );
 };
