@@ -1,7 +1,7 @@
 .app-wrapper {
-display: grid;
-width: 1200px;
-margin: 0 auto;
+    display: grid;
+    width: 1200px;
+    margin: 0 auto;
     grid-template-areas:
             "header header"
             "nav content";
@@ -10,10 +10,10 @@ margin: 0 auto;
 
 }
 
-
-
-
-
+.app-wrapper-content {
+    grid-area: content;
+    background-color: cornflowerblue;
+}
 
 
 /*.App {*/
