@@ -4,15 +4,19 @@
 }
 
 .dialogs {
-padding: 10px;
+    padding: 10px;
 
 }
+
 .dialog {
     padding: 10px;
+    text-decoration: none;
 }
 
 .active {
-    color: red;
+    padding: 15px;
+    color: #ec0f65;
+    text-decoration: none;
 }
 
 .messages {
