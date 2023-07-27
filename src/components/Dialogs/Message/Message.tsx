@@ -1,7 +1,7 @@
 import React from "react"
 import s from "../Dialogs.module.css"
 
-type MessagePropsType = {
+export type MessagePropsType = {
     messageText: string
 }
 

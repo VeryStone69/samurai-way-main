@@ -2,13 +2,13 @@ import React from "react";
 import s from "../Dialogs.module.css";
 import {NavLink} from "react-router-dom";
 
-type DialogPropsType = {
+
+type DialogItemPropsType = {
     name: string
     id: number
 }
 
-
-export const Dialog: React.FC<DialogPropsType> = (props) => {
+export const DialogItem = (props: DialogItemPropsType) => {
     const {name, id} = props;
     const path = `/dialogs/${id}`;
     const onClickHandler = (isActive: boolean) => {
