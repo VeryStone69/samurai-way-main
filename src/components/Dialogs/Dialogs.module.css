@@ -16,7 +16,7 @@
 .active {
     padding: 10px;
     color: #ec0f65;
-    /*text-decoration: none;*/
+    text-decoration: none;
 }
 
 .messages {

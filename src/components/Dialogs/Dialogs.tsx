@@ -11,7 +11,7 @@ type DialogPropsType = {
     id: number
 }
 type MessagePropsType = {
-    messageText:string
+    messageText: string
 }
 
 
@@ -30,43 +30,43 @@ export const Dialog: React.FC<DialogPropsType> = (props) => {
 
 }
 
-export const Message: React.FC<MessagePropsType> =(props) =>{
-    const {messageText}=props
-    return(
+export const Message: React.FC<MessagePropsType> = (props) => {
+    const {messageText} = props
+    return (
         <div className={s.message}>{messageText}</div>
     )
 }
 
-export const Dialogs= () => {
+export const Dialogs = () => {
     let dialogsData = [
-        {id: 1, name:"Alex"},
-        {id: 2, name:"Dima"},
-        {id: 3, name:"Poma"},
-        {id: 4, name:"Pasha"},
-        {id: 5, name:"Igor"},
-        {id: 6, name:"Andrey"},
+        {id: 1, name: "Alex"},
+        {id: 2, name: "Dima"},
+        {id: 3, name: "Poma"},
+        {id: 4, name: "Pasha"},
+        {id: 5, name: "Igor"},
+        {id: 6, name: "Andrey"},
     ]
     let messagesData = [
-        {id: 1, message:"Hi"},
-        {id: 2, message:"How are you?"},
-        {id: 3, message:"Yo"},
-        {id: 4, message:"Yo"},
-        {id: 5, message:"Yo"},
-        {id: 6, message:"Yo"},
+        {id: 1, message: "Hi"},
+        {id: 2, message: "How are you?"},
+        {id: 3, message: "Yo3"},
+        {id: 4, message: "Yo4"},
+        {id: 5, message: "Yo5"},
+        {id: 6, message: "Yo6"},
     ]
-
+    let dialogsElement = dialogsData.map(d => {
+        return <Dialog name={d.name} id={d.id} key={d.id}/>
+    })
+    let messagesElement = messagesData.map(m => {
+        return <Message messageText={m.message} key={m.id}/>
+    })
     return (
         <div className={s.wrapperDialogs}>
             <div className={s.dialogs}>
-                <Dialog name={dialogsData[0].name} id={dialogsData[0].id}/>
-                <Dialog name={dialogsData[1].name} id={dialogsData[0].id}/>
-                <Dialog name={dialogsData[2].name} id={dialogsData[0].id}/>
-                <Dialog name={dialogsData[3].name} id={dialogsData[0].id}/>
+                {dialogsElement}
             </div>
             <div className={s.messages}>
-                <Message messageText={messagesData[0].message}/>
-                <Message messageText={messagesData[1].message}/>
-                <Message messageText={messagesData[2].message}/>
+                {messagesElement}
             </div>
         </div>
 
