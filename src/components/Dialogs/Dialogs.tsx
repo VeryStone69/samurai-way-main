@@ -2,10 +2,13 @@ import React from "react"
 import s from "./Dialogs.module.css"
 import {NavLink} from "react-router-dom";
 
-type DialogsPropsType = {}
+// type DialogsDataType = {
+//     id: number,
+//     name: string
+// }
 type DialogPropsType = {
     name: string
-    id: string
+    id: number
 }
 type MessagePropsType = {
     messageText:string
@@ -34,25 +37,39 @@ export const Message: React.FC<MessagePropsType> =(props) =>{
     )
 }
 
-export const Dialogs: React.FC<DialogsPropsType> = (props) => {
+export const Dialogs= () => {
+    let dialogsData = [
+        {id: 1, name:"Alex"},
+        {id: 2, name:"Dima"},
+        {id: 3, name:"Poma"},
+        {id: 4, name:"Pasha"},
+        {id: 5, name:"Igor"},
+        {id: 6, name:"Andrey"},
+    ]
+    let messagesData = [
+        {id: 1, message:"Hi"},
+        {id: 2, message:"How are you?"},
+        {id: 3, message:"Yo"},
+        {id: 4, message:"Yo"},
+        {id: 5, message:"Yo"},
+        {id: 6, message:"Yo"},
+    ]
 
     return (
         <div className={s.wrapperDialogs}>
             <div className={s.dialogs}>
-                <Dialog name={"Alex1"} id={"1"}/>
-                <Dialog name={"Alex2"} id={"2"}/>
-                <Dialog name={"Alex3"} id={"3"}/>
-                <Dialog name={"Alex4"} id={"4"}/>
+                <Dialog name={dialogsData[0].name} id={dialogsData[0].id}/>
+                <Dialog name={dialogsData[1].name} id={dialogsData[0].id}/>
+                <Dialog name={dialogsData[2].name} id={dialogsData[0].id}/>
+                <Dialog name={dialogsData[3].name} id={dialogsData[0].id}/>
             </div>
             <div className={s.messages}>
-                <Message messageText={"Hello guys"}/>
-                <Message messageText={"Hello girls"}/>
-                <Message messageText={"How are you"}/>
+                <Message messageText={messagesData[0].message}/>
+                <Message messageText={messagesData[1].message}/>
+                <Message messageText={messagesData[2].message}/>
             </div>
         </div>
 
 
     )
 }
-// Style for NavLink
-// <NavLink className={({isActive}) => onClickHandler(isActive)} to={"/dialogs/2"}>Alex2</NavLink>
