@@ -1,7 +1,7 @@
 import React from 'react';
 import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {PostDataType} from "../../index";
+import {PostDataType} from "../../App";
 
 export type ProfilePropsType = {
     postData: PostDataType[]

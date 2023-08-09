@@ -17,6 +17,10 @@ export const DialogItem = (props: DialogItemPropsType) => {
     }
     return (
         <div className={s.dialog + " " + s.active}>
+            <img
+                className={s.dialogItem_avatar}
+                src="https://static-cdn4-2.vigbo.tech/u19297/22269/blog/4426958/5938479/78187796/1000-Ekaterina_Nasyrova-961e3efa6072f7f8083602f199712ff8.JPG"
+            />
             <NavLink className={({isActive}) => onClickHandler(isActive)} to={path}>{name}</NavLink>
         </div>
     )

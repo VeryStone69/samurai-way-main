@@ -2,8 +2,8 @@ import React from "react"
 import s from "./Dialogs.module.css"
 import {Message} from "./Message/Message";
 import {DialogItem} from "./DialogItem/DialogItem";
-import {DialogsDataType, MessagesDataType} from "../../index";
-
+import {DialogsDataType, MessagesDataType} from "../../App";
+//
 type DialogsPropsType = {
     dialogsData: DialogsDataType[]
     messagesData: MessagesDataType[]

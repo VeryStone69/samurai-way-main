@@ -2,7 +2,8 @@
     padding: 20px;
     grid-area: nav;
     background-color: #d95789;
-
+    display: block;
+    width: 10rem
 }
 
 .item {

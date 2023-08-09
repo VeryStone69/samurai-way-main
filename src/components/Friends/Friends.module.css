@@ -1,0 +1,23 @@
+.friendsContainer {
+}
+
+.ulContainer{
+    display: flex;
+    flex-wrap: wrap;
+
+    text-decoration: none;
+    padding-left: 0;
+}
+
+.ulContainer li {
+    list-style-type: none;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+}
+.friendAvatar{
+    height: 40px;
+    width: 40px;
+    background-color: #7a7d7f;
+    border-radius: 50%;
+}
