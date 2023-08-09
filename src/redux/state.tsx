@@ -1,5 +1,8 @@
+import {v1} from "uuid";
+import {PostDataType, StateType} from "../App";
+import {renderTree} from "../index";
 
-export const state = {
+export const state:StateType = {
     profile: {
         posts:[{id: 1, message: "Hi, how are you", likesCount: 12},
             {id: 2, message: "It's my second post", likesCount: 15},
@@ -30,3 +33,10 @@ export const state = {
     ]
 
 }
+
+export const addPost = (postMessage:string)=>{
+    const newMessage:PostDataType = {id: 5, message: postMessage, likesCount: 0};
+    state.profile.posts.unshift(newMessage);
+    renderTree(state)
+}
+

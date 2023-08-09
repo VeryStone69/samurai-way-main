@@ -5,13 +5,15 @@ import {PostDataType} from "../../App";
 
 export type ProfilePropsType = {
     postData: PostDataType[]
+    addPost:(postMessage:string)=>void
 }
 
 export const Profile = (props: ProfilePropsType) => {
+    const{postData, addPost}=props
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts postData={props.postData}/>
+            <MyPosts postData={postData} addPost={addPost}/>
         </div>
     );
 };

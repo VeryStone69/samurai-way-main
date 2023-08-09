@@ -40,20 +40,24 @@ export type StateType = {
 }
 export type AppPropsType ={
     state: StateType
+    addPost:(postMessage:string)=>void
 }
 
-
 export const App = (props: AppPropsType) => {
+    const {state,addPost}=props
     return (
 
         <div className="app-wrapper">
             <Header/>
-            <Navbar friends={props.state.friends}/>
+            <Navbar friends={state.friends}/>
             <div className="app-wrapper-content">
                 <Routes>
-                    <Route path="/profile" element={<Profile postData={props.state.profile.posts}/>}/>
+                    <Route path="/profile" element={<Profile
+                        postData={state.profile.posts}
+                        addPost={addPost}
+                    />}/>
                     <Route path="/dialogs/*"
-                           element={<Dialogs dialogsData={props.state.dialogsPage.dialogs} messagesData={props.state.dialogsPage.message}/>}/>
+                           element={<Dialogs dialogsData={state.dialogsPage.dialogs} messagesData={props.state.dialogsPage.message}/>}/>
                     {/*<Route path="/news" element={<News/>}/>*/}
                     {/*<Route path="/music" element={<Music/>}/>*/}
                     {/*<Route path="/settings" element={<Settings/>}/>*/}

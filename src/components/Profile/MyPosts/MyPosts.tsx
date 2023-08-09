@@ -5,10 +5,12 @@ import {PostDataType} from "../../../App";
 
 type MyPostsPropsType = {
     postData: PostDataType[]
+    addPost:(postMessage:string)=>void
 }
 
 export const MyPosts: FC<MyPostsPropsType> = (props) => {
-    let postsElement = props.postData.map(p => {
+    const {postData,addPost} = props
+    let postsElement = postData.map(p => {
         return <Post message={p.message} feedback={p.likesCount} key={p.id}/>
     })
 
@@ -16,8 +18,8 @@ export const MyPosts: FC<MyPostsPropsType> = (props) => {
     let newPostEl = useRef<HTMLTextAreaElement>(null)
 
     const onClickHandler=()=>{
-        if (newPostEl.current !== null) {
-            alert(newPostEl.current.value)
+        if (newPostEl.current) {
+            addPost(newPostEl.current.value)
         }
     }
     // const onChangeHandler=(e:ChangeEvent<HTMLTextAreaElement>)=>{
