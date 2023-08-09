@@ -4,27 +4,32 @@ import {renderTree} from "../render";
 
 export const state:StateType = {
     profile: {
-        posts:[{id: 1, message: "Hi, how are you", likesCount: 12},
-            {id: 2, message: "It's my second post", likesCount: 15},
-            {id: 3, message: "Number three", likesCount: 99},
-            {id: 4, message: "Yo4", likesCount: 1},
-            {id: 5, message: "Yo5", likesCount: 2},
-            {id: 6, message: "Yo6", likesCount: 3},],
+        posts:[{id: v1(), message: "Hi, how are you", likesCount: 12},
+            {id: v1(), message: "It's my second post", likesCount: 15},
+            {id: v1(), message: "Number three", likesCount: 99},
+            {id: v1(), message: "Yo4", likesCount: 1},
+            {id: v1(), message: "Yo5", likesCount: 2},
+            {id: v1(), message: "Yo6", likesCount: 3},],
+        newPostsText: "it-kamasutra"
 
     },
     dialogsPage: {
-        dialogs: [{id: 1, name: "Alex"},
-            {id: 2, name: "Dima"},
-            {id: 3, name: "Poma"},
-            {id: 4, name: "Pasha"},
-            {id: 5, name: "Igor"},
-            {id: 6, name: "Andrey"},],
-        message: [{id: 1, message: "Hi"},
-            {id: 2, message: "How are you?"},
-            {id: 3, message: "Yo3"},
-            {id: 4, message: "Yo4"},
-            {id: 5, message: "Yo5"},
-            {id: 6, message: "Yo6"}],
+        dialogs: [
+            {id: v1(), name: "Alex"},
+            {id: v1(), name: "Dima"},
+            {id: v1(), name: "Poma"},
+            {id: v1(), name: "Pasha"},
+            {id: v1(), name: "Igor"},
+            {id: v1(), name: "Andrey"},],
+        message: [
+            {id: v1(), message: "How are you?"},
+            {id: v1(), message: "Hi"},
+            {id: v1(), message: "I am fine and you?"},
+            {id: v1(), message: "Fine!"},
+            {id: v1(), message: "Maybe drink vodka?"},
+            {id: v1(), message: "Good idea!"},
+        ],
+        newMessage: "",
     },
     friends:[
         {id: v1(), name: "Leonora",img:"https://9obzor.ru/wp-content/uploads/2023/02/obrabotka-foto-neyroseti11.jpg"},
@@ -35,10 +40,27 @@ export const state:StateType = {
     ]
 
 }
-
-export const addPost = (postMessage:string)=>{
-    const newMessage:PostDataType = {id: 5, message: postMessage, likesCount: 0};
+export const addPost = ()=>{
+    const newMessage:PostDataType = {id: v1(), message: state.profile.newPostsText, likesCount: 0};
     state.profile.posts.unshift(newMessage);
+    state.profile.newPostsText = "";
+    renderTree(state)
+}
+export const updateNewPostText = (newText:string) =>{
+    state.profile.newPostsText = newText;
     renderTree(state)
 }
 
+export const addNewMessage = ()=>{
+    const newMessage = {id: v1(), message: state.dialogsPage.newMessage};
+    state.dialogsPage.message.push(newMessage)
+    state.dialogsPage.newMessage="";
+    renderTree(state)
+}
+
+export const updateNewMessage = (newMessageText:string)=>{
+
+    // state.dialogsPage.message.push(newMessage);
+    state.dialogsPage.newMessage =newMessageText;
+    renderTree(state)
+}

@@ -15,23 +15,25 @@ export type FriendsDataType = {
  }
 export type DialogsDataType = {
     name: string
-    id: number
+    id:string
 }
 export type MessagesDataType = {
-    id: number
+    id:string
     message: string
 }
 export type DialogsPage = {
     dialogs: DialogsDataType[]
     message: MessagesDataType[]
+    newMessage:string
 }
 export type PostDataType = {
-    id: number
+    id:string
     message: string
     likesCount: number
 }
 export type ProfileDataType = {
     posts:PostDataType[]
+    newPostsText:string
 }
 
 export type StateType = {
@@ -41,11 +43,14 @@ export type StateType = {
 }
 export type AppPropsType ={
     state: StateType
-    addPost:(postMessage:string)=>void
+    addPost:()=>void
+    updateNewPostText:(newText:string)=>void
+    updateNewMessage:(newMessageText:string)=>void
+    addNewMessage:()=>void
 }
 
 export const App = (props: AppPropsType) => {
-    const {state,addPost}=props
+    const {state,addPost,updateNewPostText,updateNewMessage,addNewMessage}=props
     return (
 
         <div className="app-wrapper">
@@ -55,10 +60,18 @@ export const App = (props: AppPropsType) => {
                 <Routes>
                     <Route path="/profile" element={<Profile
                         postData={state.profile.posts}
+                        newPostTextProps={state.profile.newPostsText}
+                        updateNewPostText={updateNewPostText}
                         addPost={addPost}
                     />}/>
                     <Route path="/dialogs/*"
-                           element={<Dialogs dialogsData={state.dialogsPage.dialogs} messagesData={props.state.dialogsPage.message}/>}/>
+                           element={<Dialogs
+                               newMessage={state.dialogsPage.newMessage}
+                               dialogsData={state.dialogsPage.dialogs}
+                               messagesData={props.state.dialogsPage.message}
+                               updateNewMessage={updateNewMessage}
+                               addNewMessage={addNewMessage}
+                           />}/>
                     {/*<Route path="/news" element={<News/>}/>*/}
                     {/*<Route path="/music" element={<Music/>}/>*/}
                     {/*<Route path="/settings" element={<Settings/>}/>*/}
