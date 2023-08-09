@@ -1,6 +1,10 @@
 import {v1} from "uuid";
 import {PostDataType, StateType} from "../App";
-import {renderTree} from "../render";
+
+let renderTree = (state:StateType)=>{
+    console.log("STATE")
+}
+
 
 export const state:StateType = {
     profile: {
@@ -59,8 +63,10 @@ export const addNewMessage = ()=>{
 }
 
 export const updateNewMessage = (newMessageText:string)=>{
-
-    // state.dialogsPage.message.push(newMessage);
     state.dialogsPage.newMessage =newMessageText;
     renderTree(state)
+}
+
+export const subscribe=(observe:any)=>{
+    renderTree=observe
 }
