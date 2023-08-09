@@ -20,6 +20,7 @@ export const MyPosts: FC<MyPostsPropsType> = (props) => {
     const onClickHandler=()=>{
         if (newPostEl.current) {
             addPost(newPostEl.current.value)
+            newPostEl.current.value = ""
         }
     }
     // const onChangeHandler=(e:ChangeEvent<HTMLTextAreaElement>)=>{

@@ -1,21 +1,37 @@
 .friendsContainer {
 }
 
-.ulContainer{
+.ulContainer {
+    /*display: flex;*/
+    /*flex-wrap: wrap;*/
+
+    /*padding-left: 0;*/
     display: flex;
     flex-wrap: wrap;
-
-    text-decoration: none;
     padding-left: 0;
+    justify-content: space-between;
 }
 
 .ulContainer li {
+    min-width: 60px;
     list-style-type: none;
     margin: 5px;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
-.friendAvatar{
+
+.ulContainer a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+}
+.ulContainer a:hover{
+    color: black;
+    transition: color 0.4s linear;
+}
+
+.friendAvatar {
+    border: 1px solid #fff;
     height: 40px;
     width: 40px;
     background-color: #7a7d7f;

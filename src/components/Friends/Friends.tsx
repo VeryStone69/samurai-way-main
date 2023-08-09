@@ -18,8 +18,8 @@ export const Friends = (props:FriendsPropsType) =>{
             {collapsed ? <ul className={s.ulContainer}>
                 {props.friends.map(friend => {
                     return(
-                        <li key={friend.id}>
-                            <div className={s.friendAvatar}></div>
+                        <li key={friend.id} >
+                            <img src={friend.img} className={s.friendAvatar}/>
                             <a href="#">{friend.name}</a>
                         </li>
                     )

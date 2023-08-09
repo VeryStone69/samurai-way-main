@@ -9,8 +9,9 @@ import {Route, Routes} from "react-router-dom";
 
 
 export type FriendsDataType = {
-    id:number
+    id:string
     name: string
+    img:string
  }
 export type DialogsDataType = {
     name: string
