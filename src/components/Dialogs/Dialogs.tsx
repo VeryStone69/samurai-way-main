@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useRef} from "react"
 import s from "./Dialogs.module.css"
 import {Message} from "./Message/Message";
 import {DialogItem} from "./DialogItem/DialogItem";
@@ -18,7 +18,14 @@ export const Dialogs = (props: DialogsPropsType) => {
     let messagesElement = props.messagesData.map(m => {
         return <Message messageText={m.message} key={m.id}/>
     })
+    let newMessageEl = useRef<HTMLTextAreaElement>(null)
+
+    function onClickHandler() {
+        if (newMessageEl.current !== null) alert(newMessageEl.current.value)
+    }
+
     return (
+        <>
         <div className={s.wrapperDialogs}>
             <div className={s.dialogs}>
                 {dialogsElement}
@@ -26,8 +33,15 @@ export const Dialogs = (props: DialogsPropsType) => {
             <div className={s.messages}>
                 {messagesElement}
             </div>
-        </div>
 
+        </div>
+            <div className={s.dialog_addMessage_container}>
+                <div className={s.dialog_addMessage_textarea}>
+                    <textarea ref={newMessageEl} className={s.dialog_textarea} />
+                </div>
+                <button className={s.dialog_addMessage_buttonAdd} onClick={onClickHandler} >Add post</button>
+            </div>
+        </>
 
     )
 }
