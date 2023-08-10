@@ -12,7 +12,7 @@ type MyPostsPropsType = {
 
 export const MyPosts: FC<MyPostsPropsType> = (props) => {
     const {postData,addPost,newPostText,updateNewPostText} = props;
-
+    console.log(newPostText)
     let postsElement = postData.map(p => {
         return <Post message={p.message} feedback={p.likesCount} key={p.id}/>
     })
@@ -26,7 +26,7 @@ export const MyPosts: FC<MyPostsPropsType> = (props) => {
         }
     }
     const onChangeHandler=()=>{
-        if (newPostEl.current) {
+        if (newPostEl.current !== null) {
             updateNewPostText(newPostEl.current.value)
         }
     }

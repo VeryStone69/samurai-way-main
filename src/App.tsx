@@ -6,8 +6,6 @@ import {Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {Route, Routes} from "react-router-dom";
 
-
-
 export type FriendsDataType = {
     id:string
     name: string
@@ -41,6 +39,8 @@ export type StateType = {
     dialogsPage: DialogsPage
     friends: FriendsDataType[]
 }
+
+
 export type AppPropsType ={
     state: StateType
     addPost:()=>void
