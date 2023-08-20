@@ -4,12 +4,13 @@ import {Message} from "./Message/Message";
 import {DialogItem} from "./DialogItem/DialogItem";
 import {DialogsDataType, MessagesDataType} from "../../App";
 import {DispatchACType} from "../../redux/state";
+import {addNewMessageAC, updateNewMessageAC} from "../../redux/diallogs-reduser";
 //
 type DialogsPropsType = {
     dialogsData: DialogsDataType[]
     messagesData: MessagesDataType[]
     newMessage:string
-    dispatch: (action:DispatchACType)=>void
+    dispatch: (action: DispatchACType) => void
 }
 
 
@@ -25,11 +26,12 @@ export const Dialogs = (props: DialogsPropsType) => {
 
     function onClickHandler() {
         if(newMessage){
-            dispatch({type:"ADD-NEW-MESSAGE"})
+            dispatch(addNewMessageAC())
         }
     }
     const onChangeHandler = (e:ChangeEvent<HTMLTextAreaElement>)=>{
-        dispatch({type:"UPDATE-NEW-MESSAGE",newMessageText:e.currentTarget.value})
+        const action = updateNewMessageAC(e.currentTarget.value)
+        dispatch(action)
     }
 
     return (

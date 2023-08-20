@@ -7,7 +7,7 @@ import {DispatchACType} from "../../redux/state";
 export type ProfilePropsType = {
     postData: PostDataType[]
     newPostTextProps:string
-    dispatch: (action:DispatchACType)=>void
+    dispatch: (action: DispatchACType) => void
 }
 
 export const Profile = (props: ProfilePropsType) => {

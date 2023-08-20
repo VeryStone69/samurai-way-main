@@ -2,12 +2,13 @@ import React, {ChangeEvent, FC} from "react";
 import s from "./MyPosts.module.css";
 import {Post} from "./Post/Post";
 import {PostDataType} from "../../../App";
+import {addPostAC, updateNewPostAC} from "../../../redux/profile-reduser";
 import {DispatchACType} from "../../../redux/state";
 
 type MyPostsPropsType = {
     postData: PostDataType[]
     newPostText:string
-    dispatch: (action:DispatchACType)=>void
+    dispatch: (action: DispatchACType) => void
 }
 
 export const MyPosts: FC<MyPostsPropsType> = (props) => {
@@ -19,11 +20,13 @@ export const MyPosts: FC<MyPostsPropsType> = (props) => {
 
     const onClickHandler=()=>{
         if (newPostText) {
-            dispatch({type:"ADD-POST"})
+            dispatch(addPostAC())
         }
     }
     const onChangeHandler=(e:ChangeEvent<HTMLTextAreaElement>)=>{
-        dispatch({type:"UPDATE-NEW-TEXT",newText:e.currentTarget.value})
+        const newText = e.currentTarget.value;
+        const action = updateNewPostAC(newText);
+        dispatch(action)
     }
 
 

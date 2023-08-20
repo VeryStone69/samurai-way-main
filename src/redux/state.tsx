@@ -1,5 +1,7 @@
 import {v1} from "uuid";
-import {PostDataType, StateType} from "../App";
+import {StateType} from "../App";
+import {profileReduser, ProfileReduserType} from "./profile-reduser";
+import {dialogsReduser, DialogsReduserType} from "./diallogs-reduser";
 
 export type StoreType = {
     _state: StateType
@@ -12,25 +14,7 @@ export type StoreType = {
     subscribe: (observe: () => void) => void
     dispatch: (action: DispatchACType) => void
 }
-type AddPostActionType = {
-    type: "ADD-POST"
-    // newPostsText: string
-}
-type UpdateNewTextActionType = {
-    type: "UPDATE-NEW-TEXT"
-    newText: string
-}
-type AddNewMessageActionType = {
-    type: "ADD-NEW-MESSAGE"
-}
-type UpdateNewMessageActionType = {
-    type: "UPDATE-NEW-MESSAGE"
-    newMessageText: string
-}
-export type DispatchACType = AddPostActionType
-    | UpdateNewTextActionType
-    | AddNewMessageActionType
-    | UpdateNewMessageActionType
+export type DispatchACType = ProfileReduserType|DialogsReduserType
 
 export const store: StoreType = {
     _state: {
@@ -101,22 +85,8 @@ export const store: StoreType = {
         this._onChange = observe
     },
     dispatch(action) {
-        if (action.type === "ADD-POST") {
-            let newMessage: PostDataType = {id: v1(), message: this._state.profile.newPostsText, likesCount: 0};
-            this._state.profile.posts.unshift(newMessage);
-            this._state.profile.newPostsText = "";
-            this._onChange()
-        } else if (action.type === "UPDATE-NEW-TEXT") {
-            this._state.profile.newPostsText = action.newText;
-            this._onChange()
-        } else if (action.type === "ADD-NEW-MESSAGE") {
-            const newMessage = {id: v1(), message: this._state.dialogsPage.newMessage};
-            this._state.dialogsPage.message.push(newMessage)
-            this._state.dialogsPage.newMessage = "";
-            this._onChange()
-        } else if (action.type === "UPDATE-NEW-MESSAGE") {
-            this._state.dialogsPage.newMessage = action.newMessageText;
-            this._onChange()
-        }
+        profileReduser(this._state,action as ProfileReduserType);
+        dialogsReduser(this._state,action as DialogsReduserType)
+        this._onChange()
     }
 }
