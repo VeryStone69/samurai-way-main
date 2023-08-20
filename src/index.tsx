@@ -10,10 +10,7 @@ const renderTree = ()=> {
         <BrowserRouter>
             <App
                 state={store.getState()}
-                addPost={store.addPost.bind(store)}
-                updateNewPostText={store.updateNewPostText.bind(store)}
-                updateNewMessage={store.updateNewMessage.bind(store)}
-                addNewMessage={store.addNewMessage.bind(store)}
+                dispatch={store.dispatch.bind(store)}
             />
         </BrowserRouter>,
         document.getElementById('root')

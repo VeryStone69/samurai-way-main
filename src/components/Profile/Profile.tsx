@@ -2,23 +2,22 @@ import React from 'react';
 import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {PostDataType} from "../../App";
+import {DispatchACType} from "../../redux/state";
 
 export type ProfilePropsType = {
     postData: PostDataType[]
-    addPost:()=>void
     newPostTextProps:string
-    updateNewPostText:(newText:string)=>void
+    dispatch: (action:DispatchACType)=>void
 }
 
 export const Profile = (props: ProfilePropsType) => {
-    const{postData, addPost, newPostTextProps,updateNewPostText}=props
+    const{postData, newPostTextProps,dispatch}=props
     return (
         <div>
             <ProfileInfo/>
             <MyPosts postData={postData}
-                     addPost={addPost}
                      newPostText={newPostTextProps}
-                     updateNewPostText={updateNewPostText}
+                     dispatch={dispatch}
             />
         </div>
     );

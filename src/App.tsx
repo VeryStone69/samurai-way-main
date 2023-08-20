@@ -5,6 +5,7 @@ import {Navbar} from "./components/Navbar/Navbar";
 import {Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {Route, Routes} from "react-router-dom";
+import {DispatchACType} from "./redux/state";
 
 export type FriendsDataType = {
     id:string
@@ -43,14 +44,11 @@ export type StateType = {
 
 export type AppPropsType ={
     state: StateType
-    addPost:()=>void
-    updateNewPostText:(newText:string)=>void
-    updateNewMessage:(newMessageText:string)=>void
-    addNewMessage:()=>void
+    dispatch: (action:DispatchACType)=>void
 }
 
 export const App = (props: AppPropsType) => {
-    const {state,addPost,updateNewPostText,updateNewMessage,addNewMessage}=props
+    const {state,dispatch}=props
     return (
 
         <div className="app-wrapper">
@@ -61,16 +59,18 @@ export const App = (props: AppPropsType) => {
                     <Route path="/profile" element={<Profile
                         postData={state.profile.posts}
                         newPostTextProps={state.profile.newPostsText}
-                        updateNewPostText={updateNewPostText}
-                        addPost={addPost}
+                        dispatch={dispatch}
+                        // updateNewPostText={updateNewPostText}
+                        // addPost={addPost}
                     />}/>
                     <Route path="/dialogs/*"
                            element={<Dialogs
                                newMessage={state.dialogsPage.newMessage}
                                dialogsData={state.dialogsPage.dialogs}
                                messagesData={props.state.dialogsPage.message}
-                               updateNewMessage={updateNewMessage}
-                               addNewMessage={addNewMessage}
+                               dispatch={dispatch}
+                               // updateNewMessage={updateNewMessage}
+                               // addNewMessage={addNewMessage}
                            />}/>
                     {/*<Route path="/news" element={<News/>}/>*/}
                     {/*<Route path="/music" element={<Music/>}/>*/}
