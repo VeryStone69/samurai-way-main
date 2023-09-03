@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/VeryStone69/samurai-way-main/static/css/main.3318e27b.css",
-    "main.js": "/VeryStone69/samurai-way-main/static/js/main.4e4d954e.js",
+    "main.css": "/VeryStone69/samurai-way-main/static/css/main.6dd170ec.css",
+    "main.js": "/VeryStone69/samurai-way-main/static/js/main.0d4ea1df.js",
     "index.html": "/VeryStone69/samurai-way-main/index.html",
-    "main.3318e27b.css.map": "/VeryStone69/samurai-way-main/static/css/main.3318e27b.css.map",
-    "main.4e4d954e.js.map": "/VeryStone69/samurai-way-main/static/js/main.4e4d954e.js.map"
+    "main.6dd170ec.css.map": "/VeryStone69/samurai-way-main/static/css/main.6dd170ec.css.map",
+    "main.0d4ea1df.js.map": "/VeryStone69/samurai-way-main/static/js/main.0d4ea1df.js.map"
   },
   "entrypoints": [
-    "static/css/main.3318e27b.css",
-    "static/js/main.4e4d954e.js"
+    "static/css/main.6dd170ec.css",
+    "static/js/main.0d4ea1df.js"
   ]
 }
