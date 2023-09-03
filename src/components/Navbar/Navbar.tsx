@@ -2,13 +2,9 @@ import React from 'react';
 import s from "./Navbar.module.css"
 import {NavLink} from "react-router-dom";
 import {Friends} from "../Friends/Friends";
-import {FriendsDataType} from "../../App";
 
-type NavbarPropsType ={
-    friends:FriendsDataType[]
-}
+export const Navbar = () => {
 
-export const Navbar = (props:NavbarPropsType) => {
     return (
         <nav className={s.nav}>
             <div className={s.item}><NavLink to='/profile' className={({ isActive }) => (isActive ? s.active : s.item)}>Profile</NavLink></div>
@@ -16,7 +12,7 @@ export const Navbar = (props:NavbarPropsType) => {
             <div className={s.item}><NavLink to='/news' className={({ isActive }) => (isActive ? s.active : s.item)}>News</NavLink></div>
             <div className={s.item}><NavLink to='/music' className={({ isActive }) => (isActive ? s.active : s.item)}>Music</NavLink></div>
             <div className={s.item}><NavLink to='/settings' className={({ isActive }) => (isActive ? s.active : s.item)}>Settings</NavLink></div>
-            <div className={s.item}><Friends friends={props.friends}/></div>
+            <div className={s.item}><Friends/></div>
         </nav>
     );
 };

@@ -2,30 +2,29 @@ import React, {ChangeEvent} from "react"
 import s from "./Dialogs.module.css"
 import {Message} from "./Message/Message";
 import {DialogItem} from "./DialogItem/DialogItem";
-import {DialogsDataType, MessagesDataType} from "../../App";
-import {DispatchACType} from "../../redux/state";
+import {DialogsPage} from "../../App";
 import {addNewMessageAC, updateNewMessageAC} from "../../redux/diallogs-reduser";
-//
-type DialogsPropsType = {
-    dialogsData: DialogsDataType[]
-    messagesData: MessagesDataType[]
-    newMessage:string
-    dispatch: (action: DispatchACType) => void
-}
+import {useDispatch, useSelector} from "react-redux";
+import {AppRootStateType} from "../../redux/redux-store";
 
 
-export const Dialogs = (props: DialogsPropsType) => {
-    const { dialogsData,
-            messagesData,newMessage,dispatch} =props
-    let dialogsElement = dialogsData.map(d => {
+
+export const Dialogs = () => {
+
+const dialogs = useSelector<AppRootStateType,DialogsPage>(state=>state.dialogs)
+const dispatch = useDispatch();
+
+
+
+    let dialogsElement = dialogs.dialogs.map(d => {
         return <DialogItem name={d.name} id={d.id} key={d.id}/>
     })
-    let messagesElement = messagesData.map(m => {
+    let messagesElement = dialogs.message.map(m => {
         return <Message messageText={m.message} key={m.id}/>
     })
 
     function onClickHandler() {
-        if(newMessage){
+        if(dialogs.newMessage){
             dispatch(addNewMessageAC())
         }
     }
@@ -49,7 +48,7 @@ export const Dialogs = (props: DialogsPropsType) => {
                 <div className={s.dialog_addMessage_textarea}>
                     <textarea
                         onChange={onChangeHandler}
-                        value={newMessage}
+                        value={dialogs.newMessage}
                         className={s.dialog_textarea} />
                 </div>
                 <button className={s.dialog_addMessage_buttonAdd} onClick={onClickHandler} >Add post</button>

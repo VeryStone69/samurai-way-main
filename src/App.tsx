@@ -5,13 +5,9 @@ import {Navbar} from "./components/Navbar/Navbar";
 import {Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {Route, Routes} from "react-router-dom";
-import {DispatchACType} from "./redux/state";
+import {FriendsDataType} from "./redux/friends-reduser";
 
-export type FriendsDataType = {
-    id: string
-    name: string
-    img: string
-}
+
 export type DialogsDataType = {
     name: string
     id: string
@@ -42,32 +38,15 @@ export type StateType = {
 }
 
 
-export type AppPropsType = {
-    state: StateType
-    dispatch: (action: DispatchACType) => void
-}
-
-export const App = (props: AppPropsType) => {
-    const {state, dispatch} = props
+export const App = () => {
     return (
-
         <div className="app-wrapper">
             <Header/>
-            <Navbar friends={state.friends}/>
+            <Navbar/>
             <div className="app-wrapper-content">
                 <Routes>
-                    <Route path="/profile" element={<Profile
-                        postData={state.profile.posts}
-                        newPostTextProps={state.profile.newPostsText}
-                        dispatch={dispatch}
-                    />}/>
-                    <Route path="/dialogs/*"
-                           element={<Dialogs
-                               newMessage={state.dialogsPage.newMessage}
-                               dialogsData={state.dialogsPage.dialogs}
-                               messagesData={props.state.dialogsPage.message}
-                               dispatch={dispatch}
-                           />}/>
+                    <Route path="/profile" element={<Profile/>}/>
+                    <Route path="/dialogs/*" element={<Dialogs/>}/>
                     {/*<Route path="/news" element={<News/>}/>*/}
                     {/*<Route path="/music" element={<Music/>}/>*/}
                     {/*<Route path="/settings" element={<Settings/>}/>*/}

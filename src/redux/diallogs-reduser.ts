@@ -1,4 +1,4 @@
-import {StateType} from "../App";
+import {DialogsPage} from "../App";
 import {v1} from "uuid";
 
 type AddNewMessageActionType = ReturnType<typeof addNewMessageAC>
@@ -6,16 +6,35 @@ type UpdateNewMessageActionType = ReturnType<typeof updateNewMessageAC>
 
 export type DialogsReduserType = AddNewMessageActionType | UpdateNewMessageActionType
 
-export const dialogsReduser = (state:StateType,action: DialogsReduserType) =>{
+const initialState: DialogsPage = {
+    dialogs: [
+        {id: v1(), name: "Alex"},
+        {id: v1(), name: "Dima"},
+        {id: v1(), name: "Poma"},
+        {id: v1(), name: "Pasha"},
+        {id: v1(), name: "Igor"},
+        {id: v1(), name: "Andrey"},],
+    message: [
+        {id: v1(), message: "How are you?"},
+        {id: v1(), message: "Hi"},
+        {id: v1(), message: "I am fine and you?"},
+        {id: v1(), message: "Fine!"},
+        {id: v1(), message: "Maybe drink vodka?"},
+        {id: v1(), message: "Good idea!"},
+    ],
+    newMessage: "",
+}
+
+export const dialogsReduser = (state:DialogsPage=initialState,action: DialogsReduserType):DialogsPage =>{
     switch (action.type){
         case "ADD-NEW-MESSAGE":{
-            const newMessage = {id: v1(), message: state.dialogsPage.newMessage};
-            state.dialogsPage.message.push(newMessage)
-            state.dialogsPage.newMessage = "";
+            const newMessage = {id: v1(), message: state.newMessage};
+            state.message.push(newMessage)
+            state.newMessage = "";
             return state
         }
         case "UPDATE-NEW-MESSAGE": {
-            state.dialogsPage.newMessage = action.newMessageText;
+            state.newMessage = action.newMessageText;
             return state
         }
         default :return state
