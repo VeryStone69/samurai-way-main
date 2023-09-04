@@ -1,15 +1,18 @@
 import React, {ChangeEvent} from "react";
 import s from "./MyPosts.module.css";
 import {Post} from "./Post/Post";
-import {addPostAC, TasksStateType, updateNewPostAC} from "../../../redux/profile-reduser";
-import {useDispatch, useSelector} from "react-redux";
-import {AppRootStateType} from "../../../redux/redux-store";
+import {TasksStateType} from "../../../redux/profile-reduser";
 
 
-export const MyPosts = () => {
+type MyPostsPropsType = {
+    profile: TasksStateType
+    addPost: ()=>void
+    updateNewPost: (e: ChangeEvent<HTMLTextAreaElement>)=>void
+}
 
-    const profile = useSelector<AppRootStateType, TasksStateType>(state => state.profile)
-    const dispatch = useDispatch();
+export const MyPosts = (props:MyPostsPropsType) => {
+    const {profile,addPost,updateNewPost}=props
+
 
     let postsElement = profile.posts.map(p => {
         return <Post message={p.message} feedback={p.likesCount} key={p.id}/>
@@ -17,12 +20,11 @@ export const MyPosts = () => {
 
     const onClickHandler = () => {
         if (profile.newPostsText) {
-            dispatch(addPostAC())
+            addPost()
         }
     }
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        const action = updateNewPostAC(e.currentTarget.value);
-        dispatch(action)
+        updateNewPost(e)
     }
 
 

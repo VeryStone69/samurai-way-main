@@ -3,18 +3,16 @@ import s from "./Dialogs.module.css"
 import {Message} from "./Message/Message";
 import {DialogItem} from "./DialogItem/DialogItem";
 import {DialogsPage} from "../../App";
-import {addNewMessageAC, updateNewMessageAC} from "../../redux/diallogs-reduser";
-import {useDispatch, useSelector} from "react-redux";
-import {AppRootStateType} from "../../redux/redux-store";
+
+type DialogsPropsType = {
+    dialogs: DialogsPage
+    addNewMessage: () => void
+    updateNewMessage: (e: ChangeEvent<HTMLTextAreaElement>) => void
+}
 
 
-
-export const Dialogs = () => {
-
-const dialogs = useSelector<AppRootStateType,DialogsPage>(state=>state.dialogs)
-const dispatch = useDispatch();
-
-
+export const Dialogs = (props: DialogsPropsType) => {
+    const {dialogs, addNewMessage, updateNewMessage} = props
 
     let dialogsElement = dialogs.dialogs.map(d => {
         return <DialogItem name={d.name} id={d.id} key={d.id}/>
@@ -24,34 +22,34 @@ const dispatch = useDispatch();
     })
 
     function onClickHandler() {
-        if(dialogs.newMessage){
-            dispatch(addNewMessageAC())
+        if (dialogs.newMessage) {
+            addNewMessage()
         }
     }
-    const onChangeHandler = (e:ChangeEvent<HTMLTextAreaElement>)=>{
-        const action = updateNewMessageAC(e.currentTarget.value)
-        dispatch(action)
+
+    const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        updateNewMessage(e)
     }
 
     return (
         <>
-        <div className={s.wrapperDialogs}>
-            <div className={s.dialogs}>
-                {dialogsElement}
-            </div>
-            <div className={s.messages}>
-                {messagesElement}
-            </div>
+            <div className={s.wrapperDialogs}>
+                <div className={s.dialogs}>
+                    {dialogsElement}
+                </div>
+                <div className={s.messages}>
+                    {messagesElement}
+                </div>
 
-        </div>
+            </div>
             <div className={s.dialog_addMessage_container}>
                 <div className={s.dialog_addMessage_textarea}>
                     <textarea
                         onChange={onChangeHandler}
                         value={dialogs.newMessage}
-                        className={s.dialog_textarea} />
+                        className={s.dialog_textarea}/>
                 </div>
-                <button className={s.dialog_addMessage_buttonAdd} onClick={onClickHandler} >Add post</button>
+                <button className={s.dialog_addMessage_buttonAdd} onClick={onClickHandler}>Add post</button>
             </div>
         </>
 
