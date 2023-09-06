@@ -25,19 +25,17 @@ const initialState: DialogsPage = {
     newMessage: "",
 }
 
-export const dialogsReduser = (state:DialogsPage=initialState,action: DialogsReduserType):DialogsPage =>{
-    switch (action.type){
-        case "ADD-NEW-MESSAGE":{
+export const dialogsReduser = (state: DialogsPage = initialState, action: DialogsReduserType): DialogsPage => {
+    switch (action.type) {
+        case "ADD-NEW-MESSAGE": {
             const newMessage = {id: v1(), message: state.newMessage};
-            state.message.push(newMessage)
-            state.newMessage = "";
-            return state
+            return {...state, message: [...state.message, newMessage], newMessage: ""}
         }
         case "UPDATE-NEW-MESSAGE": {
-            state.newMessage = action.newMessageText;
-            return state
+            return {...state, newMessage: action.newMessageText}
         }
-        default :return state
+        default :
+            return {...state}
     }
 }
 
