@@ -10,7 +10,7 @@ export const Post = (props: PropsPostType) => {
         <>
             <div className={s.item}>
                 <img
-                    src="https://9obzor.ru/wp-content/uploads/2023/02/obrabotka-foto-neyroseti11.jpg"
+                    src="https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-Vector.png"
                     alt=""/>
                 {props.message}
             </div>

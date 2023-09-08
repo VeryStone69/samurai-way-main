@@ -9,28 +9,29 @@ export type FriendsDataType = {
 const initialState: FriendsDataType[] = [
     {
         id: v1(),
-        name: "Leonora",
-        img: "https://9obzor.ru/wp-content/uploads/2023/02/obrabotka-foto-neyroseti11.jpg"
+        name: "Jonh",
+        // img: "https://9obzor.ru/wp-content/uploads/2023/02/obrabotka-foto-neyroseti11.jpg"
+        img: "https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-Vector-PNG-Clipart.png"
     },
     {
         id: v1(),
-        name: "Meteora",
-        img: "https://static-cdn4-2.vigbo.tech/u19297/22269/blog/4426958/5938479/78187796/1000-Ekaterina_Nasyrova-961e3efa6072f7f8083602f199712ff8.JPG"
+        name: "Lily",
+        img: "https://w7.pngwing.com/pngs/224/408/png-transparent-avatar-child-girl-kid-avatars-xmas-giveaway-icon.png"
     },
     {
         id: v1(),
-        name: "Foress",
-        img: "https://www.business2community.com/ru/wp-content/uploads/sites/12/2023/05/generator.png"
+        name: "James",
+        img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSQ6JaRiKfz-Y1c61i5WpAYWtS0gV5ab91p6kSLmW9msq8hDehPmGrp97yvS97NYK2WpA&usqp=CAU"
     },
     {
         id: v1(),
-        name: "Tramp",
-        img: "https://cs13.pikabu.ru/images/big_size_comm/2023-02_4/1676600230192459959.jpg"
+        name: "Robert",
+        img: "https://it-tehnik.ru/wp-content/uploads/matureman.png"
     },
     {
         id: v1(),
-        name: "Prince",
-        img: "https://cs14.pikabu.ru/images/big_size_comm/2023-02_4/1676612896111680941.jpg"
+        name: "William",
+        img: "https://72tv.ru/uploads/posts/2022-09/1662876293_avatarka-foto-288.jpg"
     },
 ]
 
