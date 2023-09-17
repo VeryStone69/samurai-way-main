@@ -1,4 +1,4 @@
-import avatarImage from "../assets/images/userAvatar.png"
+
 
 type FollowActionType = ReturnType<typeof followAC>
 type UnFollowActionType = ReturnType<typeof unFollowAC>
@@ -40,7 +40,7 @@ const initialState: UsersDataType = {
             name: "Dmitry",
             uniqueUrlName: null,
             photos: {
-                small: avatarImage,
+                small: null,
                 large: null
             },
             status: "I am OK!",
