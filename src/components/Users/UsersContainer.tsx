@@ -3,26 +3,24 @@ import {Users} from "./Users";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../redux/redux-store";
 import {followAC, setUsersAC, unFollowAC, UsersType} from "../../redux/users-reduser";
-import {v1} from "uuid";
+import axios from "axios";
 
 export const UsersContainer = () => {
-    const users = useSelector<AppRootStateType, UsersType[]>(state => state.usersPage.users);
+    const users = useSelector<AppRootStateType, UsersType[]>(state => state.usersPage.items);
     const dispatch = useDispatch();
 
-// useEffect(()=>{
-//     dispatch(setUsersAC([
-//
-//     ]))
-// },[])
-    const followHandler = (id: string) => {
+useEffect(()=>{
+    axios.get("https://social-network.samuraijs.com/api/1.0/users")
+        .then((res)=>{
+            dispatch(setUsersAC(res.data))
+        })
+},[])
+    const followHandler = (id: number) => {
         dispatch(followAC(id))
     }
-    const unFollowHandler = (id: string) => {
+    const unFollowHandler = (id: number) => {
         dispatch(unFollowAC(id))
     }
-    // const setUsersHandler = (user: UsersType[]) => {
-    //
-    // }
 
     return (
         <>

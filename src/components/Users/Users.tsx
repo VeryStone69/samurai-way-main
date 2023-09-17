@@ -1,11 +1,12 @@
 import React, {FC} from 'react';
 import {UsersType} from "../../redux/users-reduser";
 import s from "./Users.module.css"
+import noImg from "../../assets/images/noImg.webp"
 
 type UsersPropsType = {
     users: UsersType[]
-    followHandler: (userId: string) => void
-    unFollowHandler: (userId: string) => void
+    followHandler: (userId: number) => void
+    unFollowHandler: (userId: number) => void
 }
 
 export const Users: FC<UsersPropsType> = (props) => {
@@ -15,7 +16,7 @@ export const Users: FC<UsersPropsType> = (props) => {
                 return (<div key={el.id} className={s.userContainer}>
                         <span className={s.container_img}>
                             <div >
-                                <img src={el.photoURL} alt={"photo user"} className={s.userPhoto}/>
+                                <img src={el.photos.small !== null ? el.photos.small:noImg} alt={"photo user"} className={s.userPhoto}/>
                             </div>
                         <div>
                             {el.followed
@@ -26,12 +27,12 @@ export const Users: FC<UsersPropsType> = (props) => {
                             </span>
                         <span className={s.nameLocation_Container}>
                             <span className={s.userContainer_name}>
-                                <div>{el.fullName}</div>
+                                <div>{el.name}</div>
                                 <div>{el.status}</div>
                             </span>
                             <span className={s.userContainer_location}>
-                                <div>{el.location.country}</div>
-                                <div>{el.location.city}</div>
+                                <div>No country</div>
+                                <div>No city</div>
                             </span>
                         </span>
                     </div>
