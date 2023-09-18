@@ -1,6 +1,7 @@
 import React from 'react';
-import {UsersType} from "../../redux/users-reduser";
+import {setUsersAC, UsersType} from "../../redux/users-reduser";
 import s from "./Users.module.css"
+import axios from "axios";
 
 
 type UsersPropsType = {
@@ -10,6 +11,12 @@ type UsersPropsType = {
 }
 
 class UsersClassComponent extends React.Component<any, any> {
+    componentDidMount() {
+        axios.get("https://social-network.samuraijs.com/api/1.0/users")
+            .then((res)=>{
+                console.log(res.status)
+            })
+    }
 
     render() {
         return <div className={s.main_container_users}>
