@@ -1,9 +1,10 @@
 import React, {useEffect} from 'react';
-import {Users} from "./Users";
+// import {Users} from "./Users";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../redux/redux-store";
 import {followAC, setUsersAC, unFollowAC, UsersType} from "../../redux/users-reduser";
 import axios from "axios";
+import UsersClassComponent from "./UsersClassComponent";
 
 export const UsersContainer = () => {
     const users = useSelector<AppRootStateType, UsersType[]>(state => state.usersPage.items);
@@ -24,7 +25,13 @@ useEffect(()=>{
 
     return (
         <>
-            <Users
+            {/*<Users*/}
+            {/*    users={users}*/}
+            {/*    followHandler={followHandler}*/}
+            {/*    unFollowHandler={unFollowHandler}*/}
+            {/*    // setUsersHandler={setUsersHandler}*/}
+            {/*/>*/}
+            <UsersClassComponent
                 users={users}
                 followHandler={followHandler}
                 unFollowHandler={unFollowHandler}
