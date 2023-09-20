@@ -1,26 +1,49 @@
 import React from 'react';
-import {setUsersAC, UsersType} from "../../redux/users-reduser";
+import {UsersType} from "../../redux/users-reduser";
 import s from "./Users.module.css"
 import axios from "axios";
 
 
 type UsersPropsType = {
     users: UsersType[]
+    totalUsersCount: number
+    pageSize: number
+    currentPage: number
     followHandler: (userId: number) => void
     unFollowHandler: (userId: number) => void
+    clickNextPage: (pageNumber: number) => void
 }
 
-class UsersClassComponent extends React.Component<any, any> {
+class UsersClassComponent extends React.Component<UsersPropsType> {
+
     componentDidMount() {
         axios.get("https://social-network.samuraijs.com/api/1.0/users")
-            .then((res)=>{
+            .then((res) => {
                 console.log(res.status)
             })
+        // this.onPageChanged(1)
+    }
+
+    onPageChanged = (el:number)=>{
+        this.props.clickNextPage(el)
     }
 
     render() {
+        let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
+        let pages = []
+        for (let i = 1; i <= pagesCount; i++) {
+            pages.push(i)
+        }
+
         return <div className={s.main_container_users}>
-            {this.props.users.map((el: any) => {
+            <div className={s.usersPagesNumber}>{pages.map((el) => (
+                <span
+                    className={this.props.currentPage === el ? s.pageSelected : ""}
+                    onClick={() => {this.onPageChanged(el)}}>
+                    {el}
+                </span>))}
+            </div>
+            {this.props.users.map((el: UsersType) => {
                 return <div key={el.id} className={s.userContainer}>
                         <span className={s.container_img}>
                             <div>
@@ -39,7 +62,7 @@ class UsersClassComponent extends React.Component<any, any> {
                             }
                         </div>
                             </span>
-                        <span className={s.nameLocation_Container}>
+                    <span className={s.nameLocation_Container}>
                             <span className={s.userContainer_name}>
                                 <div>{el.name}</div>
                                 <div>{el.status}</div>
@@ -49,7 +72,7 @@ class UsersClassComponent extends React.Component<any, any> {
                                 <div>No city</div>
                             </span>
                         </span>
-                    </div>
+                </div>
 
             })}
         </div>

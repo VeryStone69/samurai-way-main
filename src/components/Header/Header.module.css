@@ -1,7 +1,17 @@
 .header {
+    display: flex;
     grid-area: header;
     background-color: #539CCC;
+    align-content: center;
+    align-items: center;
+    justify-content: flex-start;
 }
 .header img {
     width: 40px;
+    margin-left: 18px;
+}
+
+.headerTitle {
+    color: #ffffff;
+    margin-left: 10px;
 }
