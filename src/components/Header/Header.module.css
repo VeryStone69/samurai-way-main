@@ -15,3 +15,10 @@
     color: #ffffff;
     margin-left: 10px;
 }
+.loginBlock {
+    float: right;
+}
+.loginBlock a {
+    color: #fff;
+    padding-left: 100px;
+}
