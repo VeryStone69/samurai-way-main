@@ -25,11 +25,12 @@ export const UsersContainer = () => {
         dispatch(setFetchingAC(true))
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageSize.totalUsersCount}&count=${pageSize.pageSize}`)
             .then((res) => {
-                dispatch(setUsersAC(res.data))
+                // dispatch(setUsersAC(res.data)) // эти диспатчи отключены, пока отрабатывает clickNextPage
+                clickNextPage(pageSize.currentPage)
                 dispatch(setTotalUsersCountAC(res.data.totalCount))
-                dispatch(setFetchingAC(false))
+                // dispatch(setFetchingAC(false))
             })
-    }, [])
+    },[])
     const followHandler = (id: number) => {
         dispatch(followAC(id))
     }
