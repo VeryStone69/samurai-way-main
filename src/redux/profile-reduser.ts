@@ -1,5 +1,6 @@
 import {PostDataType} from "../App";
 import {v1} from "uuid";
+import veryStone from "../assets/images/veryStone.jpg"
 
 export interface ProfileDataType {
     aboutMe: string;
@@ -51,7 +52,7 @@ const initialState: TasksStateType = {
         {id: v1(), message: "Yo6", likesCount: 3},],
     newPostsText: "Your text" ,
     profile:{
-        aboutMe: "я круто чувак 1001%",
+        aboutMe: "I live this life",
         contacts: {
             facebook: "facebook.com",
             website: null,
@@ -63,12 +64,12 @@ const initialState: TasksStateType = {
             mainLink: null
         },
         lookingForAJob: true,
-        lookingForAJobDescription: "не ищу, а дурачусь",
-        fullName: "samurai dimych",
-        userId: 2,
+        lookingForAJobDescription: "I'm looking for a job for fun. Slavery is not offered.",
+        fullName: "Aliaksandr Kaptsevich",
+        userId: 0,
         photos: {
             small: "https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0",
-            large: "https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0"
+            large: veryStone
         }
     }
 

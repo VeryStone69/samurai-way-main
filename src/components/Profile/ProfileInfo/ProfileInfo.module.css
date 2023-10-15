@@ -1,5 +1,5 @@
 .descriptionBlock {
-    padding: 10px;
+    padding: 30px 10px 10px 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -14,7 +14,7 @@
     font-style: normal;
     font-variant: normal;
 
-    padding-top: 10px;
+    padding-top: 30px;
 }
 
 .profileInfo_img{
@@ -23,6 +23,10 @@
 
 .profileLargePhoto {
     border-radius: 50%;
+    border: 1px solid #fff;
+    -webkit-box-shadow: 0 0 33px 17px rgba(0, 8, 12, 0.3);
+    -moz-box-shadow: 0 0 33px 17px rgba(0, 8, 12, 0.3);
+    box-shadow: 0 0 33px 17px rgba(0, 8, 12, 0.3);
 }
 
 .profileSocialNetworks{
