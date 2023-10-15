@@ -1,14 +1,41 @@
 import React from 'react';
 import s from  './ProfileInfo.module.css'
-export const ProfileInfo = () => {
+import {TasksStateType} from "../../../redux/profile-reduser";
+import {UsersLoader} from "../../common/UsersLoader";
+import facebookLogo from "../../../assets/images/icons-facebook-48.png";
+import githubLogo from "../../../assets/images/icons-github-48.png"
+import twitterLogo from "../../../assets/images/icons-twitterx-48.png"
+import websiteLogo from "../../../assets/images/icons8-search-in-browser-48.png"
+
+type ProfileInfoPropsType = {
+    profile:TasksStateType
+}
+export const ProfileInfo:React.FC<ProfileInfoPropsType> = ({...profile}) => {
+const profileData = profile.profile.profile
     return (
-        <div>
-            <img className={s.profileInfo_img}
-                src="https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg"
-                alt="content picture"/>
-            <div className={s.descriptionBlock}>
-                ava + discription
-            </div>
-        </div>
+        <>
+            {!profileData?
+                <UsersLoader/>:
+                <div>
+                    <img className={s.profileInfo_img}
+                         src="https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg"
+                         alt="content picture"/>
+                    <div className={s.descriptionBlock}>
+                        <img className={s.profileLargePhoto} alt={"user photo"} src={profileData.photos.large}/>
+                        <div className={s.profileFullName}>{profileData.fullName}</div>
+                        <div>{profileData.aboutMe}</div>
+                        {profileData.lookingForAJob ? <div className={s.findJob}>В активном поиске работы</div>: <div>У меня есть работа</div>}
+                        <div className={s.profileSocialNetworks}>
+                            {profileData.contacts.facebook ? <a href={profileData.contacts.facebook}><img alt={"facebook logo"} src={facebookLogo}/></a> : ""}
+                            {profileData.contacts.github ? <a href={profileData.contacts.github}><img alt={"github logo"} src={githubLogo}/></a>:""}
+                            {profileData.contacts.twitter ? <a href={profileData.contacts.twitter}><img alt={"twitter logo"} src={twitterLogo}/></a>:""}
+                            {profileData.contacts.website ? <a href={profileData.contacts.website}><img alt={"logo for web page"} src={websiteLogo}/></a>:""}
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </>
+
     );
 };

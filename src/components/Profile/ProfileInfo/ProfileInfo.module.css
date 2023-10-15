@@ -1,6 +1,58 @@
 .descriptionBlock {
     padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
+.profileFullName{
+    font-family: Arial, serif;
+    font-size: 19px;
+    letter-spacing: 1px;
+    color: #000000;
+    font-weight: bold;
+    font-style: normal;
+    font-variant: normal;
+
+    padding-top: 10px;
+}
+
 .profileInfo_img{
     width: 100%;
+}
+
+.profileLargePhoto {
+    border-radius: 50%;
+}
+
+.profileSocialNetworks{
+    display: flex;
+    flex-direction: row;
+    align-content: space-around;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.profileSocialNetworks a:visited {
+
+}
+
+
+.findJob {
+    animation: myAnim 4s ease 0s infinite normal forwards;
+}
+
+@keyframes myAnim {
+    0%,
+    50%,
+    100% {
+        opacity: 1;
+    }
+
+    25%,
+    75% {
+        color: red;
+        opacity: 1;
+    }
 }
