@@ -35,11 +35,11 @@
     align-content: space-around;
     justify-content: center;
     align-items: center;
-
+    transition: 1s;
 }
 
-.profileSocialNetworks a:visited {
-
+.profileSocialNetworks a:hover {
+    transform: scale(1.06);
 }
 
 

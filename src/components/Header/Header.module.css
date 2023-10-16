@@ -16,12 +16,10 @@
 }
 .header img {
     width: 40px;
-    margin-left: 18px;
 }
 
 .headerTitle {
     color: #ffffff;
-    margin-left: 10px;
 }
 .loginBlock {
     display: flex;
@@ -30,5 +28,4 @@
 }
 .loginBlock a {
     color: #fff;
-    padding-left: 100px;
 }
