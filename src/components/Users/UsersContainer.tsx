@@ -31,15 +31,40 @@ export const UsersContainer = () => {
                 // dispatch(setFetchingAC(false))
             })
     },[])
-    const followHandler = (id: number) => {
-        dispatch(followAC(id))
+    const followHandler = (userId: number) => {
+        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`,{},{
+            withCredentials:true,
+            headers: {
+                "API-KEY": "6357bf2d-3ba6-4559-b8ec-ed1b7bec63a8"
+            }
+        })
+            .then(res=>{
+                if(res.data.resultCode === 0) {
+                    dispatch(followAC(userId))
+                }
+            })
     }
-    const unFollowHandler = (id: number) => {
-        dispatch(unFollowAC(id))
+    const unFollowHandler = (userId: number) => {
+        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`,{
+            withCredentials:true,
+            headers: {
+                "API-KEY": "6357bf2d-3ba6-4559-b8ec-ed1b7bec63a8"
+            }
+        })
+            .then(res=>{
+                if (res.data.resultCode === 0) {
+                    dispatch(unFollowAC(userId))
+                }
+            })
+
     }
     const clickNextPage = (numberPage: number) => {
         dispatch(setFetchingAC(true))
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${numberPage}&count=${pageSize.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${numberPage}&count=${pageSize.pageSize}`,{
+            withCredentials:true,
+            headers: {
+                "API-KEY": "6357bf2d-3ba6-4559-b8ec-ed1b7bec63a8"
+        }})
             .then((res) => {
                 dispatch(setUsersAC(res.data))
                 dispatch(setFetchingAC(false))
