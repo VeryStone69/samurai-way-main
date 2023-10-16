@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react';
-// import {Users} from "./Users";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../redux/redux-store";
 import {
@@ -11,9 +10,9 @@ import {
     UsersDataType,
     UsersType
 } from "../../redux/users-reduser";
-import axios from "axios";
 import UsersClassComponent from "./UsersClassComponent";
 import {UsersLoader} from "../common/UsersLoader";
+import {usersAPI} from "../../api/api";
 
 export const UsersContainer = () => {
     const users = useSelector<AppRootStateType, UsersType[]>(state => state.usersPage.items);
@@ -23,21 +22,16 @@ export const UsersContainer = () => {
 
     useEffect(() => {
         dispatch(setFetchingAC(true))
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageSize.totalUsersCount}&count=${pageSize.pageSize}`)
-            .then((res) => {
+        usersAPI.getUsers(pageSize.totalUsersCount,pageSize.pageSize)
+            .then((data) => {
                 // dispatch(setUsersAC(res.data)) // эти диспатчи отключены, пока отрабатывает clickNextPage
                 clickNextPage(pageSize.currentPage)
-                dispatch(setTotalUsersCountAC(res.data.totalCount))
+                dispatch(setTotalUsersCountAC(data.totalCount))
                 // dispatch(setFetchingAC(false))
             })
     },[])
     const followHandler = (userId: number) => {
-        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`,{},{
-            withCredentials:true,
-            headers: {
-                "API-KEY": "6357bf2d-3ba6-4559-b8ec-ed1b7bec63a8"
-            }
-        })
+        usersAPI.followUser(userId)
             .then(res=>{
                 if(res.data.resultCode === 0) {
                     dispatch(followAC(userId))
@@ -45,12 +39,7 @@ export const UsersContainer = () => {
             })
     }
     const unFollowHandler = (userId: number) => {
-        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`,{
-            withCredentials:true,
-            headers: {
-                "API-KEY": "6357bf2d-3ba6-4559-b8ec-ed1b7bec63a8"
-            }
-        })
+        usersAPI.unFollowUser(userId)
             .then(res=>{
                 if (res.data.resultCode === 0) {
                     dispatch(unFollowAC(userId))
@@ -60,13 +49,9 @@ export const UsersContainer = () => {
     }
     const clickNextPage = (numberPage: number) => {
         dispatch(setFetchingAC(true))
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${numberPage}&count=${pageSize.pageSize}`,{
-            withCredentials:true,
-            headers: {
-                "API-KEY": "6357bf2d-3ba6-4559-b8ec-ed1b7bec63a8"
-        }})
-            .then((res) => {
-                dispatch(setUsersAC(res.data))
+            usersAPI.getUsers(numberPage,pageSize.pageSize)
+            .then((data) => {
+                dispatch(setUsersAC(data))
                 dispatch(setFetchingAC(false))
             })
         dispatch(setCurrentPageAC(numberPage))
