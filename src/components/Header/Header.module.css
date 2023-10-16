@@ -1,10 +1,18 @@
 .header {
+    /*Old styles*/
+    /*display: flex;*/
+    /*grid-area: header;*/
+    /*background-color: #539CCC;*/
+    /*align-content: center;*/
+    /*align-items: center;*/
+    /*justify-content: flex-start;*/
     display: flex;
     grid-area: header;
     background-color: #539CCC;
     align-content: center;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
+    padding: 0 15px 0 15px;
 }
 .header img {
     width: 40px;
@@ -16,7 +24,9 @@
     margin-left: 10px;
 }
 .loginBlock {
-    float: right;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
 }
 .loginBlock a {
     color: #fff;

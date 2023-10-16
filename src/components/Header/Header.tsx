@@ -16,7 +16,7 @@ export const Header:React.FC<HeaderPropsType> = ({...props}) => {
                 <img src="https://img.freepik.com/free-icon/diamond_318-195445.jpg?size=626&ext=jpg" alt="logo"/>
                 <span className={s.headerTitle}>Social Network</span>
                 <div className={s.loginBlock}>
-                    <NavLink to={"/login"}>{props.isAuth?props.login:<div>ZALUPA</div>}</NavLink>
+                    <NavLink to={"/login"}>{props.isAuth?props.login:<div>Login</div>}</NavLink>
                 </div>
 
             </header>
