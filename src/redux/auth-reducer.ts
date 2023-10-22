@@ -1,5 +1,5 @@
 
-type AuthReduserType = ReturnType<typeof setUserDataAC>
+type AuthReducerType = ReturnType<typeof setUserDataAC>
 export type AuthDataType = {
     resultCode: number
     messages: [],
@@ -26,10 +26,9 @@ const initialState: AuthDataType = {
 }
 
 
-export const authReduser = (state: AuthDataType = initialState, action: AuthReduserType): AuthDataType => {
+export const authReducer = (state: AuthDataType = initialState, action: AuthReducerType): AuthDataType => {
     switch (action.type) {
         case "SET-USER-DATA": {
-            console.log({...action.data, isFetching:false})
             return {...action.data, isFetching:false, isAuth:true}
 
         }

@@ -3,7 +3,7 @@ import {profileReduser} from "./profile-reduser";
 import {dialogsReduser} from "./diallogs-reduser";
 import {friendsReduser} from "./friends-reduser";
 import {usersReduser} from "./users-reduser";
-import {authReduser} from "./auth-reduser";
+import {authReducer} from "./auth-reducer";
 import thunk from "redux-thunk";
 
 export type RootState = ReturnType<typeof store.getState>
@@ -13,7 +13,7 @@ const rootReducer = combineReducers({
     dialogs: dialogsReduser,
     friends: friendsReduser,
     usersPage: usersReduser,
-    auth:authReduser
+    auth:authReducer
 })
 export type AppRootStateType = ReturnType<typeof rootReducer>
 export const store = createStore(rootReducer,applyMiddleware(thunk));

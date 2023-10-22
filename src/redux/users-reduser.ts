@@ -1,5 +1,7 @@
 import {Dispatch} from "redux";
-import {usersAPI} from "../api/api";
+import {authApi, usersAPI} from "../api/api";
+import {setUserProfile} from "./profile-reduser";
+import {setUserDataAC} from "./auth-reducer";
 
 type UsersReducerType =
     ReturnType<typeof followAC>
@@ -156,25 +158,39 @@ export const nextPageTC = (numberPage: number, pageSize: number) => (dispatch: D
         })
     dispatch(setCurrentPageAC(numberPage))
 }
- export const followTC = (userId:number)=>(dispatch:Dispatch)=>{
-     dispatch(toggleFollowingProgressAC(true, userId))
-     usersAPI.followUser(userId)
-         .then(res => {
-             if (res.data.resultCode === 0) {
-                 dispatch(followAC(userId))
+export const followTC = (userId: number) => (dispatch: Dispatch) => {
+    dispatch(toggleFollowingProgressAC(true, userId))
+    usersAPI.followUser(userId)
+        .then(res => {
+            if (res.data.resultCode === 0) {
+                dispatch(followAC(userId))
 
-             }
-             dispatch(toggleFollowingProgressAC(false, userId))
-         })
- }
- export const unFollowTC = (userId:number)=>(dispatch:Dispatch)=>{
-     dispatch(toggleFollowingProgressAC(true, userId))
-     usersAPI.unFollowUser(userId)
-         .then(res => {
-             if (res.data.resultCode === 0) {
-                 dispatch(unFollowAC(userId))
-             }
-             dispatch(toggleFollowingProgressAC(false, userId))
-         })
- }
+            }
+            dispatch(toggleFollowingProgressAC(false, userId))
+        })
+}
+export const unFollowTC = (userId: number) => (dispatch: Dispatch) => {
+    dispatch(toggleFollowingProgressAC(true, userId))
+    usersAPI.unFollowUser(userId)
+        .then(res => {
+            if (res.data.resultCode === 0) {
+                dispatch(unFollowAC(userId))
+            }
+            dispatch(toggleFollowingProgressAC(false, userId))
+        })
+}
+export const getProfileDataTC = (userId: string | undefined) => (dispatch: Dispatch) => {
+    usersAPI.getProfile(userId)
+        .then((res) => {
+            dispatch(setUserProfile(res.data))
+        })
+}
+export const getAuthUserData = () => (dispatch: Dispatch) => {
+    authApi.me()
+        .then((res) => {
+            if (res.data.resultCode === 0) {
+                dispatch(setUserDataAC(res.data))
+            }
+        })
+}
 
