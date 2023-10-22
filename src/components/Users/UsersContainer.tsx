@@ -5,7 +5,7 @@ import {
     followAC,
     setCurrentPageAC, setFetchingAC,
     setTotalUsersCountAC,
-    setUsersAC,
+    setUsersAC, toggleFollowingProgressAC,
     unFollowAC,
     UsersDataType,
     UsersType
@@ -18,6 +18,7 @@ export const UsersContainer = () => {
     const users = useSelector<AppRootStateType, UsersType[]>(state => state.usersPage.items);
     const pageSize = useSelector<AppRootStateType, UsersDataType>(state => state.usersPage);
     const fetch = useSelector<AppRootStateType, UsersDataType>(state => state.usersPage)
+    const toggleFollowing = useSelector<AppRootStateType,Array<any>>(state => state.usersPage.followingInProgress)
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -31,19 +32,24 @@ export const UsersContainer = () => {
             })
     },[])
     const followHandler = (userId: number) => {
+        dispatch(toggleFollowingProgressAC(true,userId))
         usersAPI.followUser(userId)
             .then(res=>{
                 if(res.data.resultCode === 0) {
                     dispatch(followAC(userId))
+
                 }
+                dispatch(toggleFollowingProgressAC(false,userId))
             })
     }
     const unFollowHandler = (userId: number) => {
+        dispatch(toggleFollowingProgressAC(true,userId))
         usersAPI.unFollowUser(userId)
             .then(res=>{
                 if (res.data.resultCode === 0) {
                     dispatch(unFollowAC(userId))
                 }
+                dispatch(toggleFollowingProgressAC(false,userId))
             })
 
     }
@@ -76,6 +82,7 @@ export const UsersContainer = () => {
                     followHandler={followHandler}
                     unFollowHandler={unFollowHandler}
                     clickNextPage={clickNextPage}
+                    toggleFollowing={toggleFollowing}
                     // setUsersHandler={setUsersHandler}
                 />
             }

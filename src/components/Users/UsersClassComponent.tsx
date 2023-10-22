@@ -12,6 +12,7 @@ type UsersPropsType = {
     followHandler: (userId: number) => void
     unFollowHandler: (userId: number) => void
     clickNextPage: (pageNumber: number) => void
+    toggleFollowing:Array<any>
 }
 
 class UsersClassComponent extends React.Component<UsersPropsType> {
@@ -49,8 +50,8 @@ class UsersClassComponent extends React.Component<UsersPropsType> {
                             </div>
                         <div>
                             {el.followed
-                                ? <button onClick={() => {this.props.unFollowHandler(el.id)}}>Unfollow</button>
-                                : <button onClick={() => {this.props.followHandler(el.id)}}>Follow</button>
+                                ? <button onClick={() => {this.props.unFollowHandler(el.id)}} disabled={this.props.toggleFollowing.some(id=>id===el.id)}>Unfollow</button>
+                                : <button onClick={() => {this.props.followHandler(el.id)}} disabled={this.props.toggleFollowing.some(id=>id===el.id)}>Follow</button>
                             }
                         </div>
                             </span>
