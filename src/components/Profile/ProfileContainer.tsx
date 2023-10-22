@@ -1,13 +1,15 @@
 import React, {useEffect} from 'react';
 import {Profile} from "./Profile";
-import {useDispatch} from "react-redux";
-import {useParams,} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {Navigate, useParams,} from "react-router-dom";
 import {getProfileDataTC} from "../../redux/users-reduser";
+import {AppRootStateType} from "../../redux/redux-store";
 
 
 export const ProfileContainer = () => {
     let params = useParams();
     let userId = params.userId;
+    const isAuth = useSelector<AppRootStateType,boolean>(state => state.auth.isAuth)
 
     const dispatch = useDispatch()
     useEffect(() => {
@@ -17,5 +19,5 @@ export const ProfileContainer = () => {
         dispatch(getProfileDataTC(userId))
     }, [])
 
-    return <Profile/>
+    return isAuth? <Profile/>:<Navigate to={"/login"}/>
 }

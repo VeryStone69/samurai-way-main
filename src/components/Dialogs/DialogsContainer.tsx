@@ -4,10 +4,12 @@ import {addNewMessageAC, updateNewMessageAC} from "../../redux/diallogs-reduser"
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../redux/redux-store";
 import {Dialogs} from "./Dialogs";
+import {Profile} from "../Profile/Profile";
+import {Navigate} from "react-router-dom";
 
 
 export const DialogsContainer = () => {
-
+    const isAuth = useSelector<AppRootStateType, boolean>(state => state.auth.isAuth)
     const dialogs = useSelector<AppRootStateType, DialogsPage>(state => state.dialogs)
     const dispatch = useDispatch();
 
@@ -23,9 +25,11 @@ export const DialogsContainer = () => {
     }
 
     return (
-        <Dialogs
-            dialogs={dialogs}
-            addNewMessage={addNewMessage}
-            updateNewMessage={updateNewMessage}/>
+        isAuth ?
+            <Dialogs
+                dialogs={dialogs}
+                addNewMessage={addNewMessage}
+                updateNewMessage={updateNewMessage}/>
+            : <Navigate to={"/login"}/>
     )
 }
