@@ -16,13 +16,16 @@ export const UsersContainer = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
+
         dispatch(getUsersTC(pageSize))
     }, [])
     const followHandler = (userId: number) => {
+
         dispatch(followTC(userId))
     }
     const unFollowHandler = (userId: number) => {
         dispatch(unFollowTC(userId))
+
     }
     const clickNextPage = (numberPage: number) => {
         dispatch(nextPageTC(numberPage, pageSize.pageSize))
@@ -48,7 +51,6 @@ export const UsersContainer = () => {
                     unFollowHandler={unFollowHandler}
                     clickNextPage={clickNextPage}
                     toggleFollowing={toggleFollowing}
-                    // setUsersHandler={setUsersHandler}
                 />
             }
 

@@ -1,7 +1,7 @@
 import {Dispatch} from "redux";
 import {usersAPI} from "../api/api";
 
-type UsersReduserType =
+type UsersReducerType =
     ReturnType<typeof followAC>
     | ReturnType<typeof unFollowAC>
     | ReturnType<typeof setUsersAC>
@@ -11,16 +11,6 @@ type UsersReduserType =
     | ReturnType<typeof toggleFollowingProgressAC>
 
 export type UsersType = {
-    // id: string
-    // followed: boolean
-    // fullName: string
-    // photoURL: string
-    // status: string
-    // location: {
-    //     country: string
-    //     city: string
-    // }
-
     name: string,
     id: number,
     uniqueUrlName: null | string,
@@ -66,7 +56,7 @@ const initialState: UsersDataType = {
 }
 
 
-export const usersReduser = (state: UsersDataType = initialState, action: UsersReduserType): UsersDataType => {
+export const usersReduser = (state: UsersDataType = initialState, action: UsersReducerType): UsersDataType => {
     switch (action.type) {
         case "FOLLOW": {
             return {...state, items: state.items.map(el => el.id === action.userId ? {...el, followed: true} : el)}
