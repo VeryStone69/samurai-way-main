@@ -9,15 +9,14 @@ import {AppRootStateType} from "../../redux/redux-store";
 export const ProfileContainer = () => {
     let params = useParams();
     let userId = params.userId;
-    const isAuth = useSelector<AppRootStateType,boolean>(state => state.auth.isAuth)
-
     const dispatch = useDispatch()
+    const isAuth = useSelector<AppRootStateType,boolean>(state => state.auth.isAuth)
     useEffect(() => {
         if (!params.userId) {
             userId = "2"
         }
         dispatch(getProfileDataTC(userId))
     }, [])
-
-    return isAuth? <Profile/>:<Navigate to={"/login"}/>
+    return  isAuth? <Profile/>:<Navigate to={"/login"}/>
 }
+

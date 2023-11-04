@@ -6,6 +6,7 @@ import facebookLogo from "../../../assets/images/icons-facebook-48.png";
 import githubLogo from "../../../assets/images/icons-github-48.png"
 import twitterLogo from "../../../assets/images/icons-twitterx-48.png"
 import websiteLogo from "../../../assets/images/icons8-search-in-browser-48.png"
+import ProfileStatus from "../ProfileStatus/ProfileStatus";
 
 type ProfileInfoPropsType = {
     profile:TasksStateType
@@ -23,7 +24,8 @@ const profileData = profile.profile.profile
                     <div className={s.descriptionBlock}>
                         <img className={s.profileLargePhoto} alt={"user photo"} src={profileData.photos.large}/>
                         <div className={s.profileFullName}>{profileData.fullName}</div>
-                        <div>{profileData.aboutMe}</div>
+                        <ProfileStatus status ={profileData.aboutMe}/>
+                        {/*<div>{profileData.aboutMe}</div>*/}
                         {profileData.lookingForAJob ? <div className={s.findJob}>В активном поиске работы</div>: <div>У меня есть работа</div>}
                         <div className={s.profileSocialNetworks}>
                             {profileData.contacts.facebook ? <a href={profileData.contacts.facebook}><img alt={"facebook logo"} src={facebookLogo}/></a> : ""}

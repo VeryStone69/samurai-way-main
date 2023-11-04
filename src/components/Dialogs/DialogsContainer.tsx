@@ -4,7 +4,6 @@ import {addNewMessageAC, updateNewMessageAC} from "../../redux/diallogs-reduser"
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../redux/redux-store";
 import {Dialogs} from "./Dialogs";
-import {Profile} from "../Profile/Profile";
 import {Navigate} from "react-router-dom";
 
 
