@@ -1,22 +1,29 @@
 import React from 'react';
-import s from  './ProfileInfo.module.css'
-import {TasksStateType} from "../../../redux/profile-reduser";
+import s from './ProfileInfo.module.css'
+import {TasksStateType, updateProfileStatusTC} from "../../../redux/profile-reduser";
 import {UsersLoader} from "../../common/UsersLoader";
 import facebookLogo from "../../../assets/images/icons-facebook-48.png";
 import githubLogo from "../../../assets/images/icons-github-48.png"
 import twitterLogo from "../../../assets/images/icons-twitterx-48.png"
 import websiteLogo from "../../../assets/images/icons8-search-in-browser-48.png"
 import ProfileStatus from "../ProfileStatus/ProfileStatus";
+import {useDispatch, useSelector} from "react-redux";
+import {AppRootStateType} from "../../../redux/redux-store";
 
 type ProfileInfoPropsType = {
-    profile:TasksStateType
+    profile: TasksStateType
 }
-export const ProfileInfo:React.FC<ProfileInfoPropsType> = ({...profile}) => {
-const profileData = profile.profile.profile
+export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({...profile}) => {
+    const profileData = profile.profile.profile
+    const profileStatus = useSelector<AppRootStateType, string>(state => state.profile.status)
+    const dispatch=useDispatch()
+    const statusHandler = (status:string)=>{
+        dispatch(updateProfileStatusTC(status))
+    }
     return (
         <>
-            {!profileData?
-                <UsersLoader/>:
+            {!profileData ?
+                <UsersLoader/> :
                 <div>
                     <img className={s.profileInfo_img}
                          src="https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg"
@@ -24,14 +31,22 @@ const profileData = profile.profile.profile
                     <div className={s.descriptionBlock}>
                         <img className={s.profileLargePhoto} alt={"user photo"} src={profileData.photos.large}/>
                         <div className={s.profileFullName}>{profileData.fullName}</div>
-                        <ProfileStatus status ={profileData.aboutMe}/>
+                        <ProfileStatus status={profileStatus} callback = {statusHandler}/>
                         {/*<div>{profileData.aboutMe}</div>*/}
-                        {profileData.lookingForAJob ? <div className={s.findJob}>В активном поиске работы</div>: <div>У меня есть работа</div>}
+                        {profileData.lookingForAJob ? <div className={s.findJob}>В активном поиске работы</div> :
+                            <div>У меня есть работа</div>}
                         <div className={s.profileSocialNetworks}>
-                            {profileData.contacts.facebook ? <a href={profileData.contacts.facebook}><img alt={"facebook logo"} src={facebookLogo}/></a> : ""}
-                            {profileData.contacts.github ? <a href={profileData.contacts.github}><img alt={"github logo"} src={githubLogo}/></a>:""}
-                            {profileData.contacts.twitter ? <a href={profileData.contacts.twitter}><img alt={"twitter logo"} src={twitterLogo}/></a>:""}
-                            {profileData.contacts.website ? <a href={profileData.contacts.website}><img alt={"logo for web page"} src={websiteLogo}/></a>:""}
+                            {profileData.contacts.facebook ?
+                                <a href={profileData.contacts.facebook}><img alt={"facebook logo"} src={facebookLogo}/></a> : ""}
+                            {profileData.contacts.github ?
+                                <a href={profileData.contacts.github}><img alt={"github logo"}
+                                                                           src={githubLogo}/></a> : ""}
+                            {profileData.contacts.twitter ?
+                                <a href={profileData.contacts.twitter}><img alt={"twitter logo"}
+                                                                            src={twitterLogo}/></a> : ""}
+                            {profileData.contacts.website ?
+                                <a href={profileData.contacts.website}><img alt={"logo for web page"}
+                                                                            src={websiteLogo}/></a> : ""}
                         </div>
                     </div>
                 </div>

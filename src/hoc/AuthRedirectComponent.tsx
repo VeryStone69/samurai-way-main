@@ -26,7 +26,6 @@ import {Profile} from "../components/Profile/Profile";
 
 
 export function AuthRedirectComponent<T>(Component: ComponentType<T>) {
-    console.log(Component)
     const isAuth = useSelector<AppRootStateType, boolean>(state => state.auth.isAuth)
     const RedirectComponent = () => {
         if (isAuth) {

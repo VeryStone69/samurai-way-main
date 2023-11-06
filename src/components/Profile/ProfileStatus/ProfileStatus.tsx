@@ -1,7 +1,8 @@
-import React, {FC} from 'react';
+import React, {ChangeEvent, FC, LegacyRef} from 'react';
 
 type ProfileStatusType = {
     status: string
+    callback: (status:string)=>void
 }
 
 // export const ProfileStatus:FC<ProfileStatusType> = (props) => {
@@ -20,29 +21,36 @@ type ProfileStatusType = {
 
 class ProfileStatus extends React.Component<ProfileStatusType> {
     state = {
-        editMode: false
+        editMode: false,
+        inputStatus: this.props.status
     }
 
-    activateEditMode(){
+    activateEditMode = () => {
         this.setState({editMode: true})
     }
-    deactivateEditMode(){
-        this.setState({editMode:false})
+    deactivateEditMode = () => {
+        this.setState({editMode: false})
+        this.props.callback(this.state.inputStatus)
     }
+    onChangeHandler=(e:ChangeEvent<HTMLInputElement> )=>{
+        this.setState({inputStatus:e.currentTarget.value})
+    }
+
     render() {
         return (
-            <div >
+            <div>
                 {!this.state.editMode ?
                     <div>
                         <span
-                            onClick={this.activateEditMode.bind(this)}
-                        >{this.props.status}</span>
+                            onClick={this.activateEditMode}
+                        >{this.props.status || "No status"}</span>
                     </div>
                     :
                     <div>
                         <input
-                            onBlur={this.deactivateEditMode.bind(this)}
-                            value={this.props.status}></input>
+                            onChange={this.onChangeHandler}
+                            onBlur={this.deactivateEditMode}
+                            value={this.state.inputStatus}></input>
                     </div>}
 
 

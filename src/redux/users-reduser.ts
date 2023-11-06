@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {authApi, usersAPI} from "../api/api";
+import {authApi, profileApi, usersAPI} from "../api/api";
 import {setUserProfile} from "./profile-reduser";
 import {setUserDataAC} from "./auth-reducer";
 
@@ -180,7 +180,7 @@ export const unFollowTC = (userId: number) => (dispatch: Dispatch) => {
         })
 }
 export const getProfileDataTC = (userId: string | undefined) => (dispatch: Dispatch) => {
-    usersAPI.getProfile(userId)
+    profileApi.getProfile(userId)
         .then((res) => {
             dispatch(setUserProfile(res.data))
         })
@@ -193,4 +193,5 @@ export const getAuthUserData = () => (dispatch: Dispatch) => {
             }
         })
 }
+
 
