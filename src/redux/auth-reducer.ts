@@ -1,3 +1,6 @@
+import {Dispatch} from "redux";
+import {loginApi} from "../api/api";
+import {FormDataType} from "../components/Login/Login";
 
 type AuthReducerType = ReturnType<typeof setUserDataAC>
 export type AuthDataType = {
@@ -41,5 +44,17 @@ export const setUserDataAC = (data:AuthDataType) => {
     return {
         type: "SET-USER-DATA" as const,
         data
+    }
+}
+
+export const loginUserTC = (data:FormDataType) => async (dispatch:Dispatch)=>{
+    try {
+        const result = await loginApi.loginUser(data)
+            .then(result=>{
+                console.log(result)
+            })
+
+    } catch (e) {
+       alert(e)
     }
 }

@@ -38,7 +38,19 @@ export const profileApi = {
     }
 }
 
+export const loginApi = {
+   loginUser(data:LoginUserRequestType){
+       console.log(data)
+       return instance.post<ResponseType<{userId: number}>>("/auth/login", {data})
+   }
+}
 
+export type LoginUserRequestType = {
+    email: string
+    password: string
+    rememberMe: boolean
+    captcha?:string
+}
 
 export type ResponseType<D = {}> = {
     resultCode: number
