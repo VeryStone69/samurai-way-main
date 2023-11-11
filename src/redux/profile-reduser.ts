@@ -32,7 +32,6 @@ export interface RootObjectPhotos {
 
 
 export type ProfileReduserType = ReturnType<typeof addPostAC>
-    | ReturnType<typeof updateNewPostAC>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setStatusAC>
 
@@ -84,11 +83,8 @@ const initialState: TasksStateType = {
 export const profileReduser = (state: TasksStateType = initialState, action: ProfileReduserType): TasksStateType => {
     switch (action.type) {
         case "ADD-POST": {
-            let newMessage: PostDataType = {id: v1(), message: state.newPostsText, likesCount: 0};
+            let newMessage: PostDataType = {id: v1(), message: action.newPost, likesCount: 0};
             return {...state, posts: [newMessage, ...state.posts], newPostsText: ""}
-        }
-        case "UPDATE-NEW-TEXT": {
-            return {...state, newPostsText: action.newText}
         }
         case "SET-USER-PROFILE": {
             return {...state, profile: action.profile}
@@ -101,15 +97,10 @@ export const profileReduser = (state: TasksStateType = initialState, action: Pro
     }
 }
 
-export const addPostAC = () => {
+export const addPostAC = (newPost: string) => {
     return {
-        type: "ADD-POST"
-    } as const
-}
-export const updateNewPostAC = (newText: string) => {
-    return {
-        type: "UPDATE-NEW-TEXT",
-        newText
+        type: "ADD-POST",
+        newPost
     } as const
 }
 
@@ -131,15 +122,14 @@ export const getProfileStatusTC = (userId: string | undefined) => (dispatch: Dis
         )
 }
 
-export const updateProfileStatusTC = (status: string) =>(dispatch: Dispatch) => {
+export const updateProfileStatusTC = (status: string) => (dispatch: Dispatch) => {
 
-       profileApi.updateStatus(status)
-           .then(res=>{
-               if (res.data.resultCode === 0) {
-                   dispatch(setStatusAC(status))
-               }
-           })
-
+    profileApi.updateStatus(status)
+        .then(res => {
+            if (res.data.resultCode === 0) {
+                dispatch(setStatusAC(status))
+            }
+        })
 
 
 }

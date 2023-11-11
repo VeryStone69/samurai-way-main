@@ -5,12 +5,28 @@ padding: 10px;
 
 }
 
-.myPostTextarea {
-
+.formTextarea {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 25px;
 }
-
-.myPostButton {
+.fieldTextarea{
     padding: 10px;
-    margin-bottom: 10px;
-    font-size: 22px;
+    color: rgba(107, 105, 105, 0.82);
+    font-size: large;
+    margin: 12px;
+    max-width: 100%;
+    min-height: 30%;
+    min-width: 75%;
+    border: 1px solid #539CCC;
+    border-radius: 10px;
+}
+.myPostButton {
+    margin: 12px;
+    min-width: 9%;
+    border-radius: 10px;
+    border: 1px solid #539CCC;
+    height: 46px;
 }

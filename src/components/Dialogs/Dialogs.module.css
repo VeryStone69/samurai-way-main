@@ -83,11 +83,18 @@
     border: 1px solid #539CCC;
     border-radius: 10px;
 }
+.dialogsForm {
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+
+}
 
 .dialog_addMessage_buttonAdd{
     margin: 12px;
-    width: 9%;
+    min-width: 23%;
     border-radius: 10px;
     border: 1px solid #539CCC;
-    height: 36px;
+    height: 46px;
 }

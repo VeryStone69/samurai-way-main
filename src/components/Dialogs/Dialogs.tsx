@@ -48,7 +48,7 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
 const AddMessageForm: React.FC<InjectedFormProps<FormDialogType>> = (props) => {
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form className={s.dialogsForm} onSubmit={props.handleSubmit}>
             <div className={s.dialog_addMessage_textarea}>
                 <Field
                     placeholder={"Enter your message"}
