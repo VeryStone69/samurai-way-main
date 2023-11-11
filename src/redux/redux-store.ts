@@ -1,7 +1,7 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
 import {profileReduser} from "./profile-reduser";
-import {dialogsReduser} from "./diallogs-reduser";
-import {friendsReduser} from "./friends-reduser";
+import {dialogsReducer} from "./diallogs-reduser";
+import {friendsReducer} from "./friends-reduser";
 import {usersReduser} from "./users-reduser";
 import {authReducer} from "./auth-reducer";
 import {reducer as formReducer} from "redux-form";
@@ -12,12 +12,13 @@ export type RootState = ReturnType<typeof store.getState>
 
 const rootReducer = combineReducers({
     profile: profileReduser,
-    dialogs: dialogsReduser,
-    friends: friendsReduser,
+    dialogs: dialogsReducer,
+    friends: friendsReducer,
     usersPage: usersReduser,
     auth:authReducer,
-    form:formReducer
+    form:formReducer,
+
 })
 export type AppRootStateType = ReturnType<typeof rootReducer>
 export const store = createStore(rootReducer,applyMiddleware(thunk));
-console.log(store.getState().form)
+console.log(store.getState())

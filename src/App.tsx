@@ -21,7 +21,7 @@ export type MessagesDataType = {
 export type DialogsPage = {
     dialogs: DialogsDataType[]
     message: MessagesDataType[]
-    newMessage: string
+    // newMessage: string
 }
 export type PostDataType = {
     id: string

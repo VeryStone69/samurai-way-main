@@ -35,6 +35,6 @@ const initialState: FriendsDataType[] = [
     },
 ]
 
-export const friendsReduser = (state: FriendsDataType[] = initialState, action: any): FriendsDataType[] => {
+export const friendsReducer = (state: FriendsDataType[] = initialState, action: any): FriendsDataType[] => {
     return [...state]
 }
