@@ -1,29 +1,31 @@
-import {Dispatch} from "redux";
-import {loginApi} from "../api/api";
+import {authApi} from "../api/api";
 import {FormDataType} from "../components/Login/Login";
+import {getAuthUserData} from "./users-reduser";
+import {AppThunkDispatch} from "./redux-store";
 
 type AuthReducerType = ReturnType<typeof setUserDataAC>
 export type AuthDataType = {
-    resultCode: number
-    messages: [],
-    data: {
-        id: number|null
-        email: string|null
-        login: string|null
-    }
+    resultCode?: number
+    messages?: [],
+    data: DataType
     isFetching?: boolean
     isAuth: boolean
+}
+type DataType = {
+    id: number | null
+    email: string | null
+    login: string | null
 }
 
 const initialState: AuthDataType = {
     resultCode: 0,
     messages: [],
-        data: {
-    id: 2,
-        email: 'blabla@bla.bla',
-        login: 'samurai'
+    data: {
+        id: 2,
+        email: null,
+        login: null
 
-},
+    },
     isFetching: true,
     isAuth: false
 }
@@ -32,7 +34,7 @@ const initialState: AuthDataType = {
 export const authReducer = (state: AuthDataType = initialState, action: AuthReducerType): AuthDataType => {
     switch (action.type) {
         case "SET-USER-DATA": {
-            return {...action.data, isFetching:false, isAuth:true}
+            return {...state, ...action.data, isFetching: false, isAuth: action.isAuth}
 
         }
         default :
@@ -40,21 +42,43 @@ export const authReducer = (state: AuthDataType = initialState, action: AuthRedu
     }
 }
 
-export const setUserDataAC = (data:AuthDataType) => {
+export const setUserDataAC = (data: AuthDataType, isAuth: boolean) => {
     return {
         type: "SET-USER-DATA" as const,
-        data
+        data,
+        isAuth
     }
 }
 
-export const loginUserTC = (data:FormDataType) => async (dispatch:Dispatch)=>{
+export const loginUserTC = (data: FormDataType) => async (dispatch: AppThunkDispatch) => {
     try {
-        const result = await loginApi.loginUser(data)
-            .then(result=>{
-                console.log(result)
+        await authApi.loginUser(data)
+            .then(result => {
+                dispatch(getAuthUserData())
+                if (result.data.resultCode === 1) {
+                    alert(result.data.messages)
+                }
+            })
+
+
+    } catch (e) {
+        alert(e)
+    }
+}
+
+export const logoutUserTC = () => async (dispatch: AppThunkDispatch) => {
+    try {
+        await authApi.logout()
+            .then(result => {
+                if (result.status === 0) {
+                    dispatch(setUserDataAC({data: {id: null, email: null, login: null}, isAuth: false}, false))
+                } else {
+                    console.log(result.status)
+                }
+
             })
 
     } catch (e) {
-       alert(e)
+        alert(e)
     }
 }

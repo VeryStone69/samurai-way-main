@@ -1,11 +1,11 @@
-import {applyMiddleware, combineReducers, createStore} from "redux";
+import {AnyAction, applyMiddleware, combineReducers, createStore} from "redux";
 import {profileReduser} from "./profile-reduser";
 import {dialogsReducer} from "./diallogs-reduser";
 import {friendsReducer} from "./friends-reduser";
 import {usersReduser} from "./users-reduser";
 import {authReducer} from "./auth-reducer";
 import {reducer as formReducer} from "redux-form";
-import thunk from "redux-thunk";
+import thunk, {ThunkDispatch} from "redux-thunk";
 
 
 export type RootState = ReturnType<typeof store.getState>
@@ -20,5 +20,8 @@ const rootReducer = combineReducers({
 
 })
 export type AppRootStateType = ReturnType<typeof rootReducer>
+export type AppThunkDispatch = ThunkDispatch<AppRootStateType, any, AnyAction>
 export const store = createStore(rootReducer,applyMiddleware(thunk));
 console.log(store.getState())
+// @ts-ignore
+window.store = store;

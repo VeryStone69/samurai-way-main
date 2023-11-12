@@ -24,6 +24,12 @@ export const usersAPI = {
 export const authApi = {
     me() {
         return instance.get(`auth/me`)
+    },
+    loginUser(data:LoginUserRequestType){
+        return instance.post<ResponseType<{userId: number}>>("/auth/login", data)
+    },
+    logout(){
+        return instance.delete<ResponseType>("/auth/login")
     }
 }
 export const profileApi = {
@@ -38,12 +44,6 @@ export const profileApi = {
     }
 }
 
-export const loginApi = {
-   loginUser(data:LoginUserRequestType){
-       console.log(data)
-       return instance.post<ResponseType<{userId: number}>>("/auth/login", {data})
-   }
-}
 
 export type LoginUserRequestType = {
     email: string

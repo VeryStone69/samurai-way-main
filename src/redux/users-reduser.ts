@@ -189,7 +189,7 @@ export const getAuthUserData = () => (dispatch: Dispatch) => {
     authApi.me()
         .then((res) => {
             if (res.data.resultCode === 0) {
-                dispatch(setUserDataAC(res.data))
+                dispatch(setUserDataAC(res.data,true))
             }
         })
 }
