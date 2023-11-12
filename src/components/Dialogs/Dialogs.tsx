@@ -4,6 +4,8 @@ import {Message} from "./Message/Message";
 import {DialogItem} from "./DialogItem/DialogItem";
 import {DialogsPage} from "../../App";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {FormControl} from "../common/FormsControls/FormsControls";
+import {maxLength50, required} from "../../utils/Validators/validators";
 
 type DialogsPropsType = {
     dialogs: DialogsPage
@@ -53,8 +55,11 @@ const AddMessageForm: React.FC<InjectedFormProps<FormDialogType>> = (props) => {
                 <Field
                     placeholder={"Enter your message"}
                     name={"newMessageBody"}
-                    component={"textarea"}
+                    // component={Textarea}
+                    component={FormControl}
+                    type="textarea"
                     className={s.dialog_textarea}
+                    validate = {[required,maxLength50]}
                 />
             </div>
             <button className={s.dialog_addMessage_buttonAdd}>Add post</button>

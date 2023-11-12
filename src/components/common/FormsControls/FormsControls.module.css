@@ -1,0 +1,11 @@
+
+.formControl.error textarea,
+.formControl.error input {
+    border: 2px #ec0f65 solid;
+}
+
+.formControl.error span {
+    display: flex;
+    justify-content: flex-start;
+    color: #ec0f65;
+}
