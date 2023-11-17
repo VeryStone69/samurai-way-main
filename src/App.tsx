@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
 import {Navbar} from "./components/Navbar/Navbar";
 import {Route, Routes} from "react-router-dom";
@@ -8,6 +8,10 @@ import {UsersContainer} from "./components/Users/UsersContainer";
 import {HeaderContainer} from "./components/Header/HeaderContainer";
 import {Login} from "./components/Login/Login";
 import {ProfileContainer} from "./components/Profile/ProfileContainer";
+import {useDispatch, useSelector} from "react-redux";
+import {initializeAppTC} from "./redux/app-reducer";
+import {AppRootStateType} from "./redux/redux-store";
+import {UsersLoader} from "./components/common/UsersLoader";
 
 
 export type DialogsDataType = {
@@ -41,6 +45,13 @@ export type StateType = {
 
 
 export const App = () => {
+    const initialized = useSelector<AppRootStateType,boolean>(state => state.app.initialized)
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(initializeAppTC())
+    }, [])
+    if (!initialized) return <UsersLoader/>
+    else
     return (
         <div className="app-wrapper">
             {/*<Header/>*/}

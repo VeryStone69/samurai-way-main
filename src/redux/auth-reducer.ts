@@ -2,6 +2,7 @@ import {authApi} from "../api/api";
 import {FormDataType} from "../components/Login/Login";
 import {getAuthUserData} from "./users-reduser";
 import {AppThunkDispatch} from "./redux-store";
+import {stopSubmit} from "redux-form";
 
 type AuthReducerType = ReturnType<typeof setUserDataAC>
 export type AuthDataType = {
@@ -54,9 +55,11 @@ export const loginUserTC = (data: FormDataType) => async (dispatch: AppThunkDisp
     try {
         await authApi.loginUser(data)
             .then(result => {
-                dispatch(getAuthUserData())
-                if (result.data.resultCode === 1) {
-                    alert(result.data.messages)
+                // dispatch(getAuthUserData())
+                if (result.data.resultCode === 0) {
+                    dispatch(getAuthUserData())
+                } else {
+                    dispatch(stopSubmit("login", {_error: result.data.messages[0]}))
                 }
             })
 

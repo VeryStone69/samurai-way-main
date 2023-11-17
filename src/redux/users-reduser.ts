@@ -2,6 +2,7 @@ import {Dispatch} from "redux";
 import {authApi, profileApi, usersAPI} from "../api/api";
 import {setUserProfile} from "./profile-reduser";
 import {setUserDataAC} from "./auth-reducer";
+import {AppThunkDispatch} from "./redux-store";
 
 type UsersReducerType =
     ReturnType<typeof followAC>
@@ -185,9 +186,8 @@ export const getProfileDataTC = (userId: string | undefined) => (dispatch: Dispa
             dispatch(setUserProfile(res.data))
         })
 }
-export const getAuthUserData = () => (dispatch: Dispatch) => {
-    authApi.me()
-        .then((res) => {
+export const getAuthUserData = ()=> async (dispatch:AppThunkDispatch) => {
+    return await authApi.me().then((res) => {
             if (res.data.resultCode === 0) {
                 dispatch(setUserDataAC(res.data,true))
             }

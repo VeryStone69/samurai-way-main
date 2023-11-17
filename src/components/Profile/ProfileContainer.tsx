@@ -10,13 +10,16 @@ import {getProfileStatusTC} from "../../redux/profile-reduser";
 export const ProfileContainer = () => {
     let params = useParams();
     let userId = params.userId;
-
+    const authorizedUserId = useSelector<AppRootStateType,any>(state => state.profile.profile?.userId)
+console.log(params)
     const dispatch = useDispatch()
     const isAuth = useSelector<AppRootStateType,boolean>(state => state.auth.isAuth)
 
     useEffect(() => {
         if (!params.userId) {
-            userId = "29772"
+            if (!authorizedUserId !== undefined) {
+                userId = authorizedUserId
+            }
         }
         dispatch(getProfileDataTC(userId))
         dispatch(getProfileStatusTC(userId))

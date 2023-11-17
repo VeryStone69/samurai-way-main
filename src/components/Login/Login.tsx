@@ -6,6 +6,7 @@ import {FormControl} from "../common/FormsControls/FormsControls";
 import {required} from "../../utils/Validators/validators";
 import {AppRootStateType} from "../../redux/redux-store";
 import {Navigate} from "react-router-dom";
+import s from "./login.module.css"
 
 export type FormDataType = {
     email: string
@@ -28,6 +29,9 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
                 <div>
                     <Field type="checkbox" name={"rememberMe"} component={"input"}/>
                     remember me
+                </div>
+                <div className={props.error&&s.formSummaryError}>
+                    {props.error}
                 </div>
                 <div>
                     <button>LOGIN</button>

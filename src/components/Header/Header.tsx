@@ -9,7 +9,6 @@ type HeaderPropsType = {
 }
 
 export const Header: React.FC<HeaderPropsType> = ({...props}) => {
-    console.log(props.isAuth)
     const onclickHandler = () => {
         props.logoutCallback()
     }

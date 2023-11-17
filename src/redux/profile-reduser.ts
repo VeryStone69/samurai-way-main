@@ -58,10 +58,10 @@ const initialState: TasksStateType = {
         aboutMe: "I live this life",
         contacts: {
             facebook: "facebook.com",
-            website: null,
-            vk: "vk.com/dimych",
-            twitter: "https://twitter.com/@sdf",
-            instagram: "instagra.com/sds",
+            website: "google.com",
+            vk: "vk.com",
+            twitter: "https://twitter.com/",
+            instagram: "instagra.com/",
             youtube: null,
             github: "github.com",
             mainLink: null
@@ -71,7 +71,7 @@ const initialState: TasksStateType = {
         fullName: "Aliaksandr Kaptsevich",
         userId: 29772,
         photos: {
-            small: "https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0",
+            small: "",
             large: veryStone
         }
     },
