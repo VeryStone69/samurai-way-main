@@ -1,13 +1,14 @@
 import React from "react";
-import {addPostAC, TasksStateType} from "../../../redux/profile-reduser";
-import {useDispatch, useSelector} from "react-redux";
-import {AppRootStateType} from "../../../redux/redux-store";
+import {addPostAC} from "../../../redux/profile-reduser";
+import {useDispatch} from "react-redux";
+import { useAppSelector} from "../../../redux/redux-store";
 import {MyPosts} from "./MyPosts";
+import {profileSelector} from "./selectors/myPostContainer-selectors";
 
 
 export const MyPostsContainer = () => {
 
-    const profile = useSelector<AppRootStateType, TasksStateType>(state => state.profile)
+    const profile = useAppSelector(profileSelector)
     const dispatch = useDispatch();
 
     const addPost = (newPost: string) => {

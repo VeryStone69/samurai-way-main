@@ -8,10 +8,11 @@ import {UsersContainer} from "./components/Users/UsersContainer";
 import {HeaderContainer} from "./components/Header/HeaderContainer";
 import {Login} from "./components/Login/Login";
 import {ProfileContainer} from "./components/Profile/ProfileContainer";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {initializeAppTC} from "./redux/app-reducer";
-import {AppRootStateType} from "./redux/redux-store";
+import {useAppSelector} from "./redux/redux-store";
 import {UsersLoader} from "./components/common/UsersLoader";
+import {initializedSelector} from "./app-selectors";
 
 
 export type DialogsDataType = {
@@ -45,7 +46,7 @@ export type StateType = {
 
 
 export const App = () => {
-    const initialized = useSelector<AppRootStateType,boolean>(state => state.app.initialized)
+    const initialized = useAppSelector(initializedSelector)
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(initializeAppTC())

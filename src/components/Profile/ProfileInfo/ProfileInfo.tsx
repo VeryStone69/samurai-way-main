@@ -7,15 +7,16 @@ import githubLogo from "../../../assets/images/icons-github-48.png"
 import twitterLogo from "../../../assets/images/icons-twitterx-48.png"
 import websiteLogo from "../../../assets/images/icons8-search-in-browser-48.png"
 import ProfileStatus from "../ProfileStatus/ProfileStatus";
-import {useDispatch, useSelector} from "react-redux";
-import {AppRootStateType} from "../../../redux/redux-store";
+import {useDispatch} from "react-redux";
+import {useAppSelector} from "../../../redux/redux-store";
+import {profileStatusSelector} from "./selectors/profileInfo-selectors";
 
 type ProfileInfoPropsType = {
     profile: TasksStateType
 }
 export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({...profile}) => {
     const profileData = profile.profile.profile
-    const profileStatus = useSelector<AppRootStateType, string>(state => state.profile.status)
+    const profileStatus = useAppSelector(profileStatusSelector)
     const dispatch=useDispatch()
     const statusHandler = (status:string)=>{
         dispatch(updateProfileStatusTC(status))

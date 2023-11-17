@@ -1,15 +1,15 @@
 import React from "react"
-import {DialogsPage} from "../../App";
 import {addNewMessageAC} from "../../redux/diallogs-reduser";
-import {useDispatch, useSelector} from "react-redux";
-import {AppRootStateType} from "../../redux/redux-store";
+import {useDispatch} from "react-redux";
+import {useAppSelector} from "../../redux/redux-store";
 import {Dialogs} from "./Dialogs";
 import {Navigate} from "react-router-dom";
+import {dialogsSelector, isAuthDialogsContainerSelector} from "./selectors/dialogsContainer-selectors";
 
 
 export const DialogsContainer = () => {
-    const isAuth = useSelector<AppRootStateType, boolean>(state => state.auth.isAuth)
-    const dialogs = useSelector<AppRootStateType, DialogsPage>(state => state.dialogs)
+    const isAuth = useAppSelector(isAuthDialogsContainerSelector)
+    const dialogs = useAppSelector(dialogsSelector)
     const dispatch = useDispatch();
 
     function addNewMessage(newMessage:string) {dispatch(addNewMessageAC(newMessage))}

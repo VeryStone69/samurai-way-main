@@ -1,13 +1,12 @@
 import React, {useState} from "react";
 import s from "./Friends.module.css"
-import {useSelector} from "react-redux";
-import {AppRootStateType} from "../../redux/redux-store";
-import {FriendsDataType} from "../../redux/friends-reduser";
+import {useAppSelector} from "../../redux/redux-store";
+import {friendsSelector} from "./selectors/friends-selectors";
 
 
 export const Friends = () => {
     const [collapsed, setCollapsed] = useState<boolean>(false)
-    const friends = useSelector<AppRootStateType, FriendsDataType[]>(state => state.friends)
+    const friends = useAppSelector(friendsSelector)
 
     const onClickHandler = () => {
         setCollapsed(!collapsed)
@@ -19,7 +18,7 @@ export const Friends = () => {
                 {friends.map(friend => {
                     return (
                         <li key={friend.id}>
-                            <img src={friend.img} className={s.friendAvatar}/>
+                            <img src={friend.img} className={s.friendAvatar} alt={"user avatar"}/>
                             <a href="#">{friend.name}</a>
                         </li>
                     )
