@@ -16,6 +16,10 @@ type UsersPropsType = {
 }
 
 class UsersClassComponent extends React.Component<UsersPropsType> {
+    componentDidMount() {
+            console.log("USER CLASS COMPONENT")
+
+    }
 
     onPageChanged = (el: number) => {
         this.props.clickNextPage(el)
@@ -30,8 +34,8 @@ class UsersClassComponent extends React.Component<UsersPropsType> {
         }
 
         return <div className={s.main_container_users}>
-            <div className={s.usersPagesNumber}>{pages.map((el) => (
-                <span
+            <div className={s.usersPagesNumber}>{pages.map((el,index) => (
+                 <span key={index}
                     className={this.props.currentPage === el ? s.pageSelected : ""}
                     onClick={() => {
                         this.onPageChanged(el)

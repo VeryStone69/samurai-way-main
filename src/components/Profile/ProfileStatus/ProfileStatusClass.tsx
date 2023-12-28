@@ -5,21 +5,7 @@ type ProfileStatusType = {
     callback: (status:string)=>void
 }
 
-// export const ProfileStatus:FC<ProfileStatusType> = (props) => {
-//
-//     return (
-//      <div>
-//         <div>
-//             <span>{props.status}</span>
-//         </div>
-//          <div>
-//              <input value={props.status}></input>
-//          </div>
-//      </div>
-//     );
-// };
-
-class ProfileStatus extends React.Component<ProfileStatusType> {
+export class ProfileStatusClass extends React.Component<ProfileStatusType> {
     state = {
         editMode: false,
         inputStatus: this.props.status
@@ -65,4 +51,3 @@ class ProfileStatus extends React.Component<ProfileStatusType> {
     }
 }
 
-export default ProfileStatus

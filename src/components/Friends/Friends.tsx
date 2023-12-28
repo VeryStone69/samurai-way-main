@@ -25,7 +25,5 @@ export const Friends = () => {
                 })}
             </ul> : ""}
         </div>
-
-
     )
 }

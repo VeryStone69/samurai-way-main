@@ -75,7 +75,7 @@ const initialState: TasksStateType = {
             large: veryStone
         }
     },
-    status: "zalupa, a ne status"
+    status: "status from store"
 
 }
 

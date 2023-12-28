@@ -46,7 +46,7 @@ export type StateType = {
 
 
 export const App = () => {
-    const initialized = useAppSelector(initializedSelector)
+    const initialized = initializedSelector
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(initializeAppTC())
