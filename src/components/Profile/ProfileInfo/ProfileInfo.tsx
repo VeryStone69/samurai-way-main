@@ -10,7 +10,6 @@ import {useDispatch} from "react-redux";
 import {useAppSelector} from "../../../redux/redux-store";
 import {profileStatusSelector} from "./selectors/profileInfo-selectors";
 import {ProfileStatusWithHooks} from "../ProfileStatus/ProfileStatusWithHooks";
-import {ProfileStatusClass} from "../ProfileStatus/ProfileStatusClass";
 
 type ProfileInfoPropsType = {
     profile: TasksStateType

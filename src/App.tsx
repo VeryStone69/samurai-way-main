@@ -10,7 +10,6 @@ import {Login} from "./components/Login/Login";
 import {ProfileContainer} from "./components/Profile/ProfileContainer";
 import {useDispatch} from "react-redux";
 import {initializeAppTC} from "./redux/app-reducer";
-import {useAppSelector} from "./redux/redux-store";
 import {UsersLoader} from "./components/common/UsersLoader";
 import {initializedSelector} from "./app-selectors";
 

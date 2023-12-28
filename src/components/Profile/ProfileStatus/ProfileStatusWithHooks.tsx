@@ -10,10 +10,8 @@ export const ProfileStatusWithHooks = (props: PropsType) => {
     const [inputStatus, setInputStatus] = useState<string>(props.status)
 
     useEffect(() => {
-        if (inputStatus !== props.status) {
             setInputStatus(props.status)
-        }
-    }, []);
+    }, [props.status]);
 
     const activateEditMode = () => {
         setEditMode(true)
