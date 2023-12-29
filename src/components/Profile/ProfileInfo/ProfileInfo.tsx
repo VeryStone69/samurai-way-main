@@ -14,7 +14,7 @@ import {ProfileStatusWithHooks} from "../ProfileStatus/ProfileStatusWithHooks";
 type ProfileInfoPropsType = {
     profile: TasksStateType
 }
-export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({...profile}) => {
+export const ProfileInfo: React.FC<ProfileInfoPropsType> = React.memo(({...profile}) => {
     const profileData = profile.profile.profile
     const profileStatus = useAppSelector(profileStatusSelector)
     const dispatch=useDispatch()
@@ -58,4 +58,4 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({...profile}) => {
         </>
 
     );
-};
+});
