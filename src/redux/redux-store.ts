@@ -1,8 +1,8 @@
 import {AnyAction, applyMiddleware, combineReducers, createStore} from "redux";
 import {profileReducer} from "./profile-reducer";
-import {dialogsReducer} from "./diallogs-reduser";
-import {friendsReducer} from "./friends-reduser";
-import {usersReduser} from "./users-reduser";
+import {dialogsReducer} from "./diallogs-reducer";
+import {friendsReducer} from "./friends-reducer";
+import {usersReducer} from "./users-reducer";
 import {authReducer} from "./auth-reducer";
 import {reducer as formReducer} from "redux-form";
 import thunk, {ThunkDispatch} from "redux-thunk";
@@ -17,7 +17,7 @@ const rootReducer = combineReducers({
     profile: profileReducer,
     dialogs: dialogsReducer,
     friends: friendsReducer,
-    usersPage: usersReduser,
+    usersPage: usersReducer,
     auth:authReducer,
     form:formReducer,
 

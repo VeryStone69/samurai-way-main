@@ -1,6 +1,6 @@
 import {authApi} from "../api/api";
 import {FormDataType} from "../components/Login/Login";
-import {getAuthUserData} from "./users-reduser";
+import {getAuthUserData} from "./users-reducer";
 import {AppThunkDispatch} from "./redux-store";
 import {stopSubmit} from "redux-form";
 

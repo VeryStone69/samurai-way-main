@@ -59,7 +59,7 @@ const initialState: UsersDataType = {
 }
 
 
-export const usersReduser = (state: UsersDataType = initialState, action: UsersReducerType): UsersDataType => {
+export const usersReducer = (state: UsersDataType = initialState, action: UsersReducerType): UsersDataType => {
     switch (action.type) {
         case "FOLLOW": {
             return {...state, items: state.items.map(el => el.id === action.userId ? {...el, followed: true} : el)}

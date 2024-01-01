@@ -1,5 +1,5 @@
 import React from "react"
-import {addNewMessageAC} from "../../redux/diallogs-reduser";
+import {addNewMessageAC} from "../../redux/diallogs-reducer";
 import {useDispatch} from "react-redux";
 import {useAppSelector} from "../../redux/redux-store";
 import {Dialogs} from "./Dialogs";

@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {Profile} from "./Profile";
 import {useDispatch} from "react-redux";
 import {Navigate, useParams,} from "react-router-dom";
-import {getProfileDataTC} from "../../redux/users-reduser";
+import {getProfileDataTC} from "../../redux/users-reducer";
 import {useAppSelector} from "../../redux/redux-store";
 import {getProfileStatusTC} from "../../redux/profile-reducer";
 import {authorizedUserIdSelector, isAuthSelector} from "./selectors/profileContainer-selector";

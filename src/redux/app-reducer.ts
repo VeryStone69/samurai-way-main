@@ -1,4 +1,4 @@
-import {getAuthUserData} from "./users-reduser";
+import {getAuthUserData} from "./users-reducer";
 import {AppThunkDispatch} from "./redux-store";
 
 

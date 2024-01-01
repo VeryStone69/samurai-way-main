@@ -4,7 +4,7 @@ import {useAppSelector} from "../../redux/redux-store";
 import {
     followTC, getUsersTC, nextPageTC,
     unFollowTC
-} from "../../redux/users-reduser";
+} from "../../redux/users-reducer";
 import UsersClassComponent from "./UsersClassComponent";
 import {UsersLoader} from "../common/UsersLoader";
 import {

@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import './App.css';
 import {Navbar} from "./components/Navbar/Navbar";
 import {Route, Routes} from "react-router-dom";
-import {FriendsDataType} from "./redux/friends-reduser";
+import {FriendsDataType} from "./redux/friends-reducer";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {UsersContainer} from "./components/Users/UsersContainer";
 import {HeaderContainer} from "./components/Header/HeaderContainer";
@@ -12,6 +12,7 @@ import {useDispatch} from "react-redux";
 import {initializeAppTC} from "./redux/app-reducer";
 import {UsersLoader} from "./components/common/UsersLoader";
 import {initializedSelector} from "./app-selectors";
+import {DialogsPage} from "./redux/diallogs-reducer";
 
 
 export type DialogsDataType = {
@@ -21,11 +22,6 @@ export type DialogsDataType = {
 export type MessagesDataType = {
     id: string
     message: string
-}
-export type DialogsPage = {
-    dialogs: DialogsDataType[]
-    message: MessagesDataType[]
-    // newMessage: string
 }
 export type PostDataType = {
     id: string

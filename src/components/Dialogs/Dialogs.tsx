@@ -2,10 +2,10 @@ import React from "react"
 import s from "./Dialogs.module.css"
 import {Message} from "./Message/Message";
 import {DialogItem} from "./DialogItem/DialogItem";
-import {DialogsPage} from "../../App";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {FormControl} from "../common/FormsControls/FormsControls";
 import {maxLength50, required} from "../../utils/Validators/validators";
+import {DialogsPage} from "../../redux/diallogs-reducer";
 
 type DialogsPropsType = {
     dialogs: DialogsPage

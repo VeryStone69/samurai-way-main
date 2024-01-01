@@ -1,7 +1,7 @@
 import {v1} from "uuid";
 import {StateType} from "../App";
 import {profileReducer, ProfileReduserType} from "./profile-reducer";
-import {dialogsReducer, DialogsReduserType} from "./diallogs-reduser";
+import {dialogsReducer, DialogsReducerType} from "./diallogs-reducer";
 
 export type StoreType = {
     _state: StateType
@@ -14,12 +14,12 @@ export type StoreType = {
     subscribe: (observe: () => void) => void
     dispatch: (action: DispatchACType) => void
 }
-export type DispatchACType = ProfileReduserType | DialogsReduserType
+export type DispatchACType = ProfileReduserType | DialogsReducerType
 
 // import {v1} from "uuid";
 // import {StateType} from "../App";
 // import {profileReduser, ProfileReduserType} from "./profile-reduser";
-// import {dialogsReduser, DialogsReduserType} from "./diallogs-reduser";
+// import {dialogsReduser, DialogsReducerType} from "./diallogs-reduser";
 //
 // type StoreType = {
 //     _state: StateType
@@ -32,7 +32,7 @@ export type DispatchACType = ProfileReduserType | DialogsReduserType
 //     subscribe: (observe: () => void) => void
 //     dispatch: (action: DispatchACType) => void
 // }
-// export type DispatchACType = ProfileReduserType|DialogsReduserType
+// export type DispatchACType = ProfileReduserType|DialogsReducerType
 //
 //  const store: StoreType = {
 //     _state: {
@@ -104,7 +104,7 @@ export type DispatchACType = ProfileReduserType | DialogsReduserType
 //     },
 //     dispatch(action) {
 //         profileReduser(this._state,action as ProfileReduserType);
-//         dialogsReduser(this._state,action as DialogsReduserType)
+//         dialogsReduser(this._state,action as DialogsReducerType)
 //         this._onChange()
 //     }
 // }

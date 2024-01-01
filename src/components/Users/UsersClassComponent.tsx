@@ -1,5 +1,5 @@
 import React from 'react';
-import {UsersType} from "../../redux/users-reduser";
+import {UsersType} from "../../redux/users-reducer";
 import s from "./Users.module.css"
 import {NavLink} from "react-router-dom";
 
