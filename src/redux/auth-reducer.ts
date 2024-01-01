@@ -7,7 +7,7 @@ import {stopSubmit} from "redux-form";
 type AuthReducerType = ReturnType<typeof setUserDataAC>
 export type AuthDataType = {
     resultCode?: number
-    messages?: [],
+    messages?: string[],
     data: DataType
     isFetching?: boolean
     isAuth: boolean
