@@ -142,7 +142,7 @@ export const toggleFollowingProgressAC = (toggle: boolean, userId: number) => ({
 // =====-THUNK-=====
 export const getUsersTC = (pageSize: UsersDataType) => async (dispatch: Dispatch) => {
     dispatch(setFetchingAC(true))
-    let response = await usersAPI.getUsers(pageSize.currentPage, pageSize.pageSize)
+    const response = await usersAPI.getUsers(pageSize.currentPage, pageSize.pageSize)
     dispatch(setCurrentPageAC(pageSize.currentPage))
     dispatch(setFetchingAC(false))
     dispatch(setUsersAC(response))
@@ -150,14 +150,14 @@ export const getUsersTC = (pageSize: UsersDataType) => async (dispatch: Dispatch
 }
 export const nextPageTC = (numberPage: number, pageSize: number) => async (dispatch: Dispatch) => {
     dispatch(setFetchingAC(true))
-    let response = await usersAPI.getUsers(numberPage, pageSize)
+    const response = await usersAPI.getUsers(numberPage, pageSize)
     dispatch(setUsersAC(response))
     dispatch(setFetchingAC(false))
     dispatch(setCurrentPageAC(numberPage))
 }
 export const followTC = (userId: number) => async (dispatch: Dispatch) => {
     dispatch(toggleFollowingProgressAC(true, userId))
-    let response = await usersAPI.followUser(userId)
+    const response = await usersAPI.followUser(userId)
     if (response.data.resultCode === 0) {
         dispatch(followAC(userId))
     }
@@ -165,14 +165,14 @@ export const followTC = (userId: number) => async (dispatch: Dispatch) => {
 }
 export const unFollowTC = (userId: number) => async (dispatch: Dispatch) => {
     dispatch(toggleFollowingProgressAC(true, userId))
-    let response = await usersAPI.unFollowUser(userId)
+    const response = await usersAPI.unFollowUser(userId)
     if (response.data.resultCode === 0) {
         dispatch(unFollowAC(userId))
     }
     dispatch(toggleFollowingProgressAC(false, userId))
 }
 export const getProfileDataTC = (userId: string | undefined) => async (dispatch: Dispatch) => {
-    let response = await profileApi.getProfile(userId)
+    const response = await profileApi.getProfile(userId)
     dispatch(setUserProfile(response.data))
 }
 export const getAuthUserData = () => async (dispatch: AppThunkDispatch) => {

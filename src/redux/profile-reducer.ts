@@ -115,12 +115,12 @@ export const setStatusAC = (status: string) => {
     return {type: "PROFILE/SET-PROFILE-STATUS" as const, status}
 }
 export const getProfileStatusTC = (userId: string | undefined) => async (dispatch: Dispatch) => {
-    let response = await profileApi.getStatus(userId)
+    const response = await profileApi.getStatus(userId)
     dispatch(setStatusAC(response.data))
 }
 
 export const updateProfileStatusTC = (status: string) => async (dispatch: Dispatch) => {
-    let response = await profileApi.updateStatus(status)
+    const response = await profileApi.updateStatus(status)
             if (response.data.resultCode === 0) {
                 dispatch(setStatusAC(status))
             }

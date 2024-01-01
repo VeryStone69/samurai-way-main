@@ -53,7 +53,7 @@ export const setUserDataAC = (data: AuthDataType, isAuth: boolean) => {
 
 export const loginUserTC = (data: FormDataType) => async (dispatch: AppThunkDispatch) => {
     try {
-        let response = await authApi.loginUser(data)
+        const response = await authApi.loginUser(data)
         if (response.data.resultCode === 0) {
             dispatch(getAuthUserData())
         } else {
@@ -66,7 +66,7 @@ export const loginUserTC = (data: FormDataType) => async (dispatch: AppThunkDisp
 
 export const logoutUserTC = () => async (dispatch: AppThunkDispatch) => {
     try {
-        let response = await authApi.logout()
+        const response = await authApi.logout()
         if (response.status === 0) {
             dispatch(setUserDataAC({data: {id: null, email: null, login: null}, isAuth: false}, false))
         } else {
