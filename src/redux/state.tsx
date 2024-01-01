@@ -1,6 +1,6 @@
 import {v1} from "uuid";
 import {StateType} from "../App";
-import {profileReduser, ProfileReduserType} from "./profile-reduser";
+import {profileReducer, ProfileReduserType} from "./profile-reducer";
 import {dialogsReducer, DialogsReduserType} from "./diallogs-reduser";
 
 export type StoreType = {

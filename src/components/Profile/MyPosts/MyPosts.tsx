@@ -1,7 +1,7 @@
 import React from "react";
 import s from "./MyPosts.module.css";
 import {Post} from "./Post/Post";
-import {TasksStateType} from "../../../redux/profile-reduser";
+import {TasksStateType} from "../../../redux/profile-reducer";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {maxLength100, required} from "../../../utils/Validators/validators";
 import {FormControl} from "../../common/FormsControls/FormsControls";

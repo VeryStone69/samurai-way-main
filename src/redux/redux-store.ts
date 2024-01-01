@@ -1,5 +1,5 @@
 import {AnyAction, applyMiddleware, combineReducers, createStore} from "redux";
-import {profileReduser} from "./profile-reduser";
+import {profileReducer} from "./profile-reducer";
 import {dialogsReducer} from "./diallogs-reduser";
 import {friendsReducer} from "./friends-reduser";
 import {usersReduser} from "./users-reduser";
@@ -14,7 +14,7 @@ import {TypedUseSelectorHook, useSelector} from "react-redux";
 
 const rootReducer = combineReducers({
     app:appReducer,
-    profile: profileReduser,
+    profile: profileReducer,
     dialogs: dialogsReducer,
     friends: friendsReducer,
     usersPage: usersReduser,

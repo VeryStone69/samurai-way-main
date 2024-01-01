@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './ProfileInfo.module.css'
-import {TasksStateType, updateProfileStatusTC} from "../../../redux/profile-reduser";
+import {TasksStateType, updateProfileStatusTC} from "../../../redux/profile-reducer";
 import {UsersLoader} from "../../common/UsersLoader";
 import facebookLogo from "../../../assets/images/icons-facebook-48.png";
 import githubLogo from "../../../assets/images/icons-github-48.png"

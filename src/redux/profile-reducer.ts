@@ -80,7 +80,7 @@ const initialState: TasksStateType = {
 }
 
 
-export const profileReduser = (state: TasksStateType = initialState, action: ProfileReduserType): TasksStateType => {
+export const profileReducer = (state: TasksStateType = initialState, action: ProfileReduserType): TasksStateType => {
     switch (action.type) {
         case "ADD-POST": {
             let newMessage: PostDataType = {id: v1(), message: action.newPost, likesCount: 0};

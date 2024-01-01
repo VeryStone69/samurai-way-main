@@ -1,5 +1,5 @@
 import React from "react";
-import {addPostAC} from "../../../redux/profile-reduser";
+import {addPostAC} from "../../../redux/profile-reducer";
 import {useDispatch} from "react-redux";
 import { useAppSelector} from "../../../redux/redux-store";
 import {MyPosts} from "./MyPosts";

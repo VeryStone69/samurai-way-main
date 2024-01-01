@@ -1,6 +1,6 @@
 import {Dispatch} from "redux";
 import {authApi, profileApi, usersAPI} from "../api/api";
-import {setUserProfile} from "./profile-reduser";
+import {setUserProfile} from "./profile-reducer";
 import {setUserDataAC} from "./auth-reducer";
 import {AppThunkDispatch} from "./redux-store";
 
