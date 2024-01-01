@@ -2,7 +2,7 @@ import {getAuthUserData} from "./users-reduser";
 import {AppThunkDispatch} from "./redux-store";
 
 
-type IniinitialStateAppType = {
+export type IniinitialStateAppType = {
     initialized:boolean
 }
 
