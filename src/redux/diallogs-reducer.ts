@@ -7,7 +7,6 @@ export type DialogsReducerType = ReturnType<typeof addNewMessageAC>
 export type DialogsPage = {
     dialogs: DialogsDataType[]
     message: MessagesDataType[]
-    // newMessage: string
 }
 
 const initialState: DialogsPage = {
@@ -30,7 +29,7 @@ const initialState: DialogsPage = {
 
 export const dialogsReducer = (state: DialogsPage = initialState, action: DialogsReducerType): DialogsPage => {
     switch (action.type) {
-        case "ADD-NEW-MESSAGE": {
+        case "DIALOGS/ADD-NEW-MESSAGE": {
             const newMessage = {id: v1(), message: action.newMessageBody};
             return {...state, message: [...state.message, newMessage]}
         }
@@ -42,7 +41,7 @@ export const dialogsReducer = (state: DialogsPage = initialState, action: Dialog
 
 export const addNewMessageAC = (newMessageBody:string) => {
     return {
-        type: "ADD-NEW-MESSAGE",
+        type: "DIALOGS/ADD-NEW-MESSAGE",
         newMessageBody
     } as const
 }

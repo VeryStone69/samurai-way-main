@@ -26,7 +26,6 @@ const rootReducer = combineReducers({
 export type AppRootStateType = ReturnType<typeof rootReducer>
 export type AppThunkDispatch = ThunkDispatch<AppRootStateType, any, AnyAction>
 export const store = createStore(rootReducer,applyMiddleware(thunk));
-// export type RootState = ReturnType<typeof store.getState>
 export const useAppSelector: TypedUseSelectorHook<AppRootStateType> = useSelector
 
 export type AppDispatch = ThunkDispatch<AppRootStateType, unknown, AnyAction>

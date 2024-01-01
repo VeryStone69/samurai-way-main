@@ -82,14 +82,14 @@ const initialState: TasksStateType = {
 
 export const profileReducer = (state: TasksStateType = initialState, action: ProfileReduserType): TasksStateType => {
     switch (action.type) {
-        case "ADD-POST": {
+        case "PROFILE/ADD-POST": {
             let newMessage: PostDataType = {id: v1(), message: action.newPost, likesCount: 0};
             return {...state, posts: [newMessage, ...state.posts], newPostsText: ""}
         }
-        case "SET-USER-PROFILE": {
+        case "PROFILE/SET-USER-PROFILE": {
             return {...state, profile: action.profile}
         }
-        case "SET-PROFILE-STATUS": {
+        case "PROFILE/SET-PROFILE-STATUS": {
             return {...state, status: action.status}
         }
         default :
@@ -99,39 +99,31 @@ export const profileReducer = (state: TasksStateType = initialState, action: Pro
 
 export const addPostAC = (newPost: string) => {
     return {
-        type: "ADD-POST",
+        type: "PROFILE/ADD-POST",
         newPost
     } as const
 }
 
 export const setUserProfile = (profile: ProfileDataType) => {
     return {
-        type: "SET-USER-PROFILE" as const,
+        type: "PROFILE/SET-USER-PROFILE" as const,
         profile
     }
 }
 
 export const setStatusAC = (status: string) => {
-    return {type: "SET-PROFILE-STATUS" as const, status}
+    return {type: "PROFILE/SET-PROFILE-STATUS" as const, status}
 }
-export const getProfileStatusTC = (userId: string | undefined) => (dispatch: Dispatch) => {
-    profileApi.getStatus(userId)
-        .then(res => {
-                dispatch(setStatusAC(res.data))
-            }
-        )
+export const getProfileStatusTC = (userId: string | undefined) => async (dispatch: Dispatch) => {
+    let response = await profileApi.getStatus(userId)
+    dispatch(setStatusAC(response.data))
 }
 
-export const updateProfileStatusTC = (status: string) => (dispatch: Dispatch) => {
-
-    profileApi.updateStatus(status)
-        .then(res => {
-            if (res.data.resultCode === 0) {
+export const updateProfileStatusTC = (status: string) => async (dispatch: Dispatch) => {
+    let response = await profileApi.updateStatus(status)
+            if (response.data.resultCode === 0) {
                 dispatch(setStatusAC(status))
             }
-        })
-
-
 }
 
 

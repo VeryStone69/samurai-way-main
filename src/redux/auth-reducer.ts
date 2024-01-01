@@ -34,7 +34,7 @@ const initialState: AuthDataType = {
 
 export const authReducer = (state: AuthDataType = initialState, action: AuthReducerType): AuthDataType => {
     switch (action.type) {
-        case "SET-USER-DATA": {
+        case "AUTH/SET-USER-DATA": {
             return {...state, ...action.data, isFetching: false, isAuth: action.isAuth}
 
         }
@@ -45,7 +45,7 @@ export const authReducer = (state: AuthDataType = initialState, action: AuthRedu
 
 export const setUserDataAC = (data: AuthDataType, isAuth: boolean) => {
     return {
-        type: "SET-USER-DATA" as const,
+        type: "AUTH/SET-USER-DATA" as const,
         data,
         isAuth
     }
@@ -53,17 +53,12 @@ export const setUserDataAC = (data: AuthDataType, isAuth: boolean) => {
 
 export const loginUserTC = (data: FormDataType) => async (dispatch: AppThunkDispatch) => {
     try {
-        await authApi.loginUser(data)
-            .then(result => {
-                // dispatch(getAuthUserData())
-                if (result.data.resultCode === 0) {
-                    dispatch(getAuthUserData())
-                } else {
-                    dispatch(stopSubmit("login", {_error: result.data.messages[0]}))
-                }
-            })
-
-
+        let response = await authApi.loginUser(data)
+        if (response.data.resultCode === 0) {
+            dispatch(getAuthUserData())
+        } else {
+            dispatch(stopSubmit("login", {_error: response.data.messages[0]}))
+        }
     } catch (e) {
         alert(e)
     }
@@ -71,16 +66,12 @@ export const loginUserTC = (data: FormDataType) => async (dispatch: AppThunkDisp
 
 export const logoutUserTC = () => async (dispatch: AppThunkDispatch) => {
     try {
-        await authApi.logout()
-            .then(result => {
-                if (result.status === 0) {
-                    dispatch(setUserDataAC({data: {id: null, email: null, login: null}, isAuth: false}, false))
-                } else {
-                    console.log(result.status)
-                }
-
-            })
-
+        let response = await authApi.logout()
+        if (response.status === 0) {
+            dispatch(setUserDataAC({data: {id: null, email: null, login: null}, isAuth: false}, false))
+        } else {
+            console.log(response.status)
+        }
     } catch (e) {
         alert(e)
     }

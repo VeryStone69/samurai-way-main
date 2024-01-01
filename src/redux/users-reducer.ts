@@ -61,25 +61,25 @@ const initialState: UsersDataType = {
 
 export const usersReducer = (state: UsersDataType = initialState, action: UsersReducerType): UsersDataType => {
     switch (action.type) {
-        case "FOLLOW": {
+        case "USERS/FOLLOW": {
             return {...state, items: state.items.map(el => el.id === action.userId ? {...el, followed: true} : el)}
         }
-        case "UNFOLLOW": {
+        case "USERS/UNFOLLOW": {
             return {...state, items: state.items.map(el => el.id === action.userId ? {...el, followed: false} : el)}
         }
-        case "SET-USERS": {
+        case "USERS/SET-USERS": {
             return {...state, items: action.users.items}
         }
-        case "SET-PAGE": {
+        case "USERS/SET-PAGE": {
             return {...state, currentPage: action.numberPage}
         }
-        case "SET-TOTAL-COUNT": {
+        case "USERS/SET-TOTAL-COUNT": {
             return {...state, totalUsersCount: action.totalCount}
         }
-        case "SET-TOGGLE-IS-FETCHING": {
+        case "USERS/SET-TOGGLE-IS-FETCHING": {
             return {...state, isFetching: action.fetch}
         }
-        case "TOGGLE-IS-FOLLOWING-PROGRESS": {
+        case "USERS/TOGGLE-IS-FOLLOWING-PROGRESS": {
             return {
                 ...state,
                 followingInProgress: action.toggle
@@ -98,100 +98,89 @@ export const usersReducer = (state: UsersDataType = initialState, action: UsersR
 //=====-ACTION-=====
 export const followAC = (userId: number) => {
     return {
-        type: "FOLLOW",
+        type: "USERS/FOLLOW",
         userId
     } as const
 }
 export const unFollowAC = (userId: number) => {
     return {
-        type: "UNFOLLOW",
+        type: "USERS/UNFOLLOW",
         userId
     } as const
 }
 export const setUsersAC = (users: UsersDataType) => {
     return {
-        type: "SET-USERS",
+        type: "USERS/SET-USERS",
         users
     } as const
 }
 export const setCurrentPageAC = (numberPage: number) => {
     return {
-        type: "SET-PAGE",
+        type: "USERS/SET-PAGE",
         numberPage
     } as const
 }
 export const setTotalUsersCountAC = (totalCount: number) => {
     return {
-        type: "SET-TOTAL-COUNT",
+        type: "USERS/SET-TOTAL-COUNT",
         totalCount
     } as const
 }
 export const setFetchingAC = (fetch: boolean) => {
     return {
-        type: "SET-TOGGLE-IS-FETCHING" as const,
+        type: "USERS/SET-TOGGLE-IS-FETCHING" as const,
         fetch
     }
 }
 export const toggleFollowingProgressAC = (toggle: boolean, userId: number) => ({
-    type: "TOGGLE-IS-FOLLOWING-PROGRESS" as const,
+    type: "USERS/TOGGLE-IS-FOLLOWING-PROGRESS" as const,
     userId,
     toggle
 })
 
 
 // =====-THUNK-=====
-export const getUsersTC = (pageSize: UsersDataType) => (dispatch: Dispatch) => {
+export const getUsersTC = (pageSize: UsersDataType) => async (dispatch: Dispatch) => {
     dispatch(setFetchingAC(true))
-    usersAPI.getUsers(pageSize.currentPage, pageSize.pageSize)
-        .then((data) => {
-            dispatch(setCurrentPageAC(pageSize.currentPage))
-            dispatch(setFetchingAC(false))
-            dispatch(setUsersAC(data))
-            dispatch(setTotalUsersCountAC(data.totalCount))
-        })
+    let response = await usersAPI.getUsers(pageSize.currentPage, pageSize.pageSize)
+    dispatch(setCurrentPageAC(pageSize.currentPage))
+    dispatch(setFetchingAC(false))
+    dispatch(setUsersAC(response))
+    dispatch(setTotalUsersCountAC(response.totalCount))
 }
-export const nextPageTC = (numberPage: number, pageSize: number) => (dispatch: Dispatch) => {
+export const nextPageTC = (numberPage: number, pageSize: number) => async (dispatch: Dispatch) => {
     dispatch(setFetchingAC(true))
-    usersAPI.getUsers(numberPage, pageSize)
-        .then((data) => {
-            dispatch(setUsersAC(data))
-            dispatch(setFetchingAC(false))
-        })
+    let response = await usersAPI.getUsers(numberPage, pageSize)
+    dispatch(setUsersAC(response))
+    dispatch(setFetchingAC(false))
     dispatch(setCurrentPageAC(numberPage))
 }
-export const followTC = (userId: number) => (dispatch: Dispatch) => {
+export const followTC = (userId: number) => async (dispatch: Dispatch) => {
     dispatch(toggleFollowingProgressAC(true, userId))
-    usersAPI.followUser(userId)
-        .then(res => {
-            if (res.data.resultCode === 0) {
-                dispatch(followAC(userId))
-
-            }
-            dispatch(toggleFollowingProgressAC(false, userId))
-        })
+    let response = await usersAPI.followUser(userId)
+    if (response.data.resultCode === 0) {
+        dispatch(followAC(userId))
+    }
+    dispatch(toggleFollowingProgressAC(false, userId))
 }
-export const unFollowTC = (userId: number) => (dispatch: Dispatch) => {
+export const unFollowTC = (userId: number) => async (dispatch: Dispatch) => {
     dispatch(toggleFollowingProgressAC(true, userId))
-    usersAPI.unFollowUser(userId)
-        .then(res => {
-            if (res.data.resultCode === 0) {
-                dispatch(unFollowAC(userId))
-            }
-            dispatch(toggleFollowingProgressAC(false, userId))
-        })
+    let response = await usersAPI.unFollowUser(userId)
+    if (response.data.resultCode === 0) {
+        dispatch(unFollowAC(userId))
+    }
+    dispatch(toggleFollowingProgressAC(false, userId))
 }
-export const getProfileDataTC = (userId: string | undefined) => (dispatch: Dispatch) => {
-    profileApi.getProfile(userId)
-        .then((res) => {
-            dispatch(setUserProfile(res.data))
-        })
+export const getProfileDataTC = (userId: string | undefined) => async (dispatch: Dispatch) => {
+    let response = await profileApi.getProfile(userId)
+    dispatch(setUserProfile(response.data))
 }
-export const getAuthUserData = ()=> async (dispatch:AppThunkDispatch) => {
+export const getAuthUserData = () => async (dispatch: AppThunkDispatch) => {
     return await authApi.me().then((res) => {
-            if (res.data.resultCode === 0) {
-                dispatch(setUserDataAC(res.data,true))
-            }
-        })
+        if (res.data.resultCode === 0) {
+            dispatch(setUserDataAC(res.data, true))
+        }
+    })
 }
 
 
