@@ -2,47 +2,28 @@ import React from 'react';
 import {UsersType} from "../../redux/users-reducer";
 import s from "./Users.module.css"
 import {NavLink} from "react-router-dom";
+import {Paginator} from "./Paginator/Paginator";
 
 
-type UsersPropsType = {
+type PropsType = {
     users: UsersType[]
     totalUsersCount: number
     pageSize: number
     currentPage: number
     followHandler: (userId: number) => void
     unFollowHandler: (userId: number) => void
-    clickNextPage: (pageNumber: number) => void
     toggleFollowing:Array<any>
 }
 
-class UsersClassComponent extends React.Component<UsersPropsType> {
-    componentDidMount() {
-            console.log("USER CLASS COMPONENT")
-
-    }
-
-    onPageChanged = (el: number) => {
-        this.props.clickNextPage(el)
-    }
+class UsersClassComponent extends React.Component<PropsType> {
 
     render() {
 
-        let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
-        let pages = []
-        for (let i = 1; i <= pagesCount; i++) {
-            pages.push(i)
-        }
 
         return <div className={s.main_container_users}>
-            <div className={s.usersPagesNumber}>{pages.map((el,index) => (
-                 <span key={index}
-                    className={this.props.currentPage === el ? s.pageSelected : ""}
-                    onClick={() => {
-                        this.onPageChanged(el)
-                    }}>
-                    {el}
-                </span>))}
-            </div>
+            <Paginator totalUsersCount={this.props.totalUsersCount}
+                       pageSize={this.props.pageSize}
+                       currentPage={this.props.currentPage}/>
             {this.props.users.map((el: UsersType) => {
                 return <div key={el.id} className={s.userContainer}>
                         <span className={s.container_img}>

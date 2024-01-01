@@ -1,14 +1,14 @@
-import React, {FC} from 'react';
+import React from 'react';
 import {UsersType} from "../../redux/users-reducer";
 import s from "./Users.module.css"
 
-type UsersPropsType = {
+type PropsType = {
     users: UsersType[]
     followHandler: (userId: number) => void
     unFollowHandler: (userId: number) => void
 }
 
-export const Users: FC<UsersPropsType> = (props) => {
+export const Users = (props:PropsType) => {
     return (
         <div className={s.main_container_users}>
             {props.users.map(el => {

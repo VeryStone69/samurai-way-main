@@ -32,9 +32,6 @@ export const UsersContainer = () => {
         dispatch(unFollowTC(userId))
 
     }
-    const clickNextPage = (numberPage: number) => {
-        dispatch(nextPageTC(numberPage, pageSize.pageSize))
-    }
 
 
     return (
@@ -54,7 +51,6 @@ export const UsersContainer = () => {
                     currentPage={pageSize.currentPage}
                     followHandler={followHandler}
                     unFollowHandler={unFollowHandler}
-                    clickNextPage={clickNextPage}
                     toggleFollowing={toggleFollowing}
                 />
             }
