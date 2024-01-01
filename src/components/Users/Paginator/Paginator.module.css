@@ -1,0 +1,57 @@
+/*.usersPagesNumber {*/
+/*    display: flex;*/
+/*    height: 42px;*/
+/*    width: 89%;*/
+/*    overflow: hidden;*/
+/*    flex-direction: row;*/
+/*    flex-wrap: wrap;*/
+/*    justify-content: center;*/
+/*    align-content: center;*/
+/*}*/
+
+/*.pageSelected {*/
+/*    font-weight: bold;*/
+/*    font-size: large;*/
+/*    padding: 5px;*/
+/*    color:#d95789*/
+/*}*/
+
+/*.usersPagesNumber > span {*/
+/*    margin: 2px;*/
+/*    cursor: pointer;*/
+
+/*}*/
+
+.usersPagesNumber {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 10px;
+    margin: 20px 0;
+}
+
+.usersPagesNumber span {
+    margin: 0 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: rgba(83, 156, 204, 0.46);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.usersPagesNumber span:hover {
+    background-color: #d95789;
+    color: white;
+}
+
+.pageSelected {
+    font-weight: bold;
+    background-color: #d95789;
+    color: white;
+}
+
+.pageDots {
+    cursor: default;
+    background-color: transparent;
+}

@@ -43,22 +43,15 @@
     height: 50px;
     border-radius: 30px;
 }
-.pageSelected {
-    font-weight: bold;
-    font-size: large;
-    padding: 5px;
-    color:#d95789
-}
-.usersPagesNumber {
-    display: flex;
-    height: 42px;
-    width: 89%;
-    overflow: hidden;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
-.usersPagesNumber > span {
-    margin: 2px;
-    cursor: pointer;
+/*.pageSelected {*/
+/*    font-weight: bold;*/
+/*    font-size: large;*/
+/*    padding: 5px;*/
+/*    color:#d95789*/
+/*}*/
 
-}
+/*.usersPagesNumber > span {*/
+/*    margin: 2px;*/
+/*    cursor: pointer;*/
+
+/*}*/

@@ -24,6 +24,15 @@ class UsersClassComponent extends React.Component<PropsType> {
             <Paginator totalUsersCount={this.props.totalUsersCount}
                        pageSize={this.props.pageSize}
                        currentPage={this.props.currentPage}/>
+            {/*<div className={s.usersPagesNumber}>{pages.map((el,index) => (*/}
+            {/*     <span key={index}*/}
+            {/*        className={this.props.currentPage === el ? s.pageSelected : ""}*/}
+            {/*        onClick={() => {*/}
+            {/*            this.onPageChanged(el)*/}
+            {/*        }}>*/}
+            {/*        {el}*/}
+            {/*    </span>))}*/}
+            {/*</div>*/}
             {this.props.users.map((el: UsersType) => {
                 return <div key={el.id} className={s.userContainer}>
                         <span className={s.container_img}>
