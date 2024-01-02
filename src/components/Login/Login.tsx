@@ -20,11 +20,11 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
             <form onSubmit={props.handleSubmit}>
                 <div>
                     <Field placeholder={"Login"} name={"email"} component={FormControl}
-                           type="input" validate = {[required]}/>
+                           type="input" validate = {[required]} value={"free@samuraijs.com"}/>
                 </div>
                 <div>
                     <Field placeholder={"Password"} name={"password"} component={FormControl}
-                           type="input" validate = {[required]}/>
+                           type="input" validate = {[required]} value={"free"}/>
                 </div>
                 <div>
                     <Field type="checkbox" name={"rememberMe"} component={"input"}/>
@@ -54,8 +54,17 @@ export const Login = () => {
     }
     if (isAuth) return <Navigate to={"/profile"}/>
     return (
-        <div>
-            <h1>LOGIN</h1>
+        <div className={s.containerLoginInfo}>
+            <p>To log in get registered
+                <a href={'https://social-network.samuraijs.com/'}
+                   className={s.createAccountLink}
+                   target={'_blank'}> here
+                </a>
+            </p>
+            <p>or use common test account credentials:</p>
+            <p><b>Email:</b> free@samuraijs.com</p>
+            <p><b>Password:</b> free</p>
+            {/*<h1>LOGIN</h1>*/}
             <LoginReduxForm onSubmit={onSubmit}/>
         </div>
 
