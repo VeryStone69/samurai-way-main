@@ -9,37 +9,16 @@ type PropsType = {
     currentPage: number
 }
 export const Paginator = (props: PropsType) => {
-    // const dispatch = useDispatch();
-    // let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
-    // let pages = []
-    // for (let i = 1; i <= pagesCount; i++) {
-    //     pages.push(i)
-    // }
-    // const onPageChanged = (numberPage: number) => {
-    //     dispatch(nextPageTC(numberPage, props.pageSize))
-    // }
-    // return (
-    //     <div className={s.usersPagesNumber}>{pages.map((el, index) => (
-    //         <span key={index}
-    //               className={props.currentPage === el ? s.pageSelected : ""}
-    //               onClick={() => {
-    //                   onPageChanged(el)
-    //               }}>
-    //                 {el}
-    //             </span>))}
-    //     </div>
-    // )
-    const {totalUsersCount,pageSize,currentPage}=props
     const dispatch = useDispatch();
 
-    const pagesCount = Math.ceil(totalUsersCount / pageSize);
+    const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
     const pages = [];
-    let leftPortionPageNumber = Math.max(1, currentPage - 4);
-    let rightPortionPageNumber = Math.min(pagesCount, currentPage + 5);
+    let leftPortionPageNumber = Math.max(1, props.currentPage - 4);
+    let rightPortionPageNumber = Math.min(pagesCount, props.currentPage + 5);
 
-    if (currentPage > 5) {
+    if (props.currentPage > 5) {
         pages.push(1);
-        if (currentPage > 6) {
+        if (props.currentPage > 6) {
             pages.push('...');
         }
     }
@@ -48,16 +27,15 @@ export const Paginator = (props: PropsType) => {
         pages.push(i);
     }
 
-    if (currentPage < pagesCount - 5) {
-        if (currentPage < pagesCount - 6) {
+    if (props.currentPage < pagesCount - 5) {
+        if (props.currentPage < pagesCount - 6) {
             pages.push('...');
         }
         pages.push(pagesCount);
     }
 
     const onPageChanged = (pageNumber: number) => {
-
-        dispatch(nextPageTC(pageNumber, pageSize));
+        dispatch(nextPageTC(pageNumber, props.pageSize));
     };
 
     return (
@@ -68,7 +46,7 @@ export const Paginator = (props: PropsType) => {
                 } else {
                     return (
                         <span key={index}
-                              className={currentPage === page ? s.pageSelected : ""}
+                              className={props.currentPage === page ? s.pageSelected : ""}
                               onClick={() => onPageChanged(+page)}>
                             {page}
                         </span>
