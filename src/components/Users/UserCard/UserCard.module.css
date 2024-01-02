@@ -1,0 +1,28 @@
+.container_img {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 12%;
+}
+
+.userPhoto{
+    height: 50px;
+    border-radius: 30px;
+}
+
+.nameLocation_Container {
+    height: 6em;
+    display: flex;
+    width: 50%;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: flex-start;
+}
+
+.userContainer_name {
+
+}
+
+.userContainer_location{
+}
