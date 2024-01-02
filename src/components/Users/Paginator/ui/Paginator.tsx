@@ -5,13 +5,13 @@ import {nextPageTC} from "../../../../redux/users-reducer";
 import {getPages} from "../utils/getPages";
 
 type PropsType = {
-    totalUsersCount: number
+    totalItemCount: number
     pageSize: number
     currentPage: number
 }
 export const Paginator = (props: PropsType) => {
     const dispatch = useDispatch();
-    const pages = getPages(props.totalUsersCount, props.pageSize, props.currentPage)
+    const pages = getPages(props.totalItemCount, props.pageSize, props.currentPage)
 
     const onPageChanged = (pageNumber: number) => {
         dispatch(nextPageTC(pageNumber, props.pageSize));

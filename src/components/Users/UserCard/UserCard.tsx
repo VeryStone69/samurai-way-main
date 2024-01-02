@@ -10,7 +10,6 @@ type PropsType = {
     userInfo: UsersType
 }
 export const UserCard = React.memo((props: PropsType) => {
-        console.log("UserCard")
     const dispatch = useDispatch();
     const toggleFollowing = useAppSelector(toggleFollowingSelector);
     const followHandler = (userId: number) => {

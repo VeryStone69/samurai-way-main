@@ -16,7 +16,7 @@ class UsersClassComponent extends React.Component<PropsType> {
 
     render() {
         return <div className={s.main_container_users}>
-            <Paginator totalUsersCount={this.props.totalUsersCount}
+            <Paginator totalItemCount={this.props.totalUsersCount}
                        pageSize={this.props.pageSize}
                        currentPage={this.props.currentPage}/>
             {this.props.users.map((el: UsersType) => {
