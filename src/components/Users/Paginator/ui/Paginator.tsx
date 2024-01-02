@@ -1,7 +1,8 @@
 import s from "./Paginator.module.css"
 import React from "react";
 import {useDispatch} from "react-redux";
-import {nextPageTC} from "../../../redux/users-reducer";
+import {nextPageTC} from "../../../../redux/users-reducer";
+import {getPages} from "../utils/getPages";
 
 type PropsType = {
     totalUsersCount: number
@@ -10,29 +11,7 @@ type PropsType = {
 }
 export const Paginator = (props: PropsType) => {
     const dispatch = useDispatch();
-
-    const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
-    const pages = [];
-    let leftPortionPageNumber = Math.max(1, props.currentPage - 4);
-    let rightPortionPageNumber = Math.min(pagesCount, props.currentPage + 5);
-
-    if (props.currentPage > 5) {
-        pages.push(1);
-        if (props.currentPage > 6) {
-            pages.push('...');
-        }
-    }
-
-    for (let i = leftPortionPageNumber; i <= rightPortionPageNumber; i++) {
-        pages.push(i);
-    }
-
-    if (props.currentPage < pagesCount - 5) {
-        if (props.currentPage < pagesCount - 6) {
-            pages.push('...');
-        }
-        pages.push(pagesCount);
-    }
+    const pages = getPages(props.totalUsersCount, props.pageSize, props.currentPage)
 
     const onPageChanged = (pageNumber: number) => {
         dispatch(nextPageTC(pageNumber, props.pageSize));

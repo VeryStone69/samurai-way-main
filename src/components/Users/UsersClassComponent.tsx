@@ -2,7 +2,7 @@ import React from 'react';
 import {UsersType} from "../../redux/users-reducer";
 import s from "./Users.module.css"
 import {NavLink} from "react-router-dom";
-import {Paginator} from "./Paginator/Paginator";
+import {Paginator} from "./Paginator/ui/Paginator";
 
 
 type PropsType = {
