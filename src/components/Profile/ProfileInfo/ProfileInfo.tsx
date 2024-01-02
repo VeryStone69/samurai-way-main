@@ -11,10 +11,10 @@ import {useAppSelector} from "../../../redux/redux-store";
 import {profileStatusSelector} from "./selectors/profileInfo-selectors";
 import {ProfileStatusWithHooks} from "../ProfileStatus/ProfileStatusWithHooks";
 
-type ProfileInfoPropsType = {
+type PropsType = {
     profile: TasksStateType
 }
-export const ProfileInfo: React.FC<ProfileInfoPropsType> = React.memo(({...profile}) => {
+export const ProfileInfo: React.FC<PropsType> = React.memo(({...profile}) => {
     const profileData = profile.profile.profile
     const profileStatus = useAppSelector(profileStatusSelector)
     const dispatch=useDispatch()
