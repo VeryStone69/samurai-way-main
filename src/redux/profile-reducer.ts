@@ -8,20 +8,20 @@ export interface ProfileDataType {
     aboutMe: string;
     contacts: RootObjectContacts;
     lookingForAJob: boolean;
-    lookingForAJobDescription: string;
+    lookingForAJobDescription?: string;
     fullName: string;
     userId: number;
     photos: RootObjectPhotos;
 }
 
 export interface RootObjectContacts {
-    facebook: string;
+    facebook: null | string;
     website: null | string;
-    vk: string;
-    twitter: string;
-    instagram: string;
+    vk: null | string;
+    twitter: null | string;
+    instagram: null | string;
     youtube: null | string;
-    github: string;
+    github: null | string;
     mainLink: null | string;
 }
 
@@ -34,6 +34,7 @@ export interface RootObjectPhotos {
 export type ProfileReduserType = ReturnType<typeof addPostAC>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setStatusAC>
+    | ReturnType<typeof savePhotoSuccess>
 
 export type TaskType = {
     id: string
@@ -43,9 +44,10 @@ export type TaskType = {
 export type TasksStateType = {
     posts: TaskType[]
     newPostsText: string
-    profile: ProfileDataType | null
+    profile: ProfileDataType
     status: string
 }
+
 const initialState: TasksStateType = {
     posts: [{id: v1(), message: "Hi, how are you", likesCount: 12},
         {id: v1(), message: "It's my second post", likesCount: 15},
@@ -66,7 +68,7 @@ const initialState: TasksStateType = {
             github: "github.com",
             mainLink: null
         },
-        lookingForAJob: true,
+        lookingForAJob: false,
         lookingForAJobDescription: "I'm looking for a job for fun. Slavery is not offered.",
         fullName: "Aliaksandr Kaptsevich",
         userId: 29772,
@@ -92,6 +94,10 @@ export const profileReducer = (state: TasksStateType = initialState, action: Pro
         case "PROFILE/SET-PROFILE-STATUS": {
             return {...state, status: action.status}
         }
+        case "PROFILE/SET-USER-PHOTO": {
+            return {...state, profile:{...state.profile, photos:action.photos}}
+            // return {...state}
+        }
         default :
             return {...state}
     }
@@ -110,6 +116,13 @@ export const setUserProfile = (profile: ProfileDataType) => {
         profile
     }
 }
+export const savePhotoSuccess = (photos: RootObjectPhotos)=>{
+    return {
+        type: "PROFILE/SET-USER-PHOTO" as const,
+        photos
+    }
+
+}
 
 export const setStatusAC = (status: string) => {
     return {type: "PROFILE/SET-PROFILE-STATUS" as const, status}
@@ -121,9 +134,15 @@ export const getProfileStatusTC = (userId: string | undefined) => async (dispatc
 
 export const updateProfileStatusTC = (status: string) => async (dispatch: Dispatch) => {
     const response = await profileApi.updateStatus(status)
-            if (response.data.resultCode === 0) {
-                dispatch(setStatusAC(status))
-            }
+    if (response.data.resultCode === 0) {
+        dispatch(setStatusAC(status))
+    }
+}
+export const saveProfilePhotoTC = (photos: File) => async (dispatch: Dispatch) => {
+    const response = await profileApi.savePhoto(photos)
+    if (response.data.resultCode === 0) {
+        dispatch(savePhotoSuccess(response.data.data.photos))
+    }
 }
 
 

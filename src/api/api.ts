@@ -25,10 +25,10 @@ export const authApi = {
     me() {
         return instance.get(`auth/me`)
     },
-    loginUser(data:LoginUserRequestType){
-        return instance.post<ResponseType<{userId: number}>>("/auth/login", data)
+    loginUser(data: LoginUserRequestType) {
+        return instance.post<ResponseType<{ userId: number }>>("/auth/login", data)
     },
-    logout(){
+    logout() {
         return instance.delete<ResponseType>("/auth/login")
     }
 }
@@ -36,11 +36,20 @@ export const profileApi = {
     getProfile(userId: string | undefined) {
         return instance.get(`profile/${userId}`)
     },
-    getStatus(userId: string | undefined){
+    getStatus(userId: string | undefined) {
         return instance.get<string>(`/profile/status/${userId}`)
     },
-    updateStatus<ResponseType>(status: string|null){
+    updateStatus<ResponseType>(status: string | null) {
         return instance.put(`profile/status`, {status})
+    },
+    savePhoto(photoFile:File) {
+        const formData = new FormData();
+        formData.append("image", photoFile)
+        return instance.put(`profile/photo`, formData, {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        })
     }
 }
 
@@ -49,7 +58,7 @@ export type LoginUserRequestType = {
     email: string
     password: string
     rememberMe: boolean
-    captcha?:string
+    captcha?: string
 }
 
 export type ResponseType<D = {}> = {
@@ -58,9 +67,9 @@ export type ResponseType<D = {}> = {
     data: D
 }
 type RequestType = {
-    userId:string
+    userId: string
 }
-type GetUsersResponseType ={
+type GetUsersResponseType = {
     userId: string
     lookingForAJob: boolean
     lookingForAJobDescription: string

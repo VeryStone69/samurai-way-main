@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {ChangeEvent, DetailedHTMLProps, InputHTMLAttributes} from 'react';
 import s from './ProfileInfo.module.css'
-import {TasksStateType, updateProfileStatusTC} from "../../../redux/profile-reducer";
+import {saveProfilePhotoTC, TasksStateType, updateProfileStatusTC} from "../../../redux/profile-reducer";
 import {UsersLoader} from "../../common/UsersLoader";
 import facebookLogo from "../../../assets/images/icons-facebook-48.png";
 import githubLogo from "../../../assets/images/icons-github-48.png"
@@ -13,15 +13,20 @@ import {ProfileStatusWithHooks} from "../ProfileStatus/ProfileStatusWithHooks";
 
 type PropsType = {
     profile: TasksStateType
+    isOwner:boolean
 }
-export const ProfileInfo: React.FC<PropsType> = React.memo(({...profile}) => {
-    const profileData = profile.profile.profile
+export const ProfileInfo= React.memo((props:PropsType) => {
+    const profileData = props.profile.profile
     const profileStatus = useAppSelector(profileStatusSelector)
     const dispatch=useDispatch()
-
     const statusHandler = (status:string)=>{
         dispatch(updateProfileStatusTC(status))
     }
+    const photoSelectedHandler=(e:ChangeEvent<HTMLInputElement>)=>{
+        if (e.target.files) dispatch(saveProfilePhotoTC(e.target.files[0]))
+
+    }
+
     return (
         <>
             {!profileData ?
@@ -30,6 +35,7 @@ export const ProfileInfo: React.FC<PropsType> = React.memo(({...profile}) => {
                     <img className={s.profileInfo_img}
                          src="https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg"
                          alt="content picture"/>
+                    {props.isOwner && <input type={"file"} onChange={photoSelectedHandler}/>}
                     <div className={s.descriptionBlock}>
                         <img className={s.profileLargePhoto} alt={"user photo"} src={profileData.photos.large}/>
                         <div className={s.profileFullName}>{profileData.fullName}</div>

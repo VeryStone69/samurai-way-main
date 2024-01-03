@@ -173,6 +173,7 @@ export const unFollowTC = (userId: number) => async (dispatch: Dispatch) => {
 }
 export const getProfileDataTC = (userId: string | undefined) => async (dispatch: Dispatch) => {
     const response = await profileApi.getProfile(userId)
+    console.log(response)
     dispatch(setUserProfile(response.data))
 }
 export const getAuthUserData = () => async (dispatch: AppThunkDispatch) => {

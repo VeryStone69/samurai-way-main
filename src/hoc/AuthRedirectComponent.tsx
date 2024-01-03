@@ -25,12 +25,12 @@ import {Profile} from "../components/Profile/Profile";
 // import {Component} from "react";
 
 
-export function AuthRedirectComponent<T>(Component: ComponentType<T>) {
-    const isAuth = useSelector<AppRootStateType, boolean>(state => state.auth.isAuth)
-    const RedirectComponent = () => {
-        if (isAuth) {
-            return <Navigate to={"/login"}/>
-        } else return <Profile/>
-    }
-    return RedirectComponent
-}
+// export function AuthRedirectComponent<T>(Component: ComponentType<T>) {
+//     const isAuth = useSelector<AppRootStateType, boolean>(state => state.auth.isAuth)
+//     const RedirectComponent = () => {
+//         if (isAuth) {
+//             return <Navigate to={"/login"}/>
+//         } else return <Profile/>
+//     }
+//     return RedirectComponent
+// }
