@@ -60,3 +60,8 @@
         opacity: 1;
     }
 }
+
+.inputFileContainer {
+    padding-top: 25px;
+    width: 7%;
+}

@@ -2,26 +2,26 @@ import {PostDataType} from "../App";
 import {v1} from "uuid";
 import veryStone from "../assets/images/veryStone.jpg"
 import {Dispatch} from "redux";
-import {profileApi} from "../api/api";
+import {profileApi, SaveUserProfileChangesType} from "../api/api";
 
 export interface ProfileDataType {
     aboutMe: string;
     contacts: RootObjectContacts;
     lookingForAJob: boolean;
-    lookingForAJobDescription?: string;
+    lookingForAJobDescription: string;
     fullName: string;
     userId: number;
     photos: RootObjectPhotos;
 }
 
 export interface RootObjectContacts {
-    facebook: null | string;
-    website: null | string;
-    vk: null | string;
-    twitter: null | string;
-    instagram: null | string;
+    facebook:  null | string;
+    website:  null | string;
+    vk:  null | string;
+    twitter:  null | string;
+    instagram:  null | string;
     youtube: null | string;
-    github: null | string;
+    github:  null | string;
     mainLink: null | string;
 }
 
@@ -59,16 +59,16 @@ const initialState: TasksStateType = {
     profile: {
         aboutMe: "I live this life",
         contacts: {
-            facebook: "facebook.com",
-            website: "google.com",
-            vk: "vk.com",
-            twitter: "https://twitter.com/",
-            instagram: "instagra.com/",
-            youtube: null,
+            facebook: "https://facebook.com",
+            website: "https://google.com",
+            vk: "https://vk.com",
+            twitter: "https://twitter.com",
+            instagram: "https://www.instagram.com",
+            youtube: "https://www.youtube.com",
             github: "github.com",
-            mainLink: null
+            mainLink: ""
         },
-        lookingForAJob: false,
+        lookingForAJob: true,
         lookingForAJobDescription: "I'm looking for a job for fun. Slavery is not offered.",
         fullName: "Aliaksandr Kaptsevich",
         userId: 29772,
@@ -143,6 +143,15 @@ export const saveProfilePhotoTC = (photos: File) => async (dispatch: Dispatch) =
     if (response.data.resultCode === 0) {
         dispatch(savePhotoSuccess(response.data.data.photos))
     }
+}
+export const updateUserProfileChangesTC = (data:SaveUserProfileChangesType) => async (dispatch:Dispatch)=>{
+    const response = await profileApi.saveUserProfileChanges(data)
+    try {
+        console.log(response)
+    } catch (e) {
+        console.log(e)
+    }
+
 }
 
 

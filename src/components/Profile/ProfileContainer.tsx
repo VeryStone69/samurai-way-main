@@ -24,9 +24,6 @@ export const ProfileContainer = () => {
         dispatch(getProfileStatusTC(userId))
     }, [params,authorizedUserId])
 
-
-
-
     return isAuth ? <Profile isOwner = {!userId}/> : <Navigate to={"/login"}/>
 }
 

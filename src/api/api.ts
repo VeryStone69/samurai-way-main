@@ -42,7 +42,7 @@ export const profileApi = {
     updateStatus<ResponseType>(status: string | null) {
         return instance.put(`profile/status`, {status})
     },
-    savePhoto(photoFile:File) {
+    savePhoto(photoFile: File) {
         const formData = new FormData();
         formData.append("image", photoFile)
         return instance.put(`profile/photo`, formData, {
@@ -50,6 +50,9 @@ export const profileApi = {
                 "Content-Type": "multipart/form-data"
             }
         })
+    },
+    saveUserProfileChanges(userData:SaveUserProfileChangesType) {
+        return instance.put("profile",userData)
     }
 }
 
@@ -66,6 +69,24 @@ export type ResponseType<D = {}> = {
     messages: Array<string>
     data: D
 }
+
+export type SaveUserProfileChangesType = {
+    userId: number
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    contacts: {
+        github: string,
+        vk: string,
+        facebook: string,
+        instagram: string
+        twitter: string
+        website: string
+        youtube: string
+        mainLink: string
+    }
+}
+
 type RequestType = {
     userId: string
 }
