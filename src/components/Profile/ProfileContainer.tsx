@@ -10,7 +10,7 @@ import {authorizedUserIdSelector, isAuthSelector} from "./selectors/profileConta
 
 export const ProfileContainer = () => {
     let params = useParams();
-    let userId = params.userId;
+    let userId = Number(params.userId);
     const authorizedUserId: any = useAppSelector(authorizedUserIdSelector)
     const isAuth = useAppSelector(isAuthSelector)
     const dispatch = useDispatch()

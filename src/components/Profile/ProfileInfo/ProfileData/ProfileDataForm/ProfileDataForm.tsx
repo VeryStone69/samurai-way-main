@@ -35,7 +35,6 @@ export const ProfileDataForm = (props: PropsType) => {
     const {profileData} = props
     const {contacts, ...restProfileData} = profileData
     const {formFields} = useFormData()
-
     return (
         <div>
             <Formik
@@ -48,6 +47,7 @@ export const ProfileDataForm = (props: PropsType) => {
                         }, {} as ContactsType)
                     }
                 }}
+
                 onSubmit={(values: Values) => {
                     dispatch(updateUserProfileChangesTC(values));
                     props.goToEditMode(false)

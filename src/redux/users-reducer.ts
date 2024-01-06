@@ -171,7 +171,7 @@ export const unFollowTC = (userId: number) => async (dispatch: Dispatch) => {
     }
     dispatch(toggleFollowingProgressAC(false, userId))
 }
-export const getProfileDataTC = (userId: string | undefined) => async (dispatch: Dispatch) => {
+export const getProfileDataTC = (userId: number) => async (dispatch: Dispatch) => {
     const response = await profileApi.getProfile(userId)
     console.log(response)
     dispatch(setUserProfile(response.data))

@@ -1,8 +1,10 @@
 import {PostDataType} from "../App";
 import {v1} from "uuid";
 import veryStone from "../assets/images/veryStone.jpg"
-import {Dispatch} from "redux";
+import {AnyAction, Dispatch} from "redux";
 import {profileApi, SaveUserProfileChangesType} from "../api/api";
+import {AppRootStateType, AppThunkDispatch} from "./redux-store";
+import {getProfileDataTC} from "./users-reducer";
 
 export interface ProfileDataType {
     aboutMe: string;
@@ -70,11 +72,11 @@ const initialState: TasksStateType = {
         },
         lookingForAJob: true,
         lookingForAJobDescription: "I'm looking for a job for fun. Slavery is not offered.",
-        fullName: "Aliaksandr Kaptsevich",
+        fullName: "Guest",
         userId: 29772,
         photos: {
             small: "",
-            large: veryStone
+            large: ""
         }
     },
     status: "status from store"
@@ -96,7 +98,6 @@ export const profileReducer = (state: TasksStateType = initialState, action: Pro
         }
         case "PROFILE/SET-USER-PHOTO": {
             return {...state, profile:{...state.profile, photos:action.photos}}
-            // return {...state}
         }
         default :
             return {...state}
@@ -127,7 +128,7 @@ export const savePhotoSuccess = (photos: RootObjectPhotos)=>{
 export const setStatusAC = (status: string) => {
     return {type: "PROFILE/SET-PROFILE-STATUS" as const, status}
 }
-export const getProfileStatusTC = (userId: string | undefined) => async (dispatch: Dispatch) => {
+export const getProfileStatusTC = (userId: number) => async (dispatch: Dispatch) => {
     const response = await profileApi.getStatus(userId)
     dispatch(setStatusAC(response.data))
 }
@@ -144,8 +145,13 @@ export const saveProfilePhotoTC = (photos: File) => async (dispatch: Dispatch) =
         dispatch(savePhotoSuccess(response.data.data.photos))
     }
 }
-export const updateUserProfileChangesTC = (data:SaveUserProfileChangesType) => async (dispatch:Dispatch)=>{
+export const updateUserProfileChangesTC = (data:SaveUserProfileChangesType) => async (dispatch:AppThunkDispatch,getState: () => AppRootStateType)=>{
+    const userId = getState().profile.profile.userId
     const response = await profileApi.saveUserProfileChanges(data)
+    if (response.data.resultCode === 0) {
+        await dispatch(getProfileDataTC(userId))
+        await dispatch(getProfileStatusTC(userId))
+    }
 }
 
 
