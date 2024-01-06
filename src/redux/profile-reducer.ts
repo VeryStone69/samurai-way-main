@@ -146,12 +146,6 @@ export const saveProfilePhotoTC = (photos: File) => async (dispatch: Dispatch) =
 }
 export const updateUserProfileChangesTC = (data:SaveUserProfileChangesType) => async (dispatch:Dispatch)=>{
     const response = await profileApi.saveUserProfileChanges(data)
-    try {
-        console.log(response)
-    } catch (e) {
-        console.log(e)
-    }
-
 }
 
 

@@ -1,14 +1,14 @@
 import React, {useEffect} from 'react';
 import './App.css';
 import {Navbar} from "./components/Navbar/Navbar";
-import {Navigate, Route, Routes} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import {FriendsDataType} from "./redux/friends-reducer";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {UsersContainer} from "./components/Users/UsersContainer";
 import {HeaderContainer} from "./components/Header/HeaderContainer";
 import {Login} from "./components/Login/Login";
 import {ProfileContainer} from "./components/Profile/ProfileContainer";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {initializeAppTC} from "./redux/app-reducer";
 import {UsersLoader} from "./components/common/UsersLoader";
 import {initializedSelector} from "./app-selectors";

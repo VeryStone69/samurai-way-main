@@ -86,26 +86,3 @@ export type SaveUserProfileChangesType = {
         mainLink: string
     }
 }
-
-type RequestType = {
-    userId: string
-}
-type GetUsersResponseType = {
-    userId: string
-    lookingForAJob: boolean
-    lookingForAJobDescription: string
-    fullName: string
-    contacts: object
-    github: string
-    vk: string
-    facebook: string
-    instagram: string
-    twitter: string
-    website: string
-    youtube: string
-    mainLink: string
-    photos: object
-    small: string
-    large: string
-
-}
