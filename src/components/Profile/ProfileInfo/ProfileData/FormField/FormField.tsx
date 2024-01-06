@@ -16,7 +16,10 @@ export const FormField = (props: PropsType) => {
     return (
         <div>
             <label htmlFor={props.label}>{props.title}: </label>
-            <Field id={props.label} name={props.label} type={props.type} placeholder={placeholderValue}/>
+            {props.type === "textarea"
+                ? (<Field id={props.label} name={props.label} as="textarea" placeholder={placeholderValue}/>)
+                : (<Field id={props.label} name={props.label} type={props.type} placeholder={placeholderValue}/>)
+            }
         </div>
     )
 }

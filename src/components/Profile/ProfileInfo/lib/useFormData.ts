@@ -5,9 +5,9 @@ export const useFormData = ()=>{
     const profileData=useAppSelector(profileDataSelector).profile
     const formFields = [
         { title: "Full name", label: "fullName", type: "text", placeholderName: profileData.fullName },
-        { title: "What type of job am I looking for?", label: "lookingForAJobDescription", type: "text", placeholderName: profileData.lookingForAJobDescription },
+        { title: "What type of job am I looking for?", label: "lookingForAJobDescription", type: "textarea", placeholderName: profileData.lookingForAJobDescription },
         { title: "I have a job?", label: "lookingForAJob", type: "checkbox", placeholderName: profileData.lookingForAJob},
-        { title: "About me", label: "aboutMe", type: "text", placeholderName: profileData.aboutMe },
+        { title: "About me", label: "aboutMe", type: "textarea", placeholderName: profileData.aboutMe },
     ];
 
 
