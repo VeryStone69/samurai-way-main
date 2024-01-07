@@ -1,0 +1,7 @@
+.errorContacts {
+    margin: 5px;
+    border: 1px solid red;
+    color: red;
+    padding: 10px;
+    border-radius: 5px;
+}

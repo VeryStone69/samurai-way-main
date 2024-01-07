@@ -6,6 +6,12 @@ import {profileApi, SaveUserProfileChangesType} from "../api/api";
 import {AppRootStateType, AppThunkDispatch} from "./redux-store";
 import {getProfileDataTC} from "./users-reducer";
 
+export type ServerErrors = {
+    resultCode: number
+    messages: [string],
+    data: {}
+}
+
 export interface ProfileDataType {
     aboutMe: string;
     contacts: RootObjectContacts;
@@ -17,13 +23,13 @@ export interface ProfileDataType {
 }
 
 export interface RootObjectContacts {
-    facebook:  null | string;
-    website:  null | string;
-    vk:  null | string;
-    twitter:  null | string;
-    instagram:  null | string;
+    facebook: null | string;
+    website: null | string;
+    vk: null | string;
+    twitter: null | string;
+    instagram: null | string;
     youtube: null | string;
-    github:  null | string;
+    github: null | string;
     mainLink: null | string;
 }
 
@@ -79,8 +85,7 @@ const initialState: TasksStateType = {
             large: ""
         }
     },
-    status: "status from store"
-
+    status: "status from store",
 }
 
 
@@ -97,7 +102,7 @@ export const profileReducer = (state: TasksStateType = initialState, action: Pro
             return {...state, status: action.status}
         }
         case "PROFILE/SET-USER-PHOTO": {
-            return {...state, profile:{...state.profile, photos:action.photos}}
+            return {...state, profile: {...state.profile, photos: action.photos}}
         }
         default :
             return {...state}
@@ -117,7 +122,7 @@ export const setUserProfile = (profile: ProfileDataType) => {
         profile
     }
 }
-export const savePhotoSuccess = (photos: RootObjectPhotos)=>{
+export const savePhotoSuccess = (photos: RootObjectPhotos) => {
     return {
         type: "PROFILE/SET-USER-PHOTO" as const,
         photos
@@ -145,13 +150,20 @@ export const saveProfilePhotoTC = (photos: File) => async (dispatch: Dispatch) =
         dispatch(savePhotoSuccess(response.data.data.photos))
     }
 }
-export const updateUserProfileChangesTC = (data:SaveUserProfileChangesType) => async (dispatch:AppThunkDispatch,getState: () => AppRootStateType)=>{
-    const userId = getState().profile.profile.userId
-    const response = await profileApi.saveUserProfileChanges(data)
-    if (response.data.resultCode === 0) {
-        await dispatch(getProfileDataTC(userId))
-        await dispatch(getProfileStatusTC(userId))
+export const updateUserProfileChangesTC = (data: SaveUserProfileChangesType) => async (dispatch: AppThunkDispatch, getState: () => AppRootStateType) => {
+    try {
+        const userId = getState().profile.profile.userId;
+        const response = await profileApi.saveUserProfileChanges(data);
+        if (response.data.resultCode === 0) {
+            await dispatch(getProfileDataTC(userId));
+            await dispatch(getProfileStatusTC(userId));
+        } else {
+            return Promise.reject(response.data.messages);
+        }
+    } catch (error) {
+        return Promise.reject(error);
     }
 }
+
 
 

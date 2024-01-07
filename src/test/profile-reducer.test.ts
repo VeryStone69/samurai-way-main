@@ -42,8 +42,7 @@ describe('profileReducer', () => {
                     large: " "
                 }
             },
-            status: "status from store"
-
+            status: "status from store",
         };
     });
 

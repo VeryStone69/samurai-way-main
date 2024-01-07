@@ -4,13 +4,15 @@ import {Form, Formik} from "formik";
 import {useDispatch} from "react-redux";
 import {useFormData} from "../../lib/useFormData";
 import {FormField} from "../FormField/FormField";
+import {AppDispatch} from "../../../../../redux/redux-store";
+import s from "./ProfileDataForm.module.css"
 
 type PropsType = {
     profileData: ProfileDataType
     goToEditMode: (statusEditMode: boolean) => void
 }
 
-type ContactsType = {
+export type ContactsType = {
     github: string,
     vk: string,
     facebook: string,
@@ -21,20 +23,23 @@ type ContactsType = {
     mainLink: string
 }
 
-type Values = {
+export type Values = {
     aboutMe: string
     userId: number
     lookingForAJob: boolean
     lookingForAJobDescription: string
     fullName: string
     contacts: ContactsType
+    submitError?: string
 }
 
+
 export const ProfileDataForm = (props: PropsType) => {
-    const dispatch = useDispatch();
+    const dispatch: AppDispatch = useDispatch();
     const {profileData} = props
     const {contacts, ...restProfileData} = profileData
     const {formFields} = useFormData()
+
     return (
         <div>
             <Formik
@@ -48,24 +53,35 @@ export const ProfileDataForm = (props: PropsType) => {
                     }
                 }}
 
-                onSubmit={(values: Values) => {
-                    dispatch(updateUserProfileChangesTC(values));
-                    props.goToEditMode(false)
+                onSubmit={(values: Values, {setErrors}) => {
+                    dispatch(updateUserProfileChangesTC(values))
+                        .then(() => {
+                            props.goToEditMode(false);
+                        })
+                        .catch(errorMessages => {
+                            setErrors({submitError: errorMessages});
+                        });
                 }}
             >
-                <Form>
-                    {formFields.map(field => (
-                        <FormField
-                            key={field.label}
-                            title={field.title}
-                            label={field.label}
-                            type={field.type}
-                            placeholderName={field.placeholderName}
-                        />
-                    ))}
-                    <button type="submit">Save</button>
-                </Form>
+                {({errors}) => (
+                    <Form>
+
+                        {formFields.map(field => (
+                            <FormField
+                                key={field.label}
+                                title={field.title}
+                                label={field.label}
+                                type={field.type}
+                                placeholderName={field.placeholderName}
+                            />
+                        ))}
+
+                        {errors.submitError && <div className={s.errorContacts}>{errors.submitError}</div>}
+                        <button disabled={!!errors.submitError} type="submit">Save</button>
+                    </Form>
+                )}
             </Formik>
+
         </div>
     );
 };
