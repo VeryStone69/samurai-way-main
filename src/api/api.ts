@@ -51,8 +51,8 @@ export const profileApi = {
             }
         })
     },
-    saveUserProfileChanges(userData:SaveUserProfileChangesType) {
-        return instance.put("profile",userData)
+    saveUserProfileChanges(userData: SaveUserProfileChangesType) {
+        return instance.put("profile", userData)
     }
 }
 
