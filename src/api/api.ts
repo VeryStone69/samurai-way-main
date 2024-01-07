@@ -55,6 +55,11 @@ export const profileApi = {
         return instance.put("profile", userData)
     }
 }
+export const securityApi = {
+    getCaptcha(){
+        return instance.get("security/get-captcha-url")
+    }
+}
 
 
 export type LoginUserRequestType = {

@@ -14,7 +14,8 @@ describe('authReducer', () => {
                 login: null
             },
             isFetching: true,
-            isAuth: false
+            isAuth: false,
+            captchaUrl:null
         };
     });
 
@@ -28,7 +29,8 @@ describe('authReducer', () => {
                 login: "testUser"
             },
             isFetching: false,
-            isAuth: true
+            isAuth: true,
+            captchaUrl: null
         };
 
         const action = setUserDataAC(userData, true);
