@@ -5,10 +5,10 @@ import {DialogItem} from "./DialogItem/DialogItem";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {FormControl} from "../common/FormsControls/FormsControls";
 import {maxLength50, required} from "../../utils/Validators/validators";
-import {DialogsPage} from "../../redux/diallogs-reducer";
+import {DialogsPageType} from "../../redux/diallogs-reducer";
 
 type DialogsPropsType = {
-    dialogs: DialogsPage
+    dialogs: DialogsPageType
     addNewMessage: (message: string) => void
 }
 export type FormDialogType = {

@@ -38,7 +38,6 @@ export const authReducer = (state: AuthDataType = initialState, action: AuthRedu
     switch (action.type) {
         case "AUTH/SET-USER-DATA": {
             return {...state, ...action.data, isFetching: false, isAuth: action.isAuth}
-
         }
         case "AUTH/SET-CAPTCHA": {
             return {...state, captchaUrl: action.captcha}
@@ -66,10 +65,10 @@ export const loginUserTC = (data: FormDataType) => async (dispatch: AppThunkDisp
     try {
         const response = await authApi.loginUser(data)
         if (response.data.resultCode === 0) {
-            dispatch(getAuthUserData())
+            await dispatch(getAuthUserData())
         } else {
             if (response.data.resultCode === 10) {
-                dispatch(getCaptchaUrlTC())
+                await dispatch(getCaptchaUrlTC())
             }
             dispatch(stopSubmit("login", {_error: response.data.messages[0]}))
         }

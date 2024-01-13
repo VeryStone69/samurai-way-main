@@ -46,7 +46,7 @@ export type DispatchACType = ProfileReduserType | DialogsReducerType
 //             newPostsText: "Your text"
 //
 //         },
-//         dialogsPage: {
+//         DialogsPageType: {
 //             dialogs: [
 //                 {id: v1(), name: "Alex"},
 //                 {id: v1(), name: "Dima"},

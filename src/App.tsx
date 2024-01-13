@@ -12,7 +12,7 @@ import {useDispatch} from "react-redux";
 import {initializeAppTC} from "./redux/app-reducer";
 import {UsersLoader} from "./components/common/UsersLoader";
 import {initializedSelector} from "./app-selectors";
-import {DialogsPage} from "./redux/diallogs-reducer";
+import {DialogsPageType} from "./redux/diallogs-reducer";
 
 
 export type DialogsDataType = {
@@ -35,7 +35,7 @@ export type ProfileDataType = {
 
 export type StateType = {
     profile: ProfileDataType
-    dialogsPage: DialogsPage
+    DialogsPageType: DialogsPageType
     friends: FriendsDataType[]
 }
 

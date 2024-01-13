@@ -1,8 +1,8 @@
-import {addNewMessageAC, DialogsPage, dialogsReducer} from "../redux/diallogs-reducer";
+import {addNewMessageAC, DialogsPageType, dialogsReducer} from "../redux/diallogs-reducer";
 
 
 describe('dialogsReducer', () => {
-    let startState: DialogsPage;
+    let startState: DialogsPageType;
 
     beforeEach(() => {
         startState = {

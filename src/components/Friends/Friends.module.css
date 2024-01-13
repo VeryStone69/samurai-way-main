@@ -31,9 +31,11 @@
 }
 
 .friendAvatar {
-    border: 1px solid #fff;
-    height: 40px;
-    width: 40px;
-    background-color: #7a7d7f;
-    border-radius: 50%;
+    /*border: 1px solid #fff;*/
+    /*height: 40px;*/
+    /*width: 40px;*/
+    /*background-color: #7a7d7f;*/
+    /*border-radius: 50%;*/
+    height: 50px;
+    border-radius: 30px;
 }

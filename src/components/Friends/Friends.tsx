@@ -1,13 +1,25 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import s from "./Friends.module.css"
-import {useAppSelector} from "../../redux/redux-store";
+import {AppRootStateType, useAppSelector} from "../../redux/redux-store";
 import {friendsSelector} from "./selectors/friends-selectors";
+import {getUsersTC} from "../../redux/users-reducer";
+import {getFriendsTC} from "../../redux/friends-reducer";
+import {useDispatch} from "react-redux";
+import {pageSizeSelector} from "../Users/selectors/usersContainer-selector";
+import {noAvatarLink} from "./img/noAvatar";
+import {NavLink} from "react-router-dom";
 
 
 export const Friends = () => {
     const [collapsed, setCollapsed] = useState<boolean>(false)
+    // const friends = useAppSelector(friendsSelector)
+    const pageSize = useAppSelector(pageSizeSelector);
+    const friendsSelector = ((state:AppRootStateType) => state.friends.items);
     const friends = useAppSelector(friendsSelector)
-
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getFriendsTC(pageSize))
+    }, [])
     const onClickHandler = () => {
         setCollapsed(!collapsed)
     }
@@ -18,8 +30,10 @@ export const Friends = () => {
                 {friends.map(friend => {
                     return (
                         <li key={friend.id}>
-                            <img src={friend.img} className={s.friendAvatar} alt={"user avatar"}/>
-                            <a href="#">{friend.name}</a>
+                            <NavLink to={`/profile/${friend.id}`}>
+                            <img className={s.friendAvatar} src={friend.photos.small !== null ? friend.photos.small : noAvatarLink} alt={"friend photo"}/>
+                            <div>{friend.name}</div>
+                            </NavLink>
                         </li>
                     )
                 })}
