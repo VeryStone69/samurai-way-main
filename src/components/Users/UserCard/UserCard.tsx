@@ -18,6 +18,9 @@ export const UserCard = React.memo((props: PropsType) => {
     const unFollowHandler = (userId: number) => {
         dispatch(unFollowTC(userId))
     }
+    function truncateString(str:string) {
+        return str.length > 35?str.substring(0, 35) + '...':str
+    }
     return <>
             <span className={s.container_img}>
                     <div>
@@ -41,7 +44,7 @@ export const UserCard = React.memo((props: PropsType) => {
             <span className={s.nameLocation_Container}>
                     <span className={s.userContainer_name}>
                         <div>{props.userInfo.name}</div>
-                        <div>{props.userInfo.status}</div>
+                        <div>{props.userInfo.status !==null?truncateString(props.userInfo.status):""}</div>
                     </span>
                     <span className={s.userContainer_location}>
                         <div>No country</div>
