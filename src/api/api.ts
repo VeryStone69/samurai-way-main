@@ -11,7 +11,7 @@ export const instance = axios.create({
 
 export const usersAPI = {
     getUsers(numberPage: number, pageSize: number) {
-        return instance.get(`users?page=${numberPage}&count=${pageSize}&friend=${true}`)
+        return instance.get(`users?page=${numberPage}&count=${pageSize}`)
             .then(res => res.data)
     },
 

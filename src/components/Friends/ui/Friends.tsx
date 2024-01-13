@@ -1,20 +1,17 @@
 import React, {useEffect, useState} from "react";
 import s from "./Friends.module.css"
-import {AppRootStateType, useAppSelector} from "../../redux/redux-store";
-import {friendsSelector} from "./selectors/friends-selectors";
-import {getUsersTC} from "../../redux/users-reducer";
-import {getFriendsTC} from "../../redux/friends-reducer";
+import {useAppSelector} from "../../../redux/redux-store";
+import {friendsSelector} from "../selectors/friends-selectors";
+import {getFriendsTC} from "../../../redux/friends-reducer";
 import {useDispatch} from "react-redux";
-import {pageSizeSelector} from "../Users/selectors/usersContainer-selector";
-import {noAvatarLink} from "./img/noAvatar";
+import {pageSizeSelector} from "../../Users/selectors/usersContainer-selector";
 import {NavLink} from "react-router-dom";
+import noAvatarImg from "../../../assets/images/noImg.webp"
 
 
 export const Friends = () => {
     const [collapsed, setCollapsed] = useState<boolean>(false)
-    // const friends = useAppSelector(friendsSelector)
     const pageSize = useAppSelector(pageSizeSelector);
-    const friendsSelector = ((state:AppRootStateType) => state.friends.items);
     const friends = useAppSelector(friendsSelector)
     const dispatch = useDispatch();
     useEffect(() => {
@@ -31,8 +28,10 @@ export const Friends = () => {
                     return (
                         <li key={friend.id}>
                             <NavLink to={`/profile/${friend.id}`}>
-                            <img className={s.friendAvatar} src={friend.photos.small !== null ? friend.photos.small : noAvatarLink} alt={"friend photo"}/>
-                            <div>{friend.name}</div>
+                                <img className={s.friendAvatar}
+                                     src={friend.photos.small !== null ? friend.photos.small : noAvatarImg}
+                                     alt={"friend photo"}/>
+                                <div>{friend.name}</div>
                             </NavLink>
                         </li>
                     )
