@@ -1,0 +1,32 @@
+.buttonCategoryContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 10px;
+    margin: 20px 0;
+}
+.categorySelected {
+    margin: 0 5px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #d95789;
+    color: white;
+    border: 0;
+    font-size: large;
+}
+
+.buttonChangeCategory{
+    margin: 0 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    background-color: transparent;
+    border: 0;
+
+}
+.buttonChangeCategory:hover{
+    background-color: #d95789;
+    color: white;
+}
