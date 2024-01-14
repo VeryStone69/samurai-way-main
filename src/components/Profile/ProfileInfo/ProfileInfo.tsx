@@ -1,7 +1,6 @@
-import React, {ChangeEvent, useEffect, useState} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import s from './ProfileInfo.module.css'
 import {
-    ProfileDataType,
     saveProfilePhotoTC,
     TasksStateType,
     updateProfileStatusTC

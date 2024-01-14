@@ -1,7 +1,6 @@
 import {PostDataType} from "../App";
 import {v1} from "uuid";
-import veryStone from "../assets/images/veryStone.jpg"
-import {AnyAction, Dispatch} from "redux";
+import {Dispatch} from "redux";
 import {profileApi, SaveUserProfileChangesType} from "../api/api";
 import {AppRootStateType, AppThunkDispatch} from "./redux-store";
 import {getProfileDataTC} from "./users-reducer";
