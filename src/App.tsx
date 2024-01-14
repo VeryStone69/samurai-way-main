@@ -13,6 +13,7 @@ import {initializeAppTC} from "./redux/app-reducer";
 import {UsersLoader} from "./components/common/UsersLoader";
 import {initializedSelector} from "./app-selectors";
 import {DialogsPageType} from "./redux/diallogs-reducer";
+import {News} from "./components/News/ui/News";
 
 
 export type DialogsDataType = {
@@ -60,7 +61,7 @@ export const App = () => {
                     <Route path="/dialogs/*" element={<DialogsContainer/>}/>
                     <Route path="/users/*" element={<UsersContainer/>}/>
                     <Route path="/login/*" element={<Login/>}/>
-                    {/*<Route path="/news" element={<News/>}/>*/}
+                    <Route path="/news" element={<News/>}/>
                     {/*<Route path="/music" element={<Music/>}/>*/}
                     {/*<Route path="/settings" element={<Settings/>}/>*/}
                 </Routes>
