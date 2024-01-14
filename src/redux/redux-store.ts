@@ -8,24 +8,23 @@ import {reducer as formReducer} from "redux-form";
 import thunk, {ThunkDispatch} from "redux-thunk";
 import {appReducer} from "./app-reducer";
 import {TypedUseSelectorHook, useSelector} from "react-redux";
-
-
+import {newsReducer} from "../components/News/model/news-reducer";
 
 
 const rootReducer = combineReducers({
-    app:appReducer,
+    app: appReducer,
     profile: profileReducer,
     dialogs: dialogsReducer,
     friends: friendsReducer,
     usersPage: usersReducer,
-    auth:authReducer,
-    form:formReducer,
-
+    auth: authReducer,
+    form: formReducer,
+    news: newsReducer
 })
 
 export type AppRootStateType = ReturnType<typeof rootReducer>
 export type AppThunkDispatch = ThunkDispatch<AppRootStateType, any, AnyAction>
-export const store = createStore(rootReducer,applyMiddleware(thunk));
+export const store = createStore(rootReducer, applyMiddleware(thunk));
 export const useAppSelector: TypedUseSelectorHook<AppRootStateType> = useSelector
 
 export type AppDispatch = ThunkDispatch<AppRootStateType, unknown, AnyAction>
