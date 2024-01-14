@@ -7,23 +7,8 @@ const instance = axios.create({
 )
 
 export const NewsApi = {
-    getNews<ResponseType>() {
-        return instance.get(`&category=technology&language=en&apiKey=${NewsApiKey}`)
+    getNews(category:string) {
+        return instance.get(`&category=${category}&language=en&apiKey=${NewsApiKey}`)
     }}
 
-export type ResponseType = {
-    status?: "ok"|"error"
-    code?: string
-    message?:string
-    sources?: SourcesType[] ;
-}
 
-type SourcesType = {
-    id: string;
-    name: string;
-    description: string;
-    url: string;
-    category: string;
-    language: string;
-    country: string;
-}

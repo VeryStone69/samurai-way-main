@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {useDispatch} from "react-redux";
 import {useAppSelector} from "../../redux/redux-store";
-import {getUsersTC,} from "../../redux/users-reducer";
+import {getUsersTC} from "../../redux/users-reducer";
 import UsersClassComponent from "./UsersClassComponent";
 import {UsersLoader} from "../common/UsersLoader";
 import {
