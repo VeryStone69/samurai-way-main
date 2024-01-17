@@ -1,6 +1,6 @@
 import React from "react";
 import s from "./Header.module.css";
-import {NavLink} from "react-router-dom";
+import {Navigate, NavLink} from "react-router-dom";
 
 type PropsType = {
     login: string | null
@@ -10,7 +10,8 @@ type PropsType = {
 
 export const Header = (props:PropsType) => {
     const onclickHandler = () => {
-        props.callback()
+        props.callback();
+
     }
     return (
         <>

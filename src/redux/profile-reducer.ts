@@ -38,7 +38,7 @@ export interface RootObjectPhotos {
 }
 
 
-export type ProfileReduserType = ReturnType<typeof addPostAC>
+export type ProfileReducerType = ReturnType<typeof addPostAC>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setStatusAC>
     | ReturnType<typeof savePhotoSuccess>
@@ -64,21 +64,21 @@ const initialState: TasksStateType = {
         {id: v1(), message: "Yo6", likesCount: 3},],
     newPostsText: "Your text",
     profile: {
-        aboutMe: "I live this life",
+        aboutMe: "About me",
         contacts: {
-            facebook: "https://facebook.com",
-            website: "https://google.com",
-            vk: "https://vk.com",
-            twitter: "https://twitter.com",
-            instagram: "https://www.instagram.com",
-            youtube: "https://www.youtube.com",
-            github: "github.com",
-            mainLink: ""
+            facebook: null,
+            website: null,
+            vk: null,
+            twitter: null,
+            instagram: null,
+            youtube: null,
+            github: null,
+            mainLink: null
         },
         lookingForAJob: true,
         lookingForAJobDescription: "I'm looking for a job for fun. Slavery is not offered.",
         fullName: "Guest",
-        userId: 29772,
+        userId: 1079,
         photos: {
             small: "",
             large: ""
@@ -88,7 +88,7 @@ const initialState: TasksStateType = {
 }
 
 
-export const profileReducer = (state: TasksStateType = initialState, action: ProfileReduserType): TasksStateType => {
+export const profileReducer = (state: TasksStateType = initialState, action: ProfileReducerType): TasksStateType => {
     switch (action.type) {
         case "PROFILE/ADD-POST": {
             let newMessage: PostDataType = {id: v1(), message: action.newPost, likesCount: 0};

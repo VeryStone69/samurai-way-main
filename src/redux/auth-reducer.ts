@@ -1,13 +1,12 @@
 import {authApi, securityApi} from "../api/api";
 import {FormDataType} from "../components/Login/Login";
-import {getAuthUserData} from "./users-reducer";
+import {getAuthUserData, getProfileDataTC} from "./users-reducer";
 import {AppThunkDispatch} from "./redux-store";
 import {stopSubmit} from "redux-form";
 
 type AuthReducerType = ReturnType<typeof setUserDataAC> | ReturnType<typeof getCaptchaUrlAC> | ReturnType<typeof clearUserDataAC>
 export type AuthDataType = {
     data: DataType
-    isFetching?: boolean
     isAuth: boolean
     captchaUrl: string | null
 }
@@ -71,7 +70,9 @@ export const loginUserTC = (data: FormDataType) => async (dispatch: AppThunkDisp
     try {
         const response = await authApi.loginUser(data)
         if (response.data.resultCode === 0) {
+            localStorage.setItem('userId', String(response.data.data.userId));
             await dispatch(getAuthUserData())
+            await dispatch(getProfileDataTC(response.data.data.userId))
         } else {
             if (response.data.resultCode === 10) {
                 await dispatch(getCaptchaUrlTC())
@@ -105,11 +106,11 @@ export const logoutUserTC = () => async (dispatch: AppThunkDispatch) => {
                         login: null
 
                     },
-                    isFetching: false,
                     isAuth: false,
                     captchaUrl: null
                 }))
             })
+        localStorage.removeItem("userId")
     } catch (e) {
         alert(e)
     }

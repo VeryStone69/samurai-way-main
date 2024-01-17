@@ -1,6 +1,6 @@
 import {v1} from "uuid";
 import {StateType} from "../App";
-import {profileReducer, ProfileReduserType} from "./profile-reducer";
+import {profileReducer, ProfileReducerType} from "./profile-reducer";
 import {dialogsReducer, DialogsReducerType} from "./diallogs-reducer";
 
 export type StoreType = {
@@ -14,7 +14,7 @@ export type StoreType = {
     subscribe: (observe: () => void) => void
     dispatch: (action: DispatchACType) => void
 }
-export type DispatchACType = ProfileReduserType | DialogsReducerType
+export type DispatchACType = ProfileReducerType | DialogsReducerType
 
 // import {v1} from "uuid";
 // import {StateType} from "../App";
