@@ -4,9 +4,8 @@ import {getAuthUserData} from "./users-reducer";
 import {AppThunkDispatch} from "./redux-store";
 import {stopSubmit} from "redux-form";
 
-type AuthReducerType = ReturnType<typeof setUserDataAC> | ReturnType<typeof getCaptchaUrlAC>
+type AuthReducerType = ReturnType<typeof setUserDataAC> | ReturnType<typeof getCaptchaUrlAC> | ReturnType<typeof clearUserDataAC>
 export type AuthDataType = {
-    messages?: string[],
     data: DataType
     isFetching?: boolean
     isAuth: boolean
@@ -19,14 +18,12 @@ type DataType = {
 }
 
 const initialState: AuthDataType = {
-    messages: [],
     data: {
-        id: 2,
+        id: null,
         email: null,
         login: null
 
     },
-    isFetching: true,
     isAuth: false,
     captchaUrl: null
 }
@@ -35,17 +32,21 @@ const initialState: AuthDataType = {
 export const authReducer = (state: AuthDataType = initialState, action: AuthReducerType): AuthDataType => {
     switch (action.type) {
         case "AUTH/SET-USER-DATA": {
-            return {...state, ...action.data, isFetching: false, isAuth: action.isAuth}
+            return {...state, ...action.data,
+                isAuth: action.isAuth}
         }
         case "AUTH/SET-CAPTCHA": {
             return {...state, captchaUrl: action.captcha}
+        }
+        case "AUTH/CLEAR-USER-DATA":{
+            return {...action.data}
         }
         default :
             return {...state}
     }
 }
 
-export const setUserDataAC = (data: AuthDataType, isAuth: boolean) => {
+export const setUserDataAC = (data: AuthDataType,isAuth:boolean) => {
     return {
         type: "AUTH/SET-USER-DATA" as const,
         data,
@@ -57,6 +58,13 @@ export const getCaptchaUrlAC = (captcha: string | null) => {
         type: "AUTH/SET-CAPTCHA" as const,
         captcha
     }
+}
+
+export const clearUserDataAC=(data: AuthDataType)=>{
+    return{
+        type: "AUTH/CLEAR-USER-DATA",
+        data
+    } as const
 }
 
 export const loginUserTC = (data: FormDataType) => async (dispatch: AppThunkDispatch) => {
@@ -88,14 +96,20 @@ export const getCaptchaUrlTC = () => async (dispatch: AppThunkDispatch) => {
 
 export const logoutUserTC = () => async (dispatch: AppThunkDispatch) => {
     try {
-        const response = await authApi.logout()
-        if (response.status === 0) {
-            dispatch(setUserDataAC({
-                data: {id: null, email: null, login: null},
-                isAuth: false,
-                captchaUrl: null
-            }, false))
-        }
+         await authApi.logout()
+            .then(()=>{
+                dispatch(clearUserDataAC({
+                    data: {
+                        id: null,
+                        email: null,
+                        login: null
+
+                    },
+                    isFetching: false,
+                    isAuth: false,
+                    captchaUrl: null
+                }))
+            })
     } catch (e) {
         alert(e)
     }

@@ -6,13 +6,11 @@ describe('authReducer', () => {
 
     beforeEach(() => {
         startState = {
-            messages: [],
             data: {
                 id: null,
                 email: null,
                 login: null
             },
-            isFetching: true,
             isAuth: false,
             captchaUrl:null
         };
@@ -27,7 +25,6 @@ describe('authReducer', () => {
                 email: "test@example.com",
                 login: "testUser"
             },
-            isFetching: false,
             isAuth: true,
             captchaUrl: null
         };
