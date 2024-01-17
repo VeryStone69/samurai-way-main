@@ -2,15 +2,15 @@ import React from "react";
 import s from "./Header.module.css";
 import {NavLink} from "react-router-dom";
 
-type HeaderPropsType = {
+type PropsType = {
     login: string | null
     isAuth: boolean
-    logoutCallback: () => void
+    callback: () => void
 }
 
-export const Header: React.FC<HeaderPropsType> = ({...props}) => {
+export const Header = (props:PropsType) => {
     const onclickHandler = () => {
-        props.logoutCallback()
+        props.callback()
     }
     return (
         <>

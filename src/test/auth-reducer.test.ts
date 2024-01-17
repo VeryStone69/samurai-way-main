@@ -6,7 +6,6 @@ describe('authReducer', () => {
 
     beforeEach(() => {
         startState = {
-            resultCode: 0,
             messages: [],
             data: {
                 id: null,

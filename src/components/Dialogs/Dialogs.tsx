@@ -7,6 +7,7 @@ import {FormControl} from "../common/FormsControls/FormsControls";
 import {maxLength50, required} from "../../utils/Validators/validators";
 import {DialogsPageType} from "../../redux/diallogs-reducer";
 
+
 type DialogsPropsType = {
     dialogs: DialogsPageType
     addNewMessage: (message: string) => void
@@ -16,7 +17,7 @@ export type FormDialogType = {
 }
 
 
-export const Dialogs: React.FC<DialogsPropsType> = (props) => {
+export const Dialogs = React.memo((props:DialogsPropsType) => {
     const {dialogs, addNewMessage} = props
 
     let dialogsElement = dialogs.dialogs.map(d => {
@@ -43,10 +44,11 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
             <div className={s.dialog_addMessage_container}>
                 <AddMessageFormRedux onSubmit={onSubmit}/>
             </div>
+
         </>
 
     )
-}
+})
 
 const AddMessageForm: React.FC<InjectedFormProps<FormDialogType>> = (props) => {
     return (

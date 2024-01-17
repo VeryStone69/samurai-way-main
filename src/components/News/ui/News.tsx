@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch} from "react-redux";
 import {getNewsTC, SourcesType} from "../model/news-reducer";
-import {NewsCard} from "../NewsCard/ui/NewsCard";
+import {NewsCard} from "./NewsCard/ui/NewsCard";
 import {useAppSelector} from "../../../redux/redux-store";
 import {fetchSelector} from "../../Users/selectors/usersContainer-selector";
 import {UsersLoader} from "../../common/UsersLoader";

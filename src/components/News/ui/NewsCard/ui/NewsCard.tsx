@@ -1,6 +1,6 @@
 import React from 'react';
 import s from "./NewsCard.module.css"
-import {SourcesType} from "../../model/news-reducer";
+import {SourcesType} from "../../../model/news-reducer";
 type PropsType = {
     data: SourcesType
 }

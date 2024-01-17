@@ -6,7 +6,6 @@ import {stopSubmit} from "redux-form";
 
 type AuthReducerType = ReturnType<typeof setUserDataAC> | ReturnType<typeof getCaptchaUrlAC>
 export type AuthDataType = {
-    resultCode?: number
     messages?: string[],
     data: DataType
     isFetching?: boolean
@@ -20,7 +19,6 @@ type DataType = {
 }
 
 const initialState: AuthDataType = {
-    resultCode: 0,
     messages: [],
     data: {
         id: 2,
@@ -97,8 +95,6 @@ export const logoutUserTC = () => async (dispatch: AppThunkDispatch) => {
                 isAuth: false,
                 captchaUrl: null
             }, false))
-        } else {
-            console.log(response.status)
         }
     } catch (e) {
         alert(e)
