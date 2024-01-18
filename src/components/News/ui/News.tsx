@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch} from "react-redux";
-import {getNewsTC, SourcesType} from "../model/news-reducer";
+import {CategoryType, getNewsTC} from "../model/news-reducer";
 import {NewsCard} from "./NewsCard/ui/NewsCard";
 import {useAppSelector} from "../../../redux/redux-store";
 import {fetchSelector} from "../../Users/selectors/usersContainer-selector";
@@ -15,10 +15,10 @@ export const News = () => {
     const fetch = useAppSelector(fetchSelector);
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(getNewsTC(currentCategory))
+        dispatch(getNewsTC())
     }, []);
     const changeCategoryHandler = (name: string) => {
-        dispatch(getNewsTC(name))
+        dispatch(getNewsTC())
         setCurrentCategory(name)
     }
 
@@ -35,8 +35,8 @@ export const News = () => {
                                 onClick={() => changeCategoryHandler(nameCategory)}>{nameCategory}</button>
                         })}
                     </div>
-                    {news?.map((el: SourcesType) => {
-                        return <div key={el.id}><NewsCard data={el}/></div>
+                    {news?.map((el: CategoryType) => {
+                        return <div key={el.og}><NewsCard data={el}/></div>
                     })}
                 </>
             }
