@@ -1,21 +1,22 @@
-
 .newsCardContainer {
     display: flex;
-    border: 1px solid #696666;
+    flex-direction: column;
+    border: 1px solid #c5c5c5;
     border-radius: 8px;
     overflow: hidden;
     padding: 10px;
-    margin: 5px;
+    margin: 10px;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+
+    /* Эффект при наведении */
+    &:hover {
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+        transform: translateY(-5px);
+    }
 }
 
 .contentContainer {
     padding: 10px;
-
-}
-
-.category {
-    font-size: 0.8rem;
-    color: #666;
 }
 
 .title {
@@ -23,6 +24,14 @@
     font-weight: bold;
     color: #333;
     text-decoration: none;
+
+    margin-bottom: 10px;
+    line-height: 1.4;
+
+    &:hover {
+        color: #1a73e8;
+        text-decoration: underline;
+    }
 }
 
 .description {
@@ -31,12 +40,33 @@
     margin-top: 5px;
 }
 
+.newsImage {
+    width: 100%;
+    max-height: 250px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
 .metaInfo {
     font-size: 0.8rem;
     color: #777;
     margin-top: 10px;
 }
 
-.newsImage{
-border-radius: 5px;
+@media (max-width: 768px) {
+    .title {
+        font-size: 1rem;
+    }
+
+    .description {
+        font-size: 0.8rem;
+    }
+
+    .metaInfo {
+        font-size: 0.7rem;
+    }
 }
+
+
+

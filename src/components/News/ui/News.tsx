@@ -8,33 +8,36 @@ import {UsersLoader} from "../../common/UsersLoader";
 import {newsSelector} from "../model/selectors/news-selector";
 import s from "./News.module.css"
 
+type CategoryNewsType = "Technology" | "Business" | "Health" | "Science" | "World";
+
 export const News = () => {
-    const categoryNews = ["Technology", "Business", "Health", "Science"];
+    const categoryNews: CategoryNewsType[] = ["Technology", "Business", "Health", "Science", "World"];
     const [currentCategory, setCurrentCategory] = useState(categoryNews[0])
-    const news = useAppSelector(newsSelector)
+    const news = useAppSelector(newsSelector)[currentCategory]
     const fetch = useAppSelector(fetchSelector);
     const dispatch = useDispatch();
+
     useEffect(() => {
         dispatch(getNewsTC())
     }, []);
-    const changeCategoryHandler = (name: string) => {
+    const changeCategoryHandler = (name: CategoryNewsType) => {
         dispatch(getNewsTC())
         setCurrentCategory(name)
     }
-
+console.log(news)
     return (
         <>
+            <div className={s.buttonCategoryContainer}>
+                {categoryNews.map((nameCategory: CategoryNewsType) => {
+                    return <button
+                        className={currentCategory === nameCategory ? s.categorySelected : s.buttonChangeCategory}
+                        key={nameCategory}
+                        onClick={() => changeCategoryHandler(nameCategory)}>{nameCategory}</button>
+                })}
+            </div>
             {fetch.isFetching
                 ? <UsersLoader/>
                 : <>
-                    <div className={s.buttonCategoryContainer}>
-                        {categoryNews.map((nameCategory: string) => {
-                            return <button
-                                className={currentCategory === nameCategory ? s.categorySelected : s.buttonChangeCategory}
-                                key={nameCategory}
-                                onClick={() => changeCategoryHandler(nameCategory)}>{nameCategory}</button>
-                        })}
-                    </div>
                     {news?.map((el: CategoryType) => {
                         return <div key={el.og}><NewsCard data={el}/></div>
                     })}
