@@ -14,7 +14,7 @@ export const News = () => {
     const categoryNews: CategoryNewsType[] = ["Technology", "Business", "Health", "Science", "World"];
     const [currentCategory, setCurrentCategory] = useState(categoryNews[0])
     const news = useAppSelector(newsSelector)[currentCategory]
-    const fetch = useAppSelector(fetchSelector);
+    const isFetching = useAppSelector(fetchSelector);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -24,7 +24,6 @@ export const News = () => {
         dispatch(getNewsTC())
         setCurrentCategory(name)
     }
-console.log(news)
     return (
         <>
             <div className={s.buttonCategoryContainer}>
@@ -35,7 +34,7 @@ console.log(news)
                         onClick={() => changeCategoryHandler(nameCategory)}>{nameCategory}</button>
                 })}
             </div>
-            {fetch.isFetching
+            {isFetching
                 ? <UsersLoader/>
                 : <>
                     {news?.map((el: CategoryType) => {
