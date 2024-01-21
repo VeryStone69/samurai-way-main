@@ -1,7 +1,7 @@
 .app-wrapper {
     display: grid;
     width: 80%;
-    min-height: 90vh;
+    min-height: 100vh;
     margin: 0 auto;
     grid-template-areas:
             "header header"
