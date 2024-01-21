@@ -13,16 +13,18 @@ import {profileStatusSelector} from "./selectors/profileInfo-selectors";
 import {ProfileStatusWithHooks} from "./ProfileStatus/ProfileStatusWithHooks";
 import {ProfileData} from "./ProfileData/ProfileData";
 import {ProfileDataForm} from "./ProfileData/ProfileDataForm/ProfileDataForm";
-
 type PropsType = {
     profile: TasksStateType
     isOwner:boolean
 }
+
 export const ProfileInfo= React.memo((props:PropsType) => {
     const [editMode, setEditMode] = useState<boolean>(false)
+    const pictureForNoAvatar = "https://cdn4.iconfinder.com/data/icons/music-ui-solid-24px/24/user_account_profile-2-256.png"
     const profileData = props.profile.profile
     const profileStatus = useAppSelector(profileStatusSelector)
     const dispatch=useDispatch()
+
     const statusHandler = (status:string)=>{
         dispatch(updateProfileStatusTC(status))
     }
@@ -43,7 +45,7 @@ export const ProfileInfo= React.memo((props:PropsType) => {
                          alt="content picture"/>
 
                     <div className={s.descriptionBlock}>
-                        <img className={s.profileLargePhoto} alt={"user photo"} src={profileData.photos.large}/>
+                        <img className={s.profileLargePhoto} alt={"user photo"} src={profileData.photos.large||pictureForNoAvatar}/>
                         {props.isOwner && <input className={s.inputFileContainer} type={"file"} onChange={photoSelectedHandler}/>}
                         {editMode
                             ? <ProfileDataForm profileData={profileData} goToEditMode={goToEditMode}/>
