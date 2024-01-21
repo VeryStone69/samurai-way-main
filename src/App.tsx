@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import './App.css';
 import {Navbar} from "./components/Navbar/Navbar";
-import {Route, Routes} from "react-router-dom";
+import {Navigate, Route, Routes} from "react-router-dom";
 import {FriendsDataType} from "./components/Friends/model/friends-reducer";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {UsersContainer} from "./components/Users/UsersContainer";
@@ -15,6 +15,7 @@ import {initializedSelector} from "./app-selectors";
 import {DialogsPageType} from "./redux/diallogs-reducer";
 import {News} from "./components/News/ui/News";
 import {Friends} from "./components/Friends/ui/Friends";
+import {useAppSelector} from "./redux/redux-store";
 
 
 export type DialogsDataType = {
@@ -44,32 +45,30 @@ export type StateType = {
 
 export const App = () => {
     const initialized = initializedSelector
+    const isAuth = useAppSelector(state => state.auth.isAuth)
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(initializeAppTC())
     }, [])
     if (!initialized) return <UsersLoader/>
-    else
-    return (
+    else return (
         <div className="app-wrapper">
-            {/*<Header/>*/}
             <HeaderContainer/>
             <Navbar/>
             <div className="app-wrapper-content">
                 <Routes>
+                    <Route path="/" element={isAuth ? <Navigate to="/profile" /> : <Navigate to="/login" />}/>
+                    <Route path="/login/*" element={<Login/>}/>
                     <Route path="/profile/:userId?" element={<ProfileContainer/>}/>
-                    {/*<Route path="/dialogs/*" element={<DialogsContainer/>}/>*/}
                     <Route path="/dialogs/*" element={<DialogsContainer/>}/>
                     <Route path="/users/*" element={<UsersContainer/>}/>
-                    <Route path="/login/*" element={<Login/>}/>
                     <Route path="/news" element={<News/>}/>
                     <Route path="/friends" element={<Friends/>}/>
-                    {/*<Route path="/music" element={<Music/>}/>*/}
-                    {/*<Route path="/settings" element={<Settings/>}/>*/}
                 </Routes>
             </div>
         </div>
 
 
     )
+
 }
