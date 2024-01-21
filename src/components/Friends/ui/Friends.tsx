@@ -41,24 +41,27 @@
 //     )
 // }
 
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import {AppRootStateType, useAppSelector} from "../../../redux/redux-store";
 import {friendsSelector} from "../selectors/friends-selectors";
 import {getFriendsTC} from "../model/friends-reducer";
 import {useDispatch} from "react-redux";
 import {UsersLoader} from "../../common/UsersLoader";
 import Users from "../../Users/UsersClassComponent";
+import {Navigate} from "react-router-dom";
 
 
 export const Friends = () => {
     const pageSize = useAppSelector(((state:AppRootStateType) => state.friends));
     const isFetching = useAppSelector(((state:AppRootStateType) => state.friends.isFetching));
+    const isAuth = useAppSelector(((state:AppRootStateType) => state.auth.isAuth));
     const friends = useAppSelector(friendsSelector)
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getFriendsTC(pageSize))
     }, [])
-    return (
+
+    return  isAuth ?
         <>
             {isFetching ?
                 <UsersLoader/> :
@@ -70,7 +73,7 @@ export const Friends = () => {
                 />
             }
 
-        </>
-    )
+        </> : <Navigate to={"/login"}/>
+
 
 }
