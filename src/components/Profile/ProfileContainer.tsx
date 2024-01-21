@@ -15,7 +15,6 @@ export const ProfileContainer = () => {
 
     const isAuth = useAppSelector(isAuthSelector)
     const dispatch = useDispatch()
- console.log(!userId)
     useEffect(() => {
         if (!userId) {
             userId = userIdFromLocal

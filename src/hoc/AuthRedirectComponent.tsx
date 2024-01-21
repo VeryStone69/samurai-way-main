@@ -1,6 +1,6 @@
 import React, {ComponentType, FunctionComponent} from "react";
 import {Navigate} from "react-router-dom";
-// import usersClassComponent from "../components/Users/UsersClassComponent";
+// import Users from "../components/Users/Users";
 import {useSelector} from "react-redux";
 import {AppRootStateType} from "../redux/redux-store";
 import {Profile} from "../components/Profile/Profile";
