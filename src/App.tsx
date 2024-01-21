@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import './App.css';
 import {Navbar} from "./components/Navbar/Navbar";
 import {Route, Routes} from "react-router-dom";
-import {FriendsDataType} from "./redux/friends-reducer";
+import {FriendsDataType} from "./components/Friends/model/friends-reducer";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {UsersContainer} from "./components/Users/UsersContainer";
 import {HeaderContainer} from "./components/Header/HeaderContainer";

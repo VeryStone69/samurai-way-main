@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import s from "./Friends.module.css"
 import {useAppSelector} from "../../../redux/redux-store";
 import {friendsSelector} from "../selectors/friends-selectors";
-import {getFriendsTC} from "../../../redux/friends-reducer";
+import {getFriendsTC} from "../model/friends-reducer";
 import {useDispatch} from "react-redux";
 import {pageSizeSelector} from "../../Users/selectors/usersContainer-selector";
 import {NavLink} from "react-router-dom";

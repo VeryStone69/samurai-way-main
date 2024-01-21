@@ -1,7 +1,7 @@
 import {AnyAction, applyMiddleware, combineReducers, createStore} from "redux";
 import {profileReducer} from "./profile-reducer";
 import {dialogsReducer} from "./diallogs-reducer";
-import {friendsReducer} from "./friends-reducer";
+import {friendsReducer} from "../components/Friends/model/friends-reducer";
 import {usersReducer} from "./users-reducer";
 import {authReducer} from "./auth-reducer";
 import {reducer as formReducer} from "redux-form";

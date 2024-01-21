@@ -1,6 +1,6 @@
 import {Dispatch} from "redux";
-import {setCurrentPageAC, setFetchingAC,UsersDataType} from "./users-reducer";
-import {friendsApi} from "../components/Friends/api/friends-api";
+import {setCurrentPageAC, setFetchingAC,UsersDataType} from "../../../redux/users-reducer";
+import {friendsApi} from "../api/friends-api";
 
 export type FriendsDataType = {
     id: string
