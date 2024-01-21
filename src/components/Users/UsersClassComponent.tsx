@@ -12,21 +12,18 @@ type PropsType = {
     currentPage: number
 }
 
-class UsersClassComponent extends React.Component<PropsType> {
+function Users(props: PropsType) {
+    return <div className={s.main_container_users}>
+        <Paginator totalItemCount={props.totalUsersCount}
+                   pageSize={props.pageSize}
+                   currentPage={props.currentPage}/>
+        {props.users.map((el: UsersType) => {
+            return <div key={el.id} className={s.userContainer}>
+                <UserCard userInfo={el}/>
+            </div>
 
-    render() {
-        return <div className={s.main_container_users}>
-            <Paginator totalItemCount={this.props.totalUsersCount}
-                       pageSize={this.props.pageSize}
-                       currentPage={this.props.currentPage}/>
-            {this.props.users.map((el: UsersType) => {
-                return <div key={el.id} className={s.userContainer}>
-                    <UserCard userInfo={el}/>
-                </div>
-
-            })}
-        </div>
-    }
+        })}
+    </div>
 }
 
-export default UsersClassComponent;
+export default Users;
