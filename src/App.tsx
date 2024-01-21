@@ -14,6 +14,7 @@ import {UsersLoader} from "./components/common/UsersLoader";
 import {initializedSelector} from "./app-selectors";
 import {DialogsPageType} from "./redux/diallogs-reducer";
 import {News} from "./components/News/ui/News";
+import {Friends} from "./components/Friends/ui/Friends";
 
 
 export type DialogsDataType = {
@@ -62,6 +63,7 @@ export const App = () => {
                     <Route path="/users/*" element={<UsersContainer/>}/>
                     <Route path="/login/*" element={<Login/>}/>
                     <Route path="/news" element={<News/>}/>
+                    <Route path="/friends" element={<Friends/>}/>
                     {/*<Route path="/music" element={<Music/>}/>*/}
                     {/*<Route path="/settings" element={<Settings/>}/>*/}
                 </Routes>
