@@ -1,34 +1,35 @@
 import {Dispatch} from "redux";
 import {setFetchingAC} from "../../../redux/users-reducer";
 import {NewsApi} from "../api/news-api";
+import {clearUserDataAC} from "../../../redux/auth-reducer";
 
-type NewsType={
-    US:CategoryType[] | null
-    World:CategoryType[] | null
-    Business:CategoryType[] | null
-    Technology:CategoryType[] | null
-    Entertainment:CategoryType[] | null
-    Sports:CategoryType[] | null
-    Science:CategoryType[] | null
-    Health:CategoryType[] | null
+type NewsType = {
+    US: CategoryType[] | null
+    World: CategoryType[] | null
+    Business: CategoryType[] | null
+    Technology: CategoryType[] | null
+    Entertainment: CategoryType[] | null
+    Sports: CategoryType[] | null
+    Science: CategoryType[] | null
+    Health: CategoryType[] | null
 }
 
-export type CategoryType ={
+export type CategoryType = {
     link: string | null
     og: string | null
     title: string | null
 }
 
-type NewsActionType = ReturnType<typeof setNewsAC>
+type NewsActionType = ReturnType<typeof setNewsAC> | ReturnType<typeof clearUserDataAC>
 const initialState: NewsType = {
-    US:null,
-    World:null,
-    Business:null,
-    Technology:null,
-    Entertainment:null,
-    Sports:null,
-    Science:null,
-    Health:null,
+    US: null,
+    World: null,
+    Business: null,
+    Technology: null,
+    Entertainment: null,
+    Sports: null,
+    Science: null,
+    Health: null,
 }
 
 export const newsReducer = (state: NewsType = initialState, action: NewsActionType): NewsType => {
@@ -36,13 +37,17 @@ export const newsReducer = (state: NewsType = initialState, action: NewsActionTy
         case "NEWS/SET-NEWS": {
             return {...action.newsData}
         }
+        case "AUTH/CLEAR-USER-DATA": {
+            console.log("newsReducer")
+            return {...initialState}
+        }
         default: {
             return {...state}
         }
     }
 }
 
-export const setNewsAC = (newsData:NewsType ) => {
+export const setNewsAC = (newsData: NewsType) => {
     return {
         type: "NEWS/SET-NEWS",
         newsData

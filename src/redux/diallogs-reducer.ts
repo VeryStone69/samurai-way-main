@@ -1,8 +1,9 @@
 import {DialogsDataType, MessagesDataType} from "../App";
 import {v1} from "uuid";
+import {clearUserDataAC} from "./auth-reducer";
 
 
-export type DialogsReducerType = ReturnType<typeof addNewMessageAC>
+export type DialogsReducerType = ReturnType<typeof addNewMessageAC>| ReturnType<typeof clearUserDataAC>
 
 export type DialogsPageType = {
     dialogs: DialogsDataType[]
@@ -32,6 +33,10 @@ export const dialogsReducer = (state: DialogsPageType = initialState, action: Di
         case "DIALOGS/ADD-NEW-MESSAGE": {
             const newMessage = {id: v1(), message: action.newMessageBody};
             return {...state, message: [...state.message, newMessage]}
+        }
+        case "AUTH/CLEAR-USER-DATA": {
+            console.log("dialogsReducer")
+            return {...initialState}
         }
         default :
             return {...state}

@@ -12,11 +12,17 @@ type PropsType = {
 export const UserCard = React.memo((props: PropsType) => {
     const dispatch = useDispatch();
     const toggleFollowing = useAppSelector(toggleFollowingSelector);
-    const followHandler = (userId: number) => {
-        dispatch(followTC(userId))
+    const followHandler = (userId: number|null) => {
+        if(userId){
+            dispatch(followTC(userId))
+        }
+
     }
-    const unFollowHandler = (userId: number) => {
-        dispatch(unFollowTC(userId))
+    const unFollowHandler = (userId: number|null) => {
+        if(userId){
+            dispatch(unFollowTC(userId))
+        }
+
     }
     function truncateString(str:string) {
         return str.length > 35?str.substring(0, 35) + '...':str

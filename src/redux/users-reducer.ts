@@ -1,7 +1,7 @@
 import {Dispatch} from "redux";
 import {authApi, profileApi, usersAPI} from "../api/api";
 import {setUserProfile} from "./profile-reducer";
-import {setUserDataAC} from "./auth-reducer";
+import {clearUserDataAC, setUserDataAC} from "./auth-reducer";
 import {AppThunkDispatch} from "./redux-store";
 
 type UsersReducerType =
@@ -12,10 +12,11 @@ type UsersReducerType =
     | ReturnType<typeof setTotalUsersCountAC>
     | ReturnType<typeof setFetchingAC>
     | ReturnType<typeof toggleFollowingProgressAC>
+    | ReturnType<typeof clearUserDataAC>
 
 export type UsersType = {
     name: string,
-    id: number,
+    id: number | null,
     uniqueUrlName: null | string,
     photos: {
         small: null | string
@@ -36,19 +37,7 @@ export type UsersDataType = {
 }
 
 const initialState: UsersDataType = {
-    items: [
-        {
-            id: 1,
-            name: "Dmitry",
-            uniqueUrlName: null,
-            photos: {
-                small: null,
-                large: null
-            },
-            status: "I am OK!",
-            followed: false,
-        }
-    ],
+    items: [],
     totalCount: 725039,
     error: null,
     pageSize: 10,
@@ -86,6 +75,10 @@ export const usersReducer = (state: UsersDataType = initialState, action: UsersR
                     ? [...state.followingInProgress, action.userId]
                     : state.followingInProgress.filter(id => id !== action.userId)
             }
+        }
+        case "AUTH/CLEAR-USER-DATA": {
+            console.log("usersReducer")
+            return {...initialState}
         }
 
 
@@ -137,9 +130,6 @@ export const toggleFollowingProgressAC = (toggle: boolean, userId: number) => ({
     userId,
     toggle
 })
-
-
-
 
 
 // =====-THUNK-=====

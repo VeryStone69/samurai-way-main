@@ -1,6 +1,7 @@
 import {Dispatch} from "redux";
 import {setCurrentPageAC, setFetchingAC,UsersDataType} from "../../../redux/users-reducer";
 import {friendsApi} from "../api/friends-api";
+import {clearUserDataAC} from "../../../redux/auth-reducer";
 
 export type FriendsDataType = {
     id: string
@@ -9,19 +10,7 @@ export type FriendsDataType = {
 }
 
 const initialState: UsersDataType = {
-    items: [
-        {
-            id: 1,
-            name: "Dmitry",
-            uniqueUrlName: null,
-            photos: {
-                small: null as string|null,
-                large: null as string|null
-            },
-            status: "I am OK!",
-            followed: false,
-        }
-    ],
+    items: [],
     totalCount: 725039,
     error: null,
     pageSize: 10,
@@ -35,11 +24,14 @@ export const friendsReducer = (state: UsersDataType = initialState, action: Frie
         case "FRIENDS/SET-FRIENDS":{
             return {...state, items: action.friends.items}
         }
+        case "AUTH/CLEAR-USER-DATA":{
+            console.log("friendsReducer")
+            return {...initialState}
+        }
         default:{
             return {...state}
         }
     }
-
 }
 
 export const setFriendsAC = (friends:UsersDataType)=>{
@@ -58,4 +50,4 @@ export const getFriendsTC = (pageSize: UsersDataType) => async (dispatch: Dispat
     // dispatch(setTotalUsersCountAC(response.totalCount))
 }
 
-type FriendsReducerType = ReturnType<typeof setFriendsAC>
+type FriendsReducerType = ReturnType<typeof setFriendsAC>|ReturnType<typeof clearUserDataAC>

@@ -4,6 +4,7 @@ import {Dispatch} from "redux";
 import {profileApi, SaveUserProfileChangesType} from "../api/api";
 import {AppRootStateType, AppThunkDispatch} from "./redux-store";
 import {getProfileDataTC} from "./users-reducer";
+import {clearUserDataAC} from "./auth-reducer";
 
 export type ServerErrors = {
     resultCode: number
@@ -11,7 +12,7 @@ export type ServerErrors = {
     data: {}
 }
 
-export interface ProfileDataType {
+export type ProfileDataType = {
     aboutMe: string;
     contacts: RootObjectContacts;
     lookingForAJob: boolean;
@@ -21,7 +22,7 @@ export interface ProfileDataType {
     photos: RootObjectPhotos;
 }
 
-export interface RootObjectContacts {
+export type RootObjectContacts = {
     facebook: null | string;
     website: null | string;
     vk: null | string;
@@ -32,16 +33,10 @@ export interface RootObjectContacts {
     mainLink: null | string;
 }
 
-export interface RootObjectPhotos {
+export type  RootObjectPhotos = {
     small: string;
     large: string;
 }
-
-
-export type ProfileReducerType = ReturnType<typeof addPostAC>
-    | ReturnType<typeof setUserProfile>
-    | ReturnType<typeof setStatusAC>
-    | ReturnType<typeof savePhotoSuccess>
 
 export type TaskType = {
     id: string
@@ -64,7 +59,7 @@ const initialState: TasksStateType = {
         {id: v1(), message: "Yo6", likesCount: 3},],
     newPostsText: "Your text",
     profile: {
-        aboutMe: "About me",
+        aboutMe: "",
         contacts: {
             facebook: null,
             website: null,
@@ -76,15 +71,15 @@ const initialState: TasksStateType = {
             mainLink: null
         },
         lookingForAJob: true,
-        lookingForAJobDescription: "I'm looking for a job for fun. Slavery is not offered.",
-        fullName: "Guest",
+        lookingForAJobDescription: "",
+        fullName: "",
         userId: 1079,
         photos: {
             small: "",
             large: ""
         }
     },
-    status: "status from store",
+    status: "",
 }
 
 
@@ -102,6 +97,10 @@ export const profileReducer = (state: TasksStateType = initialState, action: Pro
         }
         case "PROFILE/SET-USER-PHOTO": {
             return {...state, profile: {...state.profile, photos: action.photos}}
+        }
+        case "AUTH/CLEAR-USER-DATA": {
+            console.log("profileReducer")
+            return {...initialState}
         }
         default :
             return {...state}
@@ -164,5 +163,10 @@ export const updateUserProfileChangesTC = (data: SaveUserProfileChangesType) => 
     }
 }
 
+export type ProfileReducerType = ReturnType<typeof addPostAC>
+    | ReturnType<typeof setUserProfile>
+    | ReturnType<typeof setStatusAC>
+    | ReturnType<typeof savePhotoSuccess>
+    | ReturnType<typeof clearUserDataAC>
 
 

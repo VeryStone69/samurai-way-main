@@ -1,5 +1,6 @@
 import {getAuthUserData} from "./users-reducer";
 import {AppThunkDispatch} from "./redux-store";
+import {clearUserDataAC} from "./auth-reducer";
 
 
 export type IniinitialStateAppType = {
@@ -14,7 +15,10 @@ export const appReducer = (state: IniinitialStateAppType = initialState, action:
     switch (action.type) {
         case "APP/SET-INITIALIZED-SUCCESS": {
             return {...state, initialized:true}
-
+        }
+        case "AUTH/CLEAR-USER-DATA": {
+            console.log("appReducer")
+            return {...initialState}
         }
         default :
             return {...state}
@@ -34,4 +38,4 @@ export const initializeAppTC=()=> (dispatch:AppThunkDispatch)=>{
     })
 }
 
-type AppReducerType = ReturnType<typeof initializedSuccess>
+type AppReducerType = ReturnType<typeof initializedSuccess>| ReturnType<typeof clearUserDataAC>

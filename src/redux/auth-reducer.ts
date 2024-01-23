@@ -38,6 +38,7 @@ export const authReducer = (state: AuthDataType = initialState, action: AuthRedu
             return {...state, captchaUrl: action.captcha}
         }
         case "AUTH/CLEAR-USER-DATA":{
+            console.log("authReducer")
             return {...action.data}
         }
         default :
