@@ -35,7 +35,6 @@ export const dialogsReducer = (state: DialogsPageType = initialState, action: Di
             return {...state, message: [...state.message, newMessage]}
         }
         case "AUTH/CLEAR-USER-DATA": {
-            console.log("dialogsReducer")
             return {...initialState}
         }
         default :

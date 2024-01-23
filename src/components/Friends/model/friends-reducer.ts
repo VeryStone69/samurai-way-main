@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {setCurrentPageAC, setFetchingAC,UsersDataType} from "../../../redux/users-reducer";
+import {setCurrentPageAC, setFetchingAC, UsersDataType} from "../../../redux/users-reducer";
 import {friendsApi} from "../api/friends-api";
 import {clearUserDataAC} from "../../../redux/auth-reducer";
 
@@ -20,23 +20,22 @@ const initialState: UsersDataType = {
     followingInProgress: []
 }
 export const friendsReducer = (state: UsersDataType = initialState, action: FriendsReducerType): UsersDataType => {
-    switch (action.type){
-        case "FRIENDS/SET-FRIENDS":{
+    switch (action.type) {
+        case "FRIENDS/SET-FRIENDS": {
             return {...state, items: action.friends.items}
         }
-        case "AUTH/CLEAR-USER-DATA":{
-            console.log("friendsReducer")
+        case "AUTH/CLEAR-USER-DATA": {
             return {...initialState}
         }
-        default:{
+        default: {
             return {...state}
         }
     }
 }
 
-export const setFriendsAC = (friends:UsersDataType)=>{
-    return{
-        type: "FRIENDS/SET-FRIENDS" ,
+export const setFriendsAC = (friends: UsersDataType) => {
+    return {
+        type: "FRIENDS/SET-FRIENDS",
         friends
     } as const
 }
@@ -50,4 +49,4 @@ export const getFriendsTC = (pageSize: UsersDataType) => async (dispatch: Dispat
     // dispatch(setTotalUsersCountAC(response.totalCount))
 }
 
-type FriendsReducerType = ReturnType<typeof setFriendsAC>|ReturnType<typeof clearUserDataAC>
+type FriendsReducerType = ReturnType<typeof setFriendsAC> | ReturnType<typeof clearUserDataAC>

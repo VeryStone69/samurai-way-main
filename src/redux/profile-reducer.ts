@@ -99,7 +99,6 @@ export const profileReducer = (state: TasksStateType = initialState, action: Pro
             return {...state, profile: {...state.profile, photos: action.photos}}
         }
         case "AUTH/CLEAR-USER-DATA": {
-            console.log("profileReducer")
             return {...initialState}
         }
         default :

@@ -38,7 +38,6 @@ export const newsReducer = (state: NewsType = initialState, action: NewsActionTy
             return {...action.newsData}
         }
         case "AUTH/CLEAR-USER-DATA": {
-            console.log("newsReducer")
             return {...initialState}
         }
         default: {

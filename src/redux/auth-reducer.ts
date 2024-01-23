@@ -4,7 +4,10 @@ import {getAuthUserData, getProfileDataTC} from "./users-reducer";
 import {AppThunkDispatch} from "./redux-store";
 import {stopSubmit} from "redux-form";
 
-type AuthReducerType = ReturnType<typeof setUserDataAC> | ReturnType<typeof getCaptchaUrlAC> | ReturnType<typeof clearUserDataAC>
+type AuthReducerType =
+    ReturnType<typeof setUserDataAC>
+    | ReturnType<typeof getCaptchaUrlAC>
+    | ReturnType<typeof clearUserDataAC>
 export type AuthDataType = {
     data: DataType
     isAuth: boolean
@@ -31,14 +34,15 @@ const initialState: AuthDataType = {
 export const authReducer = (state: AuthDataType = initialState, action: AuthReducerType): AuthDataType => {
     switch (action.type) {
         case "AUTH/SET-USER-DATA": {
-            return {...state, ...action.data,
-                isAuth: action.isAuth}
+            return {
+                ...state, ...action.data,
+                isAuth: action.isAuth
+            }
         }
         case "AUTH/SET-CAPTCHA": {
             return {...state, captchaUrl: action.captcha}
         }
-        case "AUTH/CLEAR-USER-DATA":{
-            console.log("authReducer")
+        case "AUTH/CLEAR-USER-DATA": {
             return {...action.data}
         }
         default :
@@ -46,7 +50,7 @@ export const authReducer = (state: AuthDataType = initialState, action: AuthRedu
     }
 }
 
-export const setUserDataAC = (data: AuthDataType,isAuth:boolean) => {
+export const setUserDataAC = (data: AuthDataType, isAuth: boolean) => {
     return {
         type: "AUTH/SET-USER-DATA" as const,
         data,
@@ -60,8 +64,8 @@ export const getCaptchaUrlAC = (captcha: string | null) => {
     }
 }
 
-export const clearUserDataAC=(data: AuthDataType)=>{
-    return{
+export const clearUserDataAC = (data: AuthDataType) => {
+    return {
         type: "AUTH/CLEAR-USER-DATA",
         data
     } as const
@@ -98,8 +102,8 @@ export const getCaptchaUrlTC = () => async (dispatch: AppThunkDispatch) => {
 
 export const logoutUserTC = () => async (dispatch: AppThunkDispatch) => {
     try {
-         await authApi.logout()
-            .then(()=>{
+        await authApi.logout()
+            .then(() => {
                 dispatch(clearUserDataAC({
                     data: {
                         id: null,

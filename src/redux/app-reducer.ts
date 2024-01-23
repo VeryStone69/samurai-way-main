@@ -4,20 +4,19 @@ import {clearUserDataAC} from "./auth-reducer";
 
 
 export type IniinitialStateAppType = {
-    initialized:boolean
+    initialized: boolean
 }
 
-let initialState:IniinitialStateAppType = {
+let initialState: IniinitialStateAppType = {
     initialized: false
 }
 
 export const appReducer = (state: IniinitialStateAppType = initialState, action: AppReducerType): IniinitialStateAppType => {
     switch (action.type) {
         case "APP/SET-INITIALIZED-SUCCESS": {
-            return {...state, initialized:true}
+            return {...state, initialized: true}
         }
         case "AUTH/CLEAR-USER-DATA": {
-            console.log("appReducer")
             return {...initialState}
         }
         default :
@@ -31,11 +30,11 @@ export const initializedSuccess = () => {
     }
 }
 
-export const initializeAppTC=()=> (dispatch:AppThunkDispatch)=>{
+export const initializeAppTC = () => (dispatch: AppThunkDispatch) => {
     let promise = dispatch(getAuthUserData());
-    promise.then(()=>{
+    promise.then(() => {
         dispatch(initializedSuccess())
     })
 }
 
-type AppReducerType = ReturnType<typeof initializedSuccess>| ReturnType<typeof clearUserDataAC>
+type AppReducerType = ReturnType<typeof initializedSuccess> | ReturnType<typeof clearUserDataAC>

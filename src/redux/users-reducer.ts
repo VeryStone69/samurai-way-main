@@ -77,7 +77,6 @@ export const usersReducer = (state: UsersDataType = initialState, action: UsersR
             }
         }
         case "AUTH/CLEAR-USER-DATA": {
-            console.log("usersReducer")
             return {...initialState}
         }
 
